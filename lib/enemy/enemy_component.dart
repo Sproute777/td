@@ -6,10 +6,10 @@ import 'package:td/base/game_component.dart';
 import 'package:td/base/life_indicator.dart';
 import 'package:td/base/movable.dart';
 import 'package:td/base/scanable.dart';
-import 'package:td/game_blocs/stage_bar/bloc/stage_bar_bloc.dart';
 
 import 'dart:math';
 import 'package:td/game_controller/game_controller.dart';
+import 'package:td/ui/stage_bar/bloc/stage_bar_bloc.dart';
 
 enum EnemyType { enemyA, enemyB, enemyC, enemyD }
 

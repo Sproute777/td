@@ -1,5 +1,5 @@
-import 'package:td/game_blocs/inventory/bloc/inventory_bloc.dart';
 import 'package:td/game_controller/game_controller.dart';
+import 'package:td/ui/inventory/bloc/inventory_bloc.dart';
 
 import 'package:td/weapon/weapon_component.dart';
 
@@ -33,19 +33,27 @@ class _InventoryState extends State<Inventory> {
             },
             child: Opacity(
               opacity: weapons[i] == state.weapon ? 0.8 : 0.6,
-              child: Container(
-                color: Colors.white,
-                width: 50,
-                height: 50,
-                child: Center(
-                  child: Text(
-                    '${weapons[i].name} \n ${state.weaponCost.isNotEmpty ? state.weaponCost[i] : "empty"}',
-                    style: TextStyle(
-                        color: weapons[i] == state.weapon
-                            ? Colors.black
-                            : Colors.black54),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox.fromSize(
+                    size: const Size(64, 64),
+                    child: Image.asset(
+                        'assets/images/weapon/${state.weaponPath[i]}.png'),
                   ),
-                ),
+                  Container(
+                    color: Colors.white,
+                    width: 64,
+                    height: 30,
+                    child: Text(
+                      '${weapons[i].name} \n ${state.weaponCost.isNotEmpty ? state.weaponCost[i] : "empty"}',
+                      style: TextStyle(
+                          color: weapons[i] == state.weapon
+                              ? Colors.black
+                              : Colors.black54),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

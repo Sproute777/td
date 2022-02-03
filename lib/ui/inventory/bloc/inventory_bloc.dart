@@ -24,18 +24,22 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
   Future<void> _onInit(InvInit event, Emitter<InventoryState> emit) async {
     final setting = await rootBundle.loadString('assets/weaponParams.json');
     final _json = json.decode(setting);
+
     final parameters = List<int>.from(_json.map((s) => s['cost'] as int));
+
     final _listWeapons = List<WeaponType>.from(_json.map((s) {
       var w = s['label'];
       return WeaponType.values.firstWhere((v) => v.name == w);
     }));
-    // final listWeapons = List<WeaponType>.from(parameters
-    //     .map((p) => WeaponType.values.firstWhere((w) => w.name == p.label)));
-    // final listCost = List<int>.from(parameters.map((e) => e));
+
+    final subPath =
+        List<String>.from(_json.map((s) => s['barrelImg0'] as String));
+
     emit(state.setParameters(
         weaponBaseCost: parameters,
         listWeapons: _listWeapons,
-        listCost: parameters));
+        listCost: parameters,
+        weaponPath: subPath));
   }
 
   void _onSelected(InvWeaponSelected event, Emitter<InventoryState> emit) {
