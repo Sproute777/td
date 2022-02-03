@@ -1,16 +1,26 @@
 # td
+ from https://github.com/cloudseasail/free_defense  
+ 
+ Some change , added Bloc for using best Flutter Ui. 
+ 
+ FreeDefense Game with Flutter and Flame.
 
-A new Flutter project.
+<img src="assets/screenshot.jpg" width="275px"/>
 
-## Getting Started
+## DEMO: [Web version for V0]  
+[Web version] http://freedefense.vquant.ml/
 
-This project is a starting point for a Flutter application.
+Controls:
+- Click:  preview the weapon.  (donot block the enemies!)
+- Click again: build weapon.
+- Clink on weapon,  update and destroy the weapon
+- Collect mine to build weapon
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ 
+ 
+ 
+ 
+ license GNU General Public License v3.0	gpl-3.0
+ 
+ 
+ 
