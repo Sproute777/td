@@ -6,10 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:td/game/game_main.dart';
 import 'package:td/game/game_test.dart';
-import 'package:td/ui/inventory/bloc/inventory_bloc.dart';
-import 'package:td/ui/inventory/view/inventory.dart';
-import 'package:td/ui/components/weaponview_widget.dart';
-import 'package:td/ui/stage_bar/bloc/stage_bar_bloc.dart';
+import 'package:td/game_blocs/inventory/bloc/inventory_bloc.dart';
+import 'package:td/game_blocs/inventory/view/inventory.dart';
+import 'package:td/game_blocs/components/weaponview_widget.dart';
+import 'package:td/game_blocs/stage_bar/bloc/stage_bar_bloc.dart';
 import 'package:td/weapon/weapon_component.dart';
 
 import 'game_controller/game_controller.dart';

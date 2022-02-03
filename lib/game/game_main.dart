@@ -4,9 +4,9 @@ import 'package:flame_bloc/flame_bloc.dart';
 import 'package:td/base/game_component.dart';
 
 import 'package:td/game/game_setting.dart';
+import 'package:td/game_blocs/stage_bar/bloc/stage_bar_bloc.dart';
 import 'package:td/game_controller/game_controller.dart';
 import 'package:td/map/map_controller.dart';
-import 'package:td/ui/stage_bar/bloc/stage_bar_bloc.dart';
 
 class GameMain extends FlameBlocGame with HasTappables {
   late MapController mapController;

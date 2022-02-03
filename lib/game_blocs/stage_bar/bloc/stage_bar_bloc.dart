@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:td/ui/inventory/bloc/inventory_bloc.dart';
+import 'package:td/game_blocs/inventory/bloc/inventory_bloc.dart';
 
 part 'stage_bar_state.dart';
 part 'stage_bar_event.dart';

@@ -1,5 +1,5 @@
+import 'package:td/game_blocs/inventory/bloc/inventory_bloc.dart';
 import 'package:td/game_controller/game_controller.dart';
-import 'package:td/ui/inventory/bloc/inventory_bloc.dart';
 
 import 'package:td/weapon/weapon_component.dart';
 
@@ -14,19 +14,6 @@ class Inventory extends StatefulWidget {
 }
 
 class _InventoryState extends State<Inventory> {
-  Color _mapWeaponColor(WeaponType weapon) {
-    switch (weapon) {
-      case WeaponType.cannon:
-        return Colors.orange;
-      case WeaponType.mg:
-        return Colors.red;
-      case WeaponType.missele:
-        return Colors.blue;
-      default:
-        return Colors.black;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final state = context.watch<InventoryBloc>().state;
@@ -53,7 +40,10 @@ class _InventoryState extends State<Inventory> {
                 child: Center(
                   child: Text(
                     '${weapons[i].name} \n ${state.weaponCost.isNotEmpty ? state.weaponCost[i] : "empty"}',
-                    style: TextStyle(color: _mapWeaponColor(weapons[i])),
+                    style: TextStyle(
+                        color: weapons[i] == state.weapon
+                            ? Colors.black
+                            : Colors.black54),
                   ),
                 ),
               ),
@@ -63,22 +53,14 @@ class _InventoryState extends State<Inventory> {
           .expand((w) => [
                 w,
                 const SizedBox(
-                  height: 40,
                   width: 40,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(color: Colors.red),
-                  ),
                 )
               ])
           .toList()
         ..insert(
           0,
           const SizedBox(
-            height: 40,
             width: 40,
-            child: DecoratedBox(
-              decoration: BoxDecoration(color: Colors.blue),
-            ),
           ),
         )
     ]);
