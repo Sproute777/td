@@ -4,7 +4,7 @@
  Some change , added Bloc for using best Flutter Ui. 
  
  
- license https://opensource.org/licenses/BSD-2-Clause
+ license GNU General Public License v3.0	gpl-3.0
  
  
  
