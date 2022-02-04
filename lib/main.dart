@@ -54,7 +54,7 @@ class AppView extends StatefulWidget {
 
 class _AppViewState extends State<AppView> {
   bool pause = true;
-  var v = TextEditingController().dispose();
+ 
 
   @override
   Widget build(BuildContext context) {
