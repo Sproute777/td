@@ -45,8 +45,16 @@ class App extends StatelessWidget {
   }
 }
 
-class AppView extends StatelessWidget {
+class AppView extends StatefulWidget {
   const AppView({Key? key}) : super(key: key);
+
+  @override
+  State<AppView> createState() => _AppViewState();
+}
+
+class _AppViewState extends State<AppView> {
+  bool pause = true;
+  var v = TextEditingController().dispose();
 
   @override
   Widget build(BuildContext context) {
@@ -54,19 +62,21 @@ class AppView extends StatelessWidget {
       appBar: AppBar(
         title: BlocBuilder<StageBarBloc, StageBarState>(
           builder: (context, state) {
-            return Row(
-                children: [
-              Text('killed ${state.killed}'),
-              Text('missed ${state.missed}'),
-              Text('wave ${state.wave}'),
-              Text('minerals ${state.minerals}'),
-              SizedBox(
-                height: 40,
-                width: 40,
-                child: Image.asset('assets/images/neutual/mine_cluster.png',
-                    fit: BoxFit.cover),
-              ),
-            ].expand((e) => [e, const Spacer()]).toList());
+            return SingleChildScrollView(
+              child: Row(
+                  children: [
+                Text('killed\n${state.killed}'),
+                Text('missed \n${state.missed}'),
+                Text('wave \n${state.wave}'),
+                Text('minerals \n${state.minerals}'),
+                SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: Image.asset('assets/images/neutual/mine_cluster.png',
+                      fit: BoxFit.cover),
+                ),
+              ].expand((e) => [e, const Spacer()]).toList()),
+            );
           },
         ),
       ),
@@ -97,9 +107,14 @@ class AppView extends StatelessWidget {
           textStyle: const TextStyle(fontSize: 20),
         ),
         onPressed: () {
-          game.start();
-          ctx.read<InventoryBloc>().add(const InvWeaponSelected(WeaponType.mg));
-          game.overlays.remove('start');
+          if (pause) {
+            game.resumeEngine();
+            game.start();
+            ctx
+                .read<InventoryBloc>()
+                .add(const InvWeaponSelected(WeaponType.mg));
+            game.overlays.remove('start');
+          }
         },
         child: const Text('Start'),
       )),
