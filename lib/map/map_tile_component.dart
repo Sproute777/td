@@ -35,7 +35,11 @@ class MapTileComponent extends GameComponent with Tappable {
 
   @override
   bool onTapDown(TapDownInfo event) {
-    gameRef.gameController.send(this, GameControl.weaponBuilding);
+    bool paused = gameRef.paused;
+    if (!paused) {
+      gameRef.gameController.send(this, GameControl.weaponBuilding);
+      return false;
+    }
     return false;
   }
 }

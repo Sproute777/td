@@ -3,6 +3,9 @@ part of 'game_controller.dart';
 GameSetting gameSetting = GameSetting();
 
 enum GameControl {
+  gameStarted,
+  gamePaused,
+  gameResumed,
   weaponBuilding,
   weaponSelected,
   /*change type */
@@ -23,6 +26,15 @@ class GameInstruction {
   GameInstruction(this.source, this.instruction);
   void process(GameController controller) {
     switch (instruction) {
+      case GameControl.gameStarted:
+        controller.gameRef.started;
+        break;
+      case GameControl.gameResumed:
+        controller.gameRef.resumeEngine();
+        break;
+      case GameControl.gamePaused:
+        controller.gameRef.pauseEngine();
+        break;
       case GameControl.weaponBuilding:
         WeaponViewWidget.hide();
         // controller.gameRef.read<InventoryBloc>().add();

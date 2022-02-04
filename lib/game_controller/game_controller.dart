@@ -20,6 +20,8 @@ import 'package:td/weapon/weapon_component.dart';
 
 part 'controller_process.dart';
 
+enum GameStatus { paused, play }
+
 class GameController extends GameComponent {
   WeaponComponent? buildingWeapon;
   EnemyFactory enemyFactory = EnemyFactory();
@@ -32,6 +34,10 @@ class GameController extends GameComponent {
             priority: LayerPriority.getAbovePriority(1)) {
     add(enemyFactory);
   }
+
+  GameStatus _gameStatus = GameStatus.paused;
+  GameStatus get gameStatus => _gameStatus;
+  void newGameStatus(GameStatus gameStatus) => _gameStatus = gameStatus;
 
   @override
   void update(double dt) {

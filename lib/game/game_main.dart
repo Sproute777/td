@@ -63,12 +63,13 @@ class GameMain extends FlameBlocGame with HasTappables {
     add(gameController);
     // add(gamebarView);
     // add(weaponFactory);
-
+    // await add(interface ?? GameInterface());
     setting.enemies.load();
 
     loadDone = true;
     int d = currentTimeMillis() - timeRecord;
     print("GameMain onLoad done takke $d");
+    pauseEngine();
   }
 
   @override

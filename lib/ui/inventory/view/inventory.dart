@@ -32,7 +32,7 @@ class _InventoryState extends State<Inventory> {
               }
             },
             child: Opacity(
-              opacity: weapons[i] == state.weapon ? 0.8 : 0.6,
+              opacity: weapons[i] == state.weapon ? 1.0 : 0.4,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
