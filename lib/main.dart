@@ -1,5 +1,6 @@
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,11 +14,13 @@ import 'package:td/ui/stage_bar/bloc/stage_bar_bloc.dart';
 import 'package:td/weapon/weapon_component.dart';
 
 import 'game_controller/game_controller.dart';
+import 'ui/stage_bar/view/stage_bar_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Flame.device.fullScreen();
+  if (kIsWeb) {
+    await Flame.device.fullScreen();
+  }
   await Flame.device.setOrientation(DeviceOrientation.portraitUp);
 
   runApp(const App());
@@ -58,39 +61,21 @@ class _AppViewState extends State<AppView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: BlocBuilder<StageBarBloc, StageBarState>(
-          builder: (context, state) {
-            return SingleChildScrollView(
-              child: Row(
-                  children: [
-                Text('killed\n${state.killed}'),
-                Text('missed \n${state.missed}'),
-                Text('wave \n${state.wave}'),
-                Text('minerals \n${state.minerals}'),
-                SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: Image.asset('assets/images/neutual/mine_cluster.png',
-                      fit: BoxFit.cover),
-                ),
-              ].expand((e) => [e, const Spacer()]).toList()),
-            );
+    return Column(children: [
+      const StageBarView(),
+      Expanded(
+        child: GameWidget<GameMain>(
+          game: GameTest(
+              gameController: RepositoryProvider.of<GameController>(context)),
+          overlayBuilderMap: {
+            WeaponViewWidget.name: WeaponViewWidget.builder,
+            'start': _pauseMenuBuilder,
           },
+          initialActiveOverlays: const ['start'],
         ),
       ),
-      body: GameWidget<GameMain>(
-        game: GameTest(
-            gameController: RepositoryProvider.of<GameController>(context)),
-        overlayBuilderMap: {
-          WeaponViewWidget.name: WeaponViewWidget.builder,
-          'start': _pauseMenuBuilder,
-        },
-        initialActiveOverlays: const ['start'],
-      ),
-      bottomSheet: const Inventory(),
-    );
+      const Inventory(),
+    ]);
   }
 
   Widget _pauseMenuBuilder(BuildContext ctx, GameMain game) {

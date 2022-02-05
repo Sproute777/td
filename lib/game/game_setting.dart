@@ -171,7 +171,8 @@ class WeaponSettingV1 {
     double tileSize = gameSetting.mapTileSize.length;
     List<Vector2> expFrame = [];
 
-    String weaponParamsString = await loadAsset('weaponParams.json');
+    String weaponParamsString =
+        await rootBundle.loadString('assets/weaponParams.json');
 
     final weaponParams = json.decode(weaponParamsString);
 
