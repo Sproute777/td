@@ -1,7 +1,7 @@
 # td
  from https://github.com/cloudseasail/free_defense  
  
- Some change , added Bloc for using best Flutter Ui. 
+ Some change , added Bloc for using the best Flutter Ui. 
  
  FreeDefense Game with Flutter and Flame.
 
