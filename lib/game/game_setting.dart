@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:flame/assets.dart';
 import 'package:flame/components.dart';
 import 'dart:math' as math;
-
+import 'package:flame/cache.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/services.dart';
+import 'package:td/game_controller/game_controller.dart';
 
 GameSetting gameSetting = GameSetting();
 

@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'dart:math';
-import 'package:flame/assets.dart';
 import 'package:flame/components.dart';
+import 'package:flame/cache.dart';
 import 'package:td/base/game_component.dart';
 import 'package:td/base/radar.dart';
 import 'package:td/base/scanable.dart';
@@ -147,15 +147,16 @@ class GameController extends GameComponent {
   }
 
   void onBuildDone(WeaponComponent c) {
-    gameRef.read<InventoryBloc>().add(InvAddCost(index: c.weaponType.index));
-    gameRef.read<StageBarBloc>().add(SbSubtractMinerals(c.weaponType.index));
+    gameRef.inventoryBloc
+    .add(InvAddCost(index: c.weaponType.index));
+    gameRef.subsractMinerals(c.weaponType.index);
   }
 
   void onDestroy(WeaponComponent c) {
-    gameRef
-        .read<InventoryBloc>()
+    gameRef.inventoryBloc
         .add(InvSubstractCost(index: c.weaponType.index));
   }
 
   void showWeaponDialog() {}
 }
+

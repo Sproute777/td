@@ -8,8 +8,12 @@ import 'package:td/game_controller/game_controller.dart';
 import 'package:td/map/map_controller.dart';
 import 'package:td/ui/stage_bar/bloc/stage_bar_bloc.dart';
 
-class GameMain extends FlameBlocGame with HasTappables {
+import '../ui/inventory/bloc/inventory_bloc.dart';
+
+class GameMain extends FlameGame with HasTappables {
   late MapController mapController;
+  final StageBarBloc stageBarBloc;
+  final InventoryBloc inventoryBloc;
   // late WeaponFactoryView weaponFactory;
   GameController gameController;
   // late GamebarView gamebarView;
@@ -24,7 +28,10 @@ class GameMain extends FlameBlocGame with HasTappables {
   // StatusBar statusBar;
   // GameUtil util;
 
-  GameMain({required this.gameController});
+  GameMain(
+      {required this.gameController,
+      required this.stageBarBloc,
+      required this.inventoryBloc});
 
   @override
   void onGameResize(Vector2 size) {
@@ -89,9 +96,29 @@ class GameMain extends FlameBlocGame with HasTappables {
   void start() {
     if (loadDone) {
       gameController.send(GameComponent(), GameControl.enemySpawn);
-      read<StageBarBloc>().add(const SbSetKilled(0));
-      read<StageBarBloc>().add(const SbSetMissed(0));
-      read<StageBarBloc>().add(const SbSetMinerals(400));
+      stageBarBloc.add(const SbSetKilled(0));
+      stageBarBloc.add(const SbSetMissed(0));
+      stageBarBloc.add(const SbSetMinerals(400));
     }
+  }
+
+  void addMinerals(int value) {
+    stageBarBloc.add(SbAddMinerals(value));
+  }
+
+  void addMissed(int value) {
+    stageBarBloc.add(SbAddMissed(value));
+  }
+
+  void addKilled(int value) {
+    stageBarBloc.add(SbAddKilled(value));
+  }
+
+  void subsractMinerals(int value) {
+    stageBarBloc.add(SbSubtractMinerals(value));
+  }
+
+  void setWave(int value) {
+    stageBarBloc.add(SbAddWave(value));
   }
 }
