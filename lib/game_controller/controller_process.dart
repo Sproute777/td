@@ -39,7 +39,7 @@ class GameInstruction {
         WeaponViewWidget.hide();
         // controller.gameRef.read<InventoryBloc>().add();
         WeaponComponent? component = controller.buildWeapon(source.position,
-            controller.gameRef.read<InventoryBloc>().state.weapon);
+            controller.gameRef.inventoryBloc.state.weapon);
         if (component != null) {
           controller.add(component);
           controller.buildingWeapon?.removeFromParent();
@@ -75,15 +75,15 @@ class GameInstruction {
         controller.enemyFactory.start();
         break;
       case GameControl.enemyMissed:
-        controller.gameRef.read<StageBarBloc>().add(const SbAddMissed(1));
+        controller.gameRef.addMissed(1);
 
         break;
       case GameControl.enemyKilled:
-        controller.gameRef.read<StageBarBloc>().add(const SbAddKilled(1));
+        controller.gameRef.addKilled(1);
 
         break;
       case GameControl.enemyNexWave:
-        controller.gameRef.read<StageBarBloc>().add(const SbAddWave(1));
+      controller.gameRef.setWave(1);
 
         break;
       case GameControl.weaponShowAction:

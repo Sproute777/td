@@ -5,13 +5,21 @@ import 'package:td/base/scanable.dart';
 import 'package:td/enemy/enemy_component.dart';
 import 'package:td/game/game_main.dart';
 import 'package:td/game_controller/game_controller.dart';
+import 'package:td/ui/inventory/bloc/inventory_bloc.dart';
+import 'package:td/ui/stage_bar/bloc/stage_bar_bloc.dart';
 import 'package:td/weapon/bullet_component.dart';
 import 'package:td/weapon/cannon.dart';
 import 'package:td/weapon/weapon_component.dart';
 
 class GameTest extends GameMain with GameDebug {
-  GameTest({required GameController gameController})
-      : super(gameController: gameController);
+  GameTest(
+      {required GameController gameController,
+      required StageBarBloc stageBarBloc,
+      required InventoryBloc inventoryBloc})
+      : super(
+            gameController: gameController,
+            stageBarBloc: stageBarBloc,
+            inventoryBloc: inventoryBloc);
 
   @override
   Future<void> onLoad() async {
@@ -86,7 +94,7 @@ mixin GameDebug on GameMain {
 
     int weapon = 0, enemy = 0, cannon = 0, bullet = 0, exp = 0;
     int radar = 0, scanable = 0;
-    GameComponent c = read<GameController>();
+    GameComponent c = gameController;
     // gameController;
 
     void _count(c) {

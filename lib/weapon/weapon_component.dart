@@ -10,7 +10,7 @@ import 'package:td/enemy/enemy_component.dart';
 import 'package:td/game_controller/game_controller.dart';
 
 class SmartRotateEffect extends RotateEffect {
-  Function? onComplete;
+  VoidCallback? onComplete;
   SmartRotateEffect.to(double angle, EffectController controller)
       : _destinationAngle = angle,
         super.by(0, controller);
@@ -54,7 +54,7 @@ class BarrelComponent extends GameComponent {
   BarrelComponent({required Vector2 position, required Vector2 size})
       : super(position: position, size: size, priority: 21);
   double rotateSpeed = 6.0; /* radians/second */
-  double rotateTo(double radians, Function onComplete) {
+  double rotateTo(double radians,VoidCallback onComplete) {
     double duration = (radians - angle).abs() / rotateSpeed;
     if (duration <= 0) {
       onComplete.call();

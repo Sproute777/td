@@ -66,7 +66,7 @@ class _AppViewState extends State<AppView> {
       Expanded(
         child: GameWidget<GameMain>(
           game: GameTest(
-              gameController: RepositoryProvider.of<GameController>(context)),
+              gameController: RepositoryProvider.of<GameController>(context), stageBarBloc: context.read<StageBarBloc>(), inventoryBloc: context.read<InventoryBloc>(),),
           overlayBuilderMap: {
             WeaponViewWidget.name: WeaponViewWidget.builder,
             'start': _pauseMenuBuilder,
