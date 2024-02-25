@@ -1,14 +1,11 @@
-import 'package:flame/components.dart';
 import 'package:flame/game.dart';
-import 'package:flame_bloc/flame_bloc.dart';
-import 'package:td/base/game_component.dart';
 
-import 'package:td/game/game_setting.dart';
-import 'package:td/game_controller/game_controller.dart';
-import 'package:td/map/map_controller.dart';
-import 'package:td/ui/stage_bar/bloc/stage_bar_bloc.dart';
-
+import '../base/game_component.dart';
+import '../game_controller/game_controller.dart';
+import '../map/map_controller.dart';
 import '../ui/inventory/bloc/inventory_bloc.dart';
+import '../ui/stage_bar/bloc/stage_bar_bloc.dart';
+import 'game_setting.dart';
 
 class GameMain extends FlameGame with HasTappables {
   late MapController mapController;
@@ -35,7 +32,9 @@ class GameMain extends FlameGame with HasTappables {
 
   @override
   void onGameResize(Vector2 size) {
-    if (!loadDone) setting.setScreenSize(size);
+    if (!loadDone) {
+      setting.setScreenSize(size);
+    }
     super.onGameResize(size);
   }
 
@@ -45,7 +44,7 @@ class GameMain extends FlameGame with HasTappables {
 
   @override
   Future<void> onLoad() async {
-    int timeRecord = currentTimeMillis();
+    final int timeRecord = currentTimeMillis();
     await super.onLoad();
 
     // await setting.onLoad();

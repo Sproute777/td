@@ -2,8 +2,8 @@ import 'package:flame/components.dart';
 import 'package:flame/input.dart';
 // import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
-import 'package:td/base/game_component.dart';
-import 'package:td/game_controller/game_controller.dart';
+import '../base/game_component.dart';
+import '../game_controller/game_controller.dart';
 
 enum MapTileBuildStatus { Empty, BuildPreview, BuildDone }
 enum MapTileBuildEvent { None, BuildPreview, BuildDone, BuildCancel }

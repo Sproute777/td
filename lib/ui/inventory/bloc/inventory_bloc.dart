@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
-import 'package:td/weapon/weapon_component.dart';
+import '../../../weapon/weapon_component.dart';
 
 part 'inventory_event.dart';
 part 'inventory_state.dart';

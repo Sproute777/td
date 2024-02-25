@@ -2,8 +2,9 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:td/base/game_ref.dart';
-import 'package:td/game/game_main.dart';
+
+import '../game/game_main.dart';
+import 'game_ref.dart';
 
 class GameComponent extends PositionComponent with GameRef<GameMain>, HasPaint {
   Sprite? sprite;
@@ -54,7 +55,9 @@ class GameComponent extends PositionComponent with GameRef<GameMain>, HasPaint {
 
   double angleNearTo(Vector2 target) {
     double distance = position.distanceTo(target);
-    if (distance == 0) return 0;
+    if (distance == 0) {
+      return 0;
+    }
     double radians = acos((-target.y + position.y) / distance);
     if (target.x < position.x) {
       radians = pi * 2 - radians;

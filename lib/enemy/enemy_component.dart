@@ -1,15 +1,14 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:td/astar/astarnode.dart';
-import 'package:td/base/game_component.dart';
-import 'package:td/base/life_indicator.dart';
-import 'package:td/base/movable.dart';
-import 'package:td/base/scanable.dart';
 
-import 'dart:math';
-import 'package:td/game_controller/game_controller.dart';
-import 'package:td/ui/stage_bar/bloc/stage_bar_bloc.dart';
+import '../astar/astarnode.dart';
+import '../base/game_component.dart';
+import '../base/life_indicator.dart';
+import '../base/movable.dart';
+import '../base/scanable.dart';
+import '../game_controller/game_controller.dart';
 
 enum EnemyType { enemyA, enemyB, enemyC, enemyD }
 
@@ -25,7 +24,7 @@ class EnemyComponent extends GameComponent
     required Vector2 size,
   }) : super(position: position, size: size, priority: 30);
 
-  get maxLife => _maxLife;
+  double get maxLife => _maxLife;
   set maxLife(double m) {
     _maxLife = m;
     life = m;
@@ -36,7 +35,9 @@ class EnemyComponent extends GameComponent
     super.update(t);
 
     if (life < 0) {
-      if (!dead) onKilled();
+      if (!dead) {
+        onKilled();
+      }
       dead = true;
       active = false;
     }

@@ -1,6 +1,8 @@
-import 'package:flame/components.dart';
-import 'package:td/base/game_component.dart';
 import 'dart:math';
+
+import 'package:flame/components.dart';
+
+import 'game_component.dart';
 
 mixin Movable on GameComponent {
   double speed = 0;

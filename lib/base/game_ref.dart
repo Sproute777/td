@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:td/game/game_main.dart';
+import '../game/game_main.dart';
 
 mixin GameRef<T extends GameMain> on Component {
   T? _gameRef;
@@ -29,7 +29,7 @@ mixin GameRef<T extends GameMain> on Component {
     _gameRef = null;
   }
 
-  registerToGame() {
+void  registerToGame() {
     gameRef.add(this);
   }
 }

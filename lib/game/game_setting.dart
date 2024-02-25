@@ -1,12 +1,12 @@
 import 'dart:convert';
+import 'dart:math' as math;
 import 'dart:math';
 
-import 'package:flame/components.dart';
-import 'dart:math' as math;
 import 'package:flame/cache.dart';
+import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:td/game_controller/game_controller.dart';
 
 GameSetting gameSetting = GameSetting();
 
@@ -61,16 +61,16 @@ class GameSetting {
 
     enemySize = dotMultiple(enemySizeCale, mapTileSize);
     enemySpawn = Vector2(0, 0) + (mapTileSize / 2);
-    enemyTarget = (mapSize) - (mapTileSize / 2);
+    enemyTarget = mapSize - (mapTileSize / 2);
 
-    print(
+    debugPrint(
         'screenSize $screenSize,  mapGrid $mapGrid, mapTileSize $mapTileSize');
   }
 
   void optimizeMapGrid(Vector2 size) {
     mapGrid = Vector2(10, 10);
     double grid = math.min(mapGrid.x, mapGrid.y);
-    Vector2 optSize = size / grid;
+    final Vector2 optSize = size / grid;
     grid = math.min(optSize.x, optSize.y);
 
     /*Bar at top*/
@@ -105,7 +105,7 @@ class NeutualSetting {
 }
 
 class WeaponSetting {
-  String label = "";
+  String label = '';
   int cost = 0;
   late Vector2 size;
   late Vector2 bulletSize;
@@ -123,7 +123,7 @@ class WeaponSetting {
 
   WeaponSetting.empty();
 
-  fill(weaponParam, tileSize, weaponTower, images) async {
+  Future<void> fill(weaponParam, tileSize, weaponTower, images) async {
     label = weaponParam['label'];
     cost = weaponParam['cost'];
     range = weaponParam['range'] * tileSize;
@@ -149,17 +149,18 @@ class WeaponSetting {
   }
 
   void createExpolosionAnimation(List<Vector2> frameLocation, double stepTime) {
-    List<Sprite> sprites = [];
-    frameLocation.forEach(
-        (v) => sprites.add(explosion.getSprite(v.x.toInt(), v.y.toInt())));
+    final List<Sprite> sprites = [];
+    for (final v in frameLocation) {
+      sprites.add(explosion.getSprite(v.x.toInt(), v.y.toInt()));
+    }
     explosionSprites = sprites;
     // explosionAnimation =
     //     SpriteAnimation.spriteList(sprites, stepTime: stepTime, loop: false);
   }
 }
 
-Future<String> loadAsset(String assetFileName) async {
-  return await rootBundle.loadString(assetFileName);
+Future<String> loadAsset(String assetFileName) {
+  return rootBundle.loadString(assetFileName);
 }
 
 class WeaponSettingV1 {
@@ -167,8 +168,8 @@ class WeaponSettingV1 {
   WeaponSettingV1();
   Future<void> load() async {
     final images = Images();
-    Sprite weaponTower = Sprite(await images.load('weapon/Tower.png'));
-    double tileSize = gameSetting.mapTileSize.length;
+    final Sprite weaponTower = Sprite(await images.load('weapon/Tower.png'));
+    final double tileSize = gameSetting.mapTileSize.length;
     List<Vector2> expFrame = [];
 
     String weaponParamsString =

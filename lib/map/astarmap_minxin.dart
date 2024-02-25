@@ -1,6 +1,6 @@
 import 'package:flame/components.dart';
-import 'package:td/astar/astarmap.dart';
-import 'package:td/astar/astarnode.dart';
+import '../astar/astarmap.dart';
+import '../astar/astarnode.dart';
 
 mixin AstarMapMixin {
   late AstarMap astarMap;

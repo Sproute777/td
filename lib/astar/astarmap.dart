@@ -6,8 +6,9 @@
  */
 
 import 'dart:math' as math;
-import 'astarnode.dart';
+
 import 'array2d.dart';
+import 'astarnode.dart';
 
 class AstarMap {
   final double costStraight = 1.0;
@@ -94,9 +95,10 @@ class AstarMap {
         if (isOnMap(n.x - 1, n.y) &&
             isOnMap(n.x, n.y - 1) &&
             obstacleMap[n.x - 1][n.y] &&
-            obstacleMap[n.x][n.y - 1])
-          neighbors.add(
-              new AstarNode(n.x - 1, n.y - 1, parent: n, cost: costDiagnal));
+            obstacleMap[n.x][n.y - 1]) {
+          neighbors
+              .add(AstarNode(n.x - 1, n.y - 1, parent: n, cost: costDiagnal));
+        }
       }
       if (n.y < height &&
           isOnMap(n.x - 1, n.y + 1) &&
@@ -104,24 +106,26 @@ class AstarMap {
         if (isOnMap(n.x - 1, n.y) &&
             isOnMap(n.x, n.y + 1) &&
             obstacleMap[n.x - 1][n.y] &&
-            obstacleMap[n.x][n.y + 1])
-          neighbors.add(
-              new AstarNode(n.x - 1, n.y + 1, parent: n, cost: costDiagnal));
+            obstacleMap[n.x][n.y + 1]) {
+          neighbors
+              .add(AstarNode(n.x - 1, n.y + 1, parent: n, cost: costDiagnal));
+        }
       }
     }
     if (n.x < width - 1) {
-      if (isOnMap(n.x + 1, n.y) && obstacleMap[n.x + 1][n.y])
-        neighbors
-            .add(new AstarNode(n.x + 1, n.y, parent: n, cost: costStraight));
+      if (isOnMap(n.x + 1, n.y) && obstacleMap[n.x + 1][n.y]) {
+        neighbors.add(AstarNode(n.x + 1, n.y, parent: n, cost: costStraight));
+      }
       if (n.y > 0 &&
           isOnMap(n.x + 1, n.y - 1) &&
           obstacleMap[n.x + 1][n.y - 1]) {
         if (isOnMap(n.x + 1, n.y) &&
             isOnMap(n.x, n.y - 1) &&
             obstacleMap[n.x + 1][n.y] &&
-            obstacleMap[n.x][n.y - 1])
-          neighbors.add(
-              new AstarNode(n.x + 1, n.y - 1, parent: n, cost: costDiagnal));
+            obstacleMap[n.x][n.y - 1]) {
+          neighbors
+              .add(AstarNode(n.x + 1, n.y - 1, parent: n, cost: costDiagnal));
+        }
       }
       if (n.y < height &&
           isOnMap(n.x + 1, n.y + 1) &&
@@ -129,22 +133,27 @@ class AstarMap {
         if (isOnMap(n.x + 1, n.y) &&
             isOnMap(n.x, n.y + 1) &&
             obstacleMap[n.x + 1][n.y] &&
-            obstacleMap[n.x][n.y + 1])
-          neighbors.add(
-              new AstarNode(n.x + 1, n.y + 1, parent: n, cost: costDiagnal));
+            obstacleMap[n.x][n.y + 1]) {
+          neighbors
+              .add(AstarNode(n.x + 1, n.y + 1, parent: n, cost: costDiagnal));
+        }
       }
     }
-    if (n.y > 0 && isOnMap(n.x, n.y - 1) && obstacleMap[n.x][n.y - 1])
-      neighbors.add(new AstarNode(n.x, n.y - 1, parent: n, cost: costStraight));
-    if (n.y < height - 1 && isOnMap(n.x, n.y + 1) && obstacleMap[n.x][n.y + 1])
-      neighbors.add(new AstarNode(n.x, n.y + 1, parent: n, cost: costStraight));
+    if (n.y > 0 && isOnMap(n.x, n.y - 1) && obstacleMap[n.x][n.y - 1]) {
+      neighbors.add( AstarNode(n.x, n.y - 1, parent: n, cost: costStraight));
+    }
+    if (n.y < height - 1 && isOnMap(n.x, n.y + 1) && obstacleMap[n.x][n.y + 1]) {
+      neighbors.add( AstarNode(n.x, n.y + 1, parent: n, cost: costStraight));
+    }
 
     return neighbors;
   }
 
   int indexOfNode(List<AstarNode> array, AstarNode node) {
     for (var i = 0; i < array.length; i++) {
-      if (node == array[i]) return i;
+      if (node == array[i]) {
+        return i;
+      }
     }
     return -1;
   }
@@ -162,8 +171,8 @@ class AstarMap {
   }
 
   num diagonalDistance(AstarNode node, AstarNode goal) {
-    var dmin = math.min((node.x - goal.x).abs(), (node.y - goal.y).abs());
-    var dmax = math.max((node.x - goal.x).abs(), (node.y - goal.y).abs());
+    final dmin = math.min((node.x - goal.x).abs(), (node.y - goal.y).abs());
+    final dmax = math.max((node.x - goal.x).abs(), (node.y - goal.y).abs());
     return costDiagnal * dmin + costStraight * (dmax - dmin);
   }
 

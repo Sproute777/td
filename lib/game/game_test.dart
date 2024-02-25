@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
-import 'package:td/base/game_component.dart';
-import 'package:td/base/radar.dart';
-import 'package:td/base/scanable.dart';
-import 'package:td/enemy/enemy_component.dart';
-import 'package:td/game/game_main.dart';
-import 'package:td/game_controller/game_controller.dart';
-import 'package:td/ui/inventory/bloc/inventory_bloc.dart';
-import 'package:td/ui/stage_bar/bloc/stage_bar_bloc.dart';
-import 'package:td/weapon/bullet_component.dart';
-import 'package:td/weapon/cannon.dart';
-import 'package:td/weapon/weapon_component.dart';
+
+import '../base/game_component.dart';
+import '../base/radar.dart';
+import '../base/scanable.dart';
+import '../enemy/enemy_component.dart';
+import '../game_controller/game_controller.dart';
+import '../ui/inventory/bloc/inventory_bloc.dart';
+import '../ui/stage_bar/bloc/stage_bar_bloc.dart';
+import '../weapon/bullet_component.dart';
+import '../weapon/cannon.dart';
+import '../weapon/weapon_component.dart';
+import 'game_main.dart';
 
 class GameTest extends GameMain with GameDebug {
   GameTest(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:td/ui/stage_bar/bloc/stage_bar_bloc.dart';
+import '../bloc/stage_bar_bloc.dart';
 
 class StageBarView extends StatelessWidget {
   const StageBarView({Key? key}) : super(key: key);

@@ -1,22 +1,23 @@
 import 'dart:collection';
 import 'dart:math';
-import 'package:flame/components.dart';
+
 import 'package:flame/cache.dart';
-import 'package:td/base/game_component.dart';
-import 'package:td/base/radar.dart';
-import 'package:td/base/scanable.dart';
-import 'package:td/enemy/enemy_component.dart';
-import 'package:td/enemy/enemy_factory.dart';
-import 'package:td/game/game_setting.dart';
-import 'package:td/neutual/neutual_component.dart';
-import 'package:td/ui/components/weaponview_widget.dart';
-import 'package:td/ui/inventory/bloc/inventory_bloc.dart';
-import 'package:td/ui/stage_bar/bloc/stage_bar_bloc.dart';
-import 'package:td/util/priority_layer.dart';
-import 'package:td/weapon/cannon.dart';
-import 'package:td/weapon/machine_gun.dart';
-import 'package:td/weapon/missile.dart';
-import 'package:td/weapon/weapon_component.dart';
+import 'package:flame/components.dart';
+
+import '../base/game_component.dart';
+import '../base/radar.dart';
+import '../base/scanable.dart';
+import '../enemy/enemy_component.dart';
+import '../enemy/enemy_factory.dart';
+import '../game/game_setting.dart';
+import '../neutual/neutual_component.dart';
+import '../ui/components/weaponview_widget.dart';
+import '../ui/inventory/bloc/inventory_bloc.dart';
+import '../util/priority_layer.dart';
+import '../weapon/cannon.dart';
+import '../weapon/machine_gun.dart';
+import '../weapon/missile.dart';
+import '../weapon/weapon_component.dart';
 
 part 'controller_process.dart';
 
@@ -73,11 +74,11 @@ class GameController extends GameComponent {
   }
 
   void processEnemySmartMove() {
-    Iterable<Component> enemies =
+    final Iterable<Component> enemies =
         children.where((e) => e is EnemyComponent && e.active).cast();
-    enemies.forEach((element) {
+    for (final element in enemies) {
       (element as EnemyComponent).moveSmart(gateEnd.position);
-    });
+    }
   }
 
   /* Load Initialization */
@@ -91,8 +92,8 @@ class GameController extends GameComponent {
 
   void loadGate() async {
     /*random gate */
-    double rndx = Random().nextDouble();
-    double rndy = Random().nextDouble();
+    final double rndx = Random().nextDouble();
+    final double rndy = Random().nextDouble();
     Vector2 start, end;
 
     if (rndx < rndy) {
@@ -159,4 +160,3 @@ class GameController extends GameComponent {
 
   void showWeaponDialog() {}
 }
-

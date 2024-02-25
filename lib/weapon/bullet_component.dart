@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
-import 'package:td/base/game_component.dart';
-import 'package:td/base/movable.dart';
-import 'package:td/base/radar.dart';
-import 'package:td/enemy/enemy_component.dart';
+import '../base/game_component.dart';
+import '../base/movable.dart';
+import '../base/radar.dart';
+import '../enemy/enemy_component.dart';
 
 class BulletComponent extends GameComponent
     with Movable, Radar<EnemyComponent> {
