@@ -5,16 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:td/game/game_main.dart';
-import 'package:td/game/game_test.dart';
-import 'package:td/ui/components/weaponview_widget.dart';
-import 'package:td/ui/inventory/bloc/inventory_bloc.dart';
-import 'package:td/ui/inventory/view/inventory.dart';
-import 'package:td/ui/stage_bar/bloc/stage_bar_bloc.dart';
-import 'package:td/weapon/weapon_component.dart';
-
+import 'game/game_main.dart';
+import 'game/game_test.dart';
 import 'game_controller/game_controller.dart';
+import 'ui/components/weaponview_widget.dart';
+import 'ui/inventory/bloc/inventory_bloc.dart';
+import 'ui/inventory/view/inventory.dart';
+import 'ui/stage_bar/bloc/stage_bar_bloc.dart';
 import 'ui/stage_bar/view/stage_bar_view.dart';
+import 'weapon/weapon_component.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -87,8 +86,7 @@ class _AppViewState extends State<AppView> {
       child: Center(
           child: TextButton(
         style: TextButton.styleFrom(
-          padding: const EdgeInsets.all(16.0),
-          primary: Colors.white,
+          foregroundColor: Colors.white, padding: const EdgeInsets.all(16.0),
           textStyle: const TextStyle(fontSize: 20),
         ),
         onPressed: () {

@@ -1,9 +1,11 @@
-import 'package:flame/components.dart';
-import 'package:td/base/game_component.dart';
-import 'package:td/enemy/enemy_component.dart';
-import 'package:td/enemy/enmey_v1.dart';
 import 'dart:math' as math;
-import 'package:td/game_controller/game_controller.dart';
+
+import 'package:flame/components.dart';
+
+import '../base/game_component.dart';
+import '../game_controller/game_controller.dart';
+import 'enemy_component.dart';
+import 'enmey_v1.dart';
 
 class EnemyFactory extends GameComponent {
   EnemyFactory() : super(position: Vector2.zero(), size: Vector2.zero()) {

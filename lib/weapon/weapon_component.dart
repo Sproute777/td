@@ -4,10 +4,10 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
-import 'package:td/base/game_component.dart';
-import 'package:td/base/radar.dart';
-import 'package:td/enemy/enemy_component.dart';
-import 'package:td/game_controller/game_controller.dart';
+import '../base/game_component.dart';
+import '../base/radar.dart';
+import '../enemy/enemy_component.dart';
+import '../game_controller/game_controller.dart';
 
 class SmartRotateEffect extends RotateEffect {
   VoidCallback? onComplete;
@@ -121,7 +121,7 @@ class WeaponComponent extends GameComponent
     radarOn = false;
     add(TimerComponent(
         period: period,
-        repeat: false,
+        // repeat: false,
         removeOnFinish: true,
         onTick: () => radarOn = true));
   }

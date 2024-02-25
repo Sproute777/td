@@ -1,8 +1,8 @@
 import 'package:flame/extensions.dart';
-import 'package:td/astar/astarnode.dart';
-import 'package:td/map/astarmap_minxin.dart';
-import 'package:td/base/game_component.dart';
 
+import '../astar/astarnode.dart';
+import '../base/game_component.dart';
+import 'astarmap_minxin.dart';
 import 'map_tile_component.dart';
 
 class MapController extends GameComponent with AstarMapMixin {

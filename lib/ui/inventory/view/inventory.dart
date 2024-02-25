@@ -1,10 +1,9 @@
-import 'package:td/game_controller/game_controller.dart';
-import 'package:td/ui/inventory/bloc/inventory_bloc.dart';
-
-import 'package:td/weapon/weapon_component.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../game_controller/game_controller.dart';
+import '../../../weapon/weapon_component.dart';
+import '../bloc/inventory_bloc.dart';
 
 class Inventory extends StatefulWidget {
   const Inventory({Key? key}) : super(key: key);

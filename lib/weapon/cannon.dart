@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:td/base/game_component.dart';
-import 'package:td/game/game_setting.dart';
-import 'package:td/weapon/bullet_component.dart';
-import 'package:td/weapon/weapon_component.dart';
+import '../base/game_component.dart';
+import '../game/game_setting.dart';
+import 'bullet_component.dart';
+import 'weapon_component.dart';
 
 class Cannon extends WeaponComponent {
   static final WeaponSetting setting =

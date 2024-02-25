@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
-import 'package:td/base/game_component.dart';
-import 'package:td/base/radar.dart';
-import 'package:td/enemy/enemy_component.dart';
+import '../base/game_component.dart';
+import '../base/radar.dart';
+import '../enemy/enemy_component.dart';
 
 enum NeutualType { GATE_START, GATE_END, MINDER, STONE }
 
