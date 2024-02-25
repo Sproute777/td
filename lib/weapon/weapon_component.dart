@@ -66,7 +66,7 @@ class BarrelComponent extends GameComponent {
         EffectController(
           duration: duration,
           curve: Curves.easeOut,
-          infinite: false,
+          // infinite: false,
         ),
       )..onComplete = onComplete,
     );

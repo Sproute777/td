@@ -123,7 +123,8 @@ class WeaponSetting {
 
   WeaponSetting.empty();
 
-  Future<void> fill(weaponParam, tileSize, weaponTower, images) async {
+  Future<void> fill(Map<String, dynamic> weaponParam, double tileSize,
+      Sprite weaponTower, Images images) async {
     label = weaponParam['label'];
     cost = weaponParam['cost'];
     range = weaponParam['range'] * tileSize;
@@ -145,6 +146,7 @@ class WeaponSetting {
     barrel[2] =
         Sprite(await images.load('weapon/${weaponParam['barrelImg2']}.png'));
     bullet =
+        // Sprite(await images.load('weapon/${weaponParam['bulletImg']}.png'));
         Sprite(await images.load('weapon/${weaponParam['bulletImg']}.png'));
   }
 
@@ -175,7 +177,7 @@ class WeaponSettingV1 {
     String weaponParamsString =
         await rootBundle.loadString('assets/weaponParams.json');
 
-    final weaponParams = json.decode(weaponParamsString);
+    final weaponParams = json.decode(weaponParamsString) as List;
 
     WeaponSetting w = WeaponSetting.empty()
       ..explosion = SpriteSheet.fromColumnsAndRows(
