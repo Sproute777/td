@@ -37,7 +37,7 @@ class DevApp extends StatelessWidget {
 }
 
 class _AppView extends StatefulWidget {
-  const _AppView({super.key});
+  const _AppView();
 
   @override
   State<_AppView> createState() => _AppViewState();

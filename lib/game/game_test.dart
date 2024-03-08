@@ -27,15 +27,15 @@ class GameTest extends GameMain with GameDebug {
   void update(double t) {
     recordTime();
     super.update(t);
-    timeDelay("Game update ");
+    timeDelay('Game update ');
     // if (loadDone) listComponents();
   }
 
   @override
-  void render(Canvas c) {
+  void render(canvas) {
     recordTime();
-    super.render(c);
-    timeDelay("Game render ");
+    super.render(canvas);
+    timeDelay('Game render ');
   }
 
   // void debug(double t) {
@@ -56,6 +56,7 @@ class GameTest extends GameMain with GameDebug {
 
 mixin GameDebug on GameMain {
   bool debug = false;
+  @override
   int currentTimeMillis() {
     return DateTime.now().millisecondsSinceEpoch;
   }
@@ -80,37 +81,55 @@ mixin GameDebug on GameMain {
 
   @override
   void update(double t) {
-    if (t < 1) super.update(t);
+    if (t < 1) {
+      super.update(t);
+    }
   }
 
   void listComponents() {
-    if (!debug) return;
+    if (!debug) {
+      return;
+    }
 
     int weapon = 0, enemy = 0, cannon = 0, bullet = 0, exp = 0;
     int radar = 0, scanable = 0;
     final GameComponent c = gameController;
     // gameController;
 
-    void _count(c) {
-      if (c is WeaponComponent) weapon++;
-      if (c is EnemyComponent) enemy++;
-      if (c is Cannon) cannon++;
-      if (c is BulletComponent) bullet++;
-      if (c is ExplosionComponent) exp++;
-      if (c is Radar) radar++;
-      if (c is Scanable) scanable++;
-    }
-
-    void _loopChildren(c) {
-      _count(c);
-      if (c.children.length > 0) {
-        c.children.forEach((e) => _loopChildren(e));
+    void count(c) {
+      if (c is WeaponComponent) {
+        weapon++;
+      }
+      if (c is EnemyComponent) {
+        enemy++;
+      }
+      if (c is Cannon) {
+        cannon++;
+      }
+      if (c is BulletComponent) {
+        bullet++;
+      }
+      if (c is ExplosionComponent) {
+        exp++;
+      }
+      if (c is Radar) {
+        radar++;
+      }
+      if (c is Scanable) {
+        scanable++;
       }
     }
 
-    _loopChildren(c);
+    void loopChildren(c) {
+      count(c);
+      if (c.children.length > 0) {
+        c.children.forEach((e) => loopChildren(e));
+      }
+    }
 
-    print(
-        "weapon $weapon, enemy $enemy, cannon $cannon, bullet $bullet, exp $exp, radar $radar, scanable $scanable");
+    loopChildren(c);
+
+    debugPrint(
+        'weapon $weapon, enemy $enemy, cannon $cannon, bullet $bullet, exp $exp, radar $radar, scanable $scanable');
   }
 }

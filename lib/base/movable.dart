@@ -19,9 +19,9 @@ mixin Movable on GameComponent {
 
   void moveFromTo(Vector2 from, Vector2 to, [Function? onFinish]) {
     // Vector2 = from;
-    double dx = to.x - from.x;
-    double dy = to.y - from.y;
-    double dl = sqrt(pow(dx, 2) + pow(dy, 2));
+    final double dx = to.x - from.x;
+    final double dy = to.y - from.y;
+    final double dl = sqrt(pow(dx, 2) + pow(dy, 2));
     _totalLength = dl;
     _direction = Vector2(dx / dl, dy / dl);
     _movedLength = 0;

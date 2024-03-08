@@ -76,7 +76,7 @@ class GameMain extends FlameGame with TapCallbacks {
 
     loadDone = true;
     final int d = currentTimeMillis() - timeRecord;
-    debugPrint("GameMain onLoad done takke $d");
+    debugPrint('GameMain onLoad done takke $d');
     pauseEngine();
   }
 

@@ -21,11 +21,11 @@ class MapTileComponent extends GameComponent with TapCallbacks {
   });
 
   @override
-  void render(Canvas c) {
-    super.render(c);
+  void render( canvas) {
+    super.render(canvas);
     // if (background != null) {
     // background!.renderRect(c, size.toRect());
-    c.drawRect(
+    canvas.drawRect(
         size.toRect(),
         Paint()
           ..style = PaintingStyle.stroke

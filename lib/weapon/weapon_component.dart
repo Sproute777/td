@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
-import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import '../base/game_component.dart';
 import '../base/radar.dart';
@@ -57,7 +56,7 @@ class BarrelComponent extends GameComponent {
       : super(position: position, size: size, priority: 21);
   double rotateSpeed = 6.0; /* radians/second */
   double rotateTo(double radians,VoidCallback onComplete) {
-    double duration = (radians - angle).abs() / rotateSpeed;
+    final double duration = (radians - angle).abs() / rotateSpeed;
     if (duration <= 0) {
       onComplete.call();
       return 0;

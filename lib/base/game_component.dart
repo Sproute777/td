@@ -21,8 +21,8 @@ class GameComponent extends PositionComponent with GameRef<GameMain>, HasPaint {
             anchor: Anchor.center);
 
   bool active = true;
-  get length => (size.x + size.y) / 2;
-  get radius => length / 2;
+  double get length => (size.x + size.y) / 2;
+  double get radius => length / 2;
   // loadedImage(imagePath) =>
   //     Sprite.fromImage(Flame.images.loadedFiles[imagePath].loadedImage);
 
@@ -53,7 +53,7 @@ class GameComponent extends PositionComponent with GameRef<GameMain>, HasPaint {
   }
 
   double angleNearTo(Vector2 target) {
-    double distance = position.distanceTo(target);
+    final double distance = position.distanceTo(target);
     if (distance == 0) {
       return 0;
     }

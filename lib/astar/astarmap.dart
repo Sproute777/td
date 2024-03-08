@@ -63,11 +63,11 @@ class AstarMap {
       open.removeAt(lowestF);
       closed.add(current);
 
-      List<AstarNode> neighbors = neighborNodes(current);
+      final List<AstarNode> neighbors = neighborNodes(current);
       for (var i = 0; i < neighbors.length; i++) {
         if (indexOfNode(closed, neighbors[i]) == -1) {
           // Skip if in closed list
-          var index = indexOfNode(open, neighbors[i]);
+          final index = indexOfNode(open, neighbors[i]);
           if (index == -1) {
             neighbors[i].f = neighbors[i].g + heuristic(neighbors[i], goal);
             open.add(neighbors[i]);
@@ -83,12 +83,13 @@ class AstarMap {
   }
 
   List<AstarNode> neighborNodes(AstarNode n) {
-    List<AstarNode> neighbors = <AstarNode>[];
+    final List<AstarNode> neighbors = <AstarNode>[];
 
     if (n.x > 0) {
-      if (isOnMap(n.x - 1, n.y) && obstacleMap[n.x - 1][n.y])
+      if (isOnMap(n.x - 1, n.y) && obstacleMap[n.x - 1][n.y]) {
         neighbors
-            .add(new AstarNode(n.x - 1, n.y, parent: n, cost: costStraight));
+            .add(AstarNode(n.x - 1, n.y, parent: n, cost: costStraight));
+      }
       if (n.y > 0 &&
           isOnMap(n.x - 1, n.y - 1) &&
           obstacleMap[n.x - 1][n.y - 1]) {

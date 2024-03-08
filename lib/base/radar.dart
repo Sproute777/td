@@ -18,10 +18,10 @@ mixin Radar<T> on GameComponent {
   void radarScan(Iterable<Component> targets) {
     if (radarOn) {
       _bestDistance = 100000;
-      Iterable<Component> _targets = targets
-          .where((e) => ((e is T) && ((e as GameComponent).active)))
+      final Iterable<Component> targets0 = targets
+          .where((e) => (e is T) && ((e as GameComponent).active))
           .cast();
-      _targets
+      targets0
           .takeWhile((value) => _collisionTest(value as GameComponent))
           .forEach((element) {});
 
