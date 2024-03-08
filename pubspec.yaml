@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flame_bloc: ^1.8.0
+  flame_bloc: ^1.10.0
   equatable: ^2.0.3
   flutter_bloc: ^8.0.1
   # flame_tiled: ^1.2.1
