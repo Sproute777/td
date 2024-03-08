@@ -37,12 +37,10 @@ class WeaponViewWidget {
     }
     if (anchor.y <= ((paddingY / 2) + (tileSize.y * 2))) {
       anchor.y = tileSize.y * 2;
-      debugPrint('---------------${anchor.y}');
       // - size.y
     }
     if (anchor.x >= fullScreenSize.width - tileSize.x) {
       anchor.x = fullScreenSize.width - tileSize.x - size.x;
-      debugPrint('----aaaaaa----${anchor.x}');
       // - size.y
     } else  {
       anchor = Vector2(anchor.x - size.x / 2,

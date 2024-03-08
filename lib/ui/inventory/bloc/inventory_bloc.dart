@@ -28,7 +28,7 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
     final parameters = List<int>.from(_json.map((s) => s['cost'] as int));
 
     final _listWeapons = List<WeaponType>.from(_json.map((s) {
-      var w = s['label'];
+      final w = s['label'];
       return WeaponType.values.firstWhere((v) => v.name == w);
     }));
 

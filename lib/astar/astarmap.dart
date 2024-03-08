@@ -25,7 +25,7 @@ class AstarMap {
   bool isOnMap(int x, int y) => x >= 0 && x < width && y >= 0 && y < height;
 
   void initObstacleMap() {
-    obstacleMap = new Array2d<bool>(width, height, defaultValue: true);
+    obstacleMap = Array2d<bool>(width, height, defaultValue: true);
   }
 
   void addObstacle(int x, int y) {
@@ -37,19 +37,19 @@ class AstarMap {
   }
 
   AstarNode? astar(AstarNode start, AstarNode goal) {
-    List<AstarNode> closed = [];
-    List<AstarNode> open = [start];
+    final List<AstarNode> closed = [];
+    final List<AstarNode> open = [start];
 
     open.first.f = open.first.g + heuristic(open.first, goal);
 
-    while (open.length > 0) {
+    while (open.isNotEmpty) {
       var lowestF = 0;
       for (var i = 1; i < open.length; i++) {
         if (open[i].f < open[lowestF].f) {
           lowestF = i;
         }
       }
-      AstarNode current = open[lowestF];
+      final AstarNode current = open[lowestF];
 
       if (current == goal) {
         // var info = 'Map size = ${width}x$height' +

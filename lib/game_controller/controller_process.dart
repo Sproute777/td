@@ -28,17 +28,14 @@ class GameInstruction {
     switch (instruction) {
       case GameControl.gameStarted:
         controller.gameRef.started;
-        break;
       case GameControl.gameResumed:
         controller.gameRef.resumeEngine();
-        break;
       case GameControl.gamePaused:
         controller.gameRef.pauseEngine();
-        break;
       case GameControl.weaponBuilding:
         WeaponViewWidget.hide();
         // controller.gameRef.read<InventoryBloc>().add();
-        WeaponComponent? component = controller.buildWeapon(source.position,
+        final WeaponComponent? component = controller.buildWeapon(source.position,
             controller.gameRef.inventoryBloc.state.weapon);
         if (component != null) {
           controller.add(component);
@@ -48,7 +45,6 @@ class GameInstruction {
               component.collision(controller.gateEnd) ||
               controller.gameRef.mapController.testBlock(component.position);
         }
-        break;
       case GameControl.weaponSelected:
         WeaponViewWidget.hide();
         // controller.gameRef.weaponFactory.select(source as SingleWeaponView);
@@ -56,39 +52,31 @@ class GameInstruction {
           controller.send(
               controller.buildingWeapon!, GameControl.weaponBuilding);
         }
-        break;
       case GameControl.weaponBuildDone:
         // controller.buildingWeapon.buildDone = true;
         controller.onBuildDone(source as WeaponComponent);
         controller.gameRef.mapController.astarMapAddObstacle(source.position);
         controller.buildingWeapon = null;
         controller.processEnemySmartMove();
-        break;
       case GameControl.weaponDestroyed:
         WeaponViewWidget.hide();
         controller.onDestroy(source as WeaponComponent);
         controller.gameRef.mapController
             .astarMapRemoveObstacle(source.position);
         controller.processEnemySmartMove();
-        break;
       case GameControl.enemySpawn:
         controller.enemyFactory.start();
-        break;
       case GameControl.enemyMissed:
         controller.gameRef.addMissed(1);
 
-        break;
       case GameControl.enemyKilled:
         controller.gameRef.addKilled(1);
 
-        break;
       case GameControl.enemyNexWave:
       controller.gameRef.setWave(1);
 
-        break;
       case GameControl.weaponShowAction:
         WeaponViewWidget.show(source as WeaponComponent);
-        break;
       default:
     }
   }

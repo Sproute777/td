@@ -21,7 +21,7 @@ class EnemyFactory extends GameComponent {
 
   EnemyComponent spawnOneEnemy(EnemyType type) {
     EnemyComponent enemy;
-    Vector2 initPosition = gameRef.gameController.gateStart.position;
+    final Vector2 initPosition = gameRef.gameController.gateStart.position;
     enemy = spawnEnemey(initPosition, type);
     gameRef.gameController.add(enemy);
     enpowerEnemy(enemy);
@@ -41,16 +41,12 @@ class EnemyFactory extends GameComponent {
     switch (currentWave) {
       case 1:
         spawnEnemy(20, 1.2, spawnEnemyA);
-        break;
       case 2:
         spawnEnemy(30, 0.8, spawnEnemyB);
-        break;
       case 3:
         spawnEnemy(15, 2, spawnEnemyC);
-        break;
       case 4:
         spawnEnemy(10, 1.5, spawnEnemyD);
-        break;
       default:
         spawnEnemy(10, 2, spawnEnemyMix);
         break;
@@ -67,14 +63,12 @@ class EnemyFactory extends GameComponent {
     if (_spwanCount <= 0) {
       add(TimerComponent(
           period: _interval,
-          repeat: false,
           removeOnFinish: true,
           onTick: () => nextWave()));
     } else {
       spawnF();
       add(TimerComponent(
           period: _interval,
-          repeat: false,
           removeOnFinish: true,
           onTick: () => spawnEnemyLoop(spawnF)));
       _spwanCount--;
@@ -86,13 +80,13 @@ class EnemyFactory extends GameComponent {
   void spawnEnemyC() => spawnOneEnemy(EnemyType.enemyC);
   void spawnEnemyD() => spawnOneEnemy(EnemyType.enemyD);
   void spawnEnemyMix() {
-    math.Random rnd = math.Random();
-    int r = rnd.nextInt(4);
+    final math.Random rnd = math.Random();
+    final int r = rnd.nextInt(4);
     spawnOneEnemy(EnemyType.values[r]);
   }
 
   void enpowerEnemy(EnemyComponent enemy) {
-    num exp = (currentWave - 1);
+    final num exp = currentWave - 1;
     enemy.maxLife *= math.pow(1.1, exp);
   }
 }

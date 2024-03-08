@@ -23,7 +23,7 @@ class BulletComponent extends GameComponent
     radarScanAlert = onHitEnemy;
     radarScanNothing = null;
     radarCollisionDepth = 0.2;
-    onMoveFinish = this.outOfRange;
+    onMoveFinish = outOfRange;
     return super.onLoad();
   }
 

@@ -19,7 +19,7 @@ class NeutualComponent extends GameComponent with Radar<EnemyComponent> {
       radarOn = true;
       radarRange = (size.x + size.y) / 4;
       radarCollisionDepth = 0.9;
-      radarScanAlert = (c) => {(c as EnemyComponent).onArrived()};
+      radarScanAlert = (c) => (c as EnemyComponent).onArrived();
     }
   }
   @override

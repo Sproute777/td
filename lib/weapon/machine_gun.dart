@@ -10,8 +10,8 @@ class MachineGun extends WeaponComponent {
   static final WeaponSetting setting =
       GameSetting().weapons.weapon[WeaponType.mg.index];
   MachineGun({
-    required Vector2 position,
-  }) : super(position: position, size: setting.size) {
+    required super.position,
+  }) : super(size: setting.size) {
     size = setting.size;
     weaponType = WeaponType.mg;
     range = setting.range;
@@ -24,7 +24,7 @@ class MachineGun extends WeaponComponent {
 
   @override
   void fireBullet(Vector2 target) {
-    BulletComponent bullet =
+    final BulletComponent bullet =
         BulletComponent(position: _bulletPosition(), size: setting.bulletSize)
           ..angle = barrel.angle
           ..damage = setting.damage
@@ -37,10 +37,10 @@ class MachineGun extends WeaponComponent {
 
   Vector2 _bulletPosition() {
     // double bulletR = (setting.bulletSize.x + setting.bulletSize.y) / 4;
-    double r = radius /*+ bulletR*/;
+    final double r = radius /*+ bulletR*/;
     Vector2 localPosition =
         Vector2(r * sin(barrel.angle), -r * cos(barrel.angle));
-    localPosition += (size / 2);
+    localPosition += size / 2;
     return positionOf(localPosition);
   }
 

@@ -59,11 +59,11 @@ mixin Radar<T> on GameComponent {
   }
 
   bool collision(GameComponent target) {
-    Vector2 targetPosition = target.position;
-    double targetCollisionSize = (target.size.x + target.size.y) / 4;
-    double collisionRange = (targetCollisionSize + radarRange);
+    final Vector2 targetPosition = target.position;
+    final double targetCollisionSize = (target.size.x + target.size.y) / 4;
+    double collisionRange = targetCollisionSize + radarRange;
     collisionRange = collisionRange * (1 - radarCollisionDepth);
-    double distance = position.distanceTo(targetPosition);
+    final double distance = position.distanceTo(targetPosition);
     if (distance < collisionRange) {
       return true;
     }
