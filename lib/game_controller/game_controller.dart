@@ -27,12 +27,9 @@ class GameController extends GameComponent {
   WeaponComponent? buildingWeapon;
   EnemyFactory enemyFactory = EnemyFactory();
   GameController({
-    position,
-    size,
-  }) : super(
-            position: position,
-            size: size,
-            priority: LayerPriority.getAbovePriority(1)) {
+    super.position,
+    super.size,
+  }) : super(priority: LayerPriority.getAbovePriority(1)) {
     add(enemyFactory);
   }
 
@@ -50,27 +47,27 @@ class GameController extends GameComponent {
   /* Instruction Queue*/
   // ignore: prefer_final_fields
   Queue _instructQ = Queue<GameInstruction>();
-  send(GameComponent source, GameControl _instruct) {
-    _instructQ.add(GameInstruction(source, _instruct));
+  void send(GameComponent source, GameControl instruct) {
+    _instructQ.add(GameInstruction(source, instruct));
   }
 
   void processInstruction() {
     while (_instructQ.isNotEmpty) {
-      GameInstruction _instruct = _instructQ.removeFirst();
-      _instruct.process(this);
+      final GameInstruction instruct = _instructQ.removeFirst();
+      instruct.process(this);
     }
   }
 
   /* Process Routine */
   void processRadarScan() {
-    Iterable<Component> radars =
+    final Iterable<Component> radars =
         children.where((e) => e is Radar && e.radarOn).cast();
-    Iterable<Component> scanbles =
+    final Iterable<Component> scanbles =
         children.where((e) => e is Scanable && e.scanable).cast();
 
-    radars.forEach((element) {
+    for (final element in radars) {
       (element as Radar).radarScan(scanbles);
-    });
+    }
   }
 
   void processEnemySmartMove() {
@@ -84,13 +81,14 @@ class GameController extends GameComponent {
   /* Load Initialization */
   late NeutualComponent gateStart;
   late NeutualComponent gateEnd;
+
   @override
-  Future<void>? onLoad() {
+  Future<void> onLoad() async {
     super.onLoad();
     loadGate();
   }
 
-  void loadGate() async {
+  Future<void> loadGate() async {
     /*random gate */
     final double rndx = Random().nextDouble();
     final double rndy = Random().nextDouble();
@@ -134,13 +132,10 @@ class GameController extends GameComponent {
     switch (weaponType) {
       case WeaponType.cannon:
         weapon = Cannon(position: anchor);
-        break;
       case WeaponType.mg:
         weapon = MachineGun(position: anchor);
-        break;
       case WeaponType.missele:
         weapon = Missile(position: anchor);
-        break;
       default:
         break;
     }
@@ -148,14 +143,12 @@ class GameController extends GameComponent {
   }
 
   void onBuildDone(WeaponComponent c) {
-    gameRef.inventoryBloc
-    .add(InvAddCost(index: c.weaponType.index));
+    gameRef.inventoryBloc.add(InvAddCost(index: c.weaponType.index));
     gameRef.subsractMinerals(c.weaponType.index);
   }
 
   void onDestroy(WeaponComponent c) {
-    gameRef.inventoryBloc
-        .add(InvSubstractCost(index: c.weaponType.index));
+    gameRef.inventoryBloc.add(InvSubstractCost(index: c.weaponType.index));
   }
 
   void showWeaponDialog() {}

@@ -37,9 +37,9 @@ class MapController extends GameComponent with AstarMapMixin {
 
   bool testBlock(Vector2 position) {
     astarMapAddObstacle(position);
-    AstarNode? goal = astarMapResolve(
+    final AstarNode? goal = astarMapResolve(
         gameRef.setting.enemySpawn, gameRef.setting.enemyTarget);
     astarMapRemoveObstacle(position);
-    return goal == null ? true : false;
+    return goal == null;
   }
 }

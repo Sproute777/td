@@ -11,12 +11,12 @@ mixin AstarMapMixin {
   }
 
   void astarMapAddObstacle(Vector2 position) {
-    AstarNode node = _positionToNode(position);
+    final AstarNode node = _positionToNode(position);
     astarMap.addObstacle(node.x, node.y);
   }
 
   void astarMapRemoveObstacle(Vector2 position) {
-    AstarNode node = _positionToNode(position);
+    final AstarNode node = _positionToNode(position);
     astarMap.removeObstacle(node.x, node.y);
   }
 

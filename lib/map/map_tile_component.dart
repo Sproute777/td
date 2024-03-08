@@ -6,6 +6,7 @@ import '../base/game_component.dart';
 import '../game_controller/game_controller.dart';
 
 enum MapTileBuildStatus { Empty, BuildPreview, BuildDone }
+
 enum MapTileBuildEvent { None, BuildPreview, BuildDone, BuildCancel }
 
 class MapTileComponent extends GameComponent with Tappable {
@@ -15,12 +16,9 @@ class MapTileComponent extends GameComponent with Tappable {
   Sprite? background;
 
   MapTileComponent({
-    Vector2? position,
-    Vector2? size,
-  }) : super(
-          position: position,
-          size: size,
-        );
+    super.position,
+    super.size,
+  });
 
   void render(Canvas c) {
     super.render(c);
@@ -35,7 +33,7 @@ class MapTileComponent extends GameComponent with Tappable {
 
   @override
   bool onTapDown(TapDownInfo event) {
-    bool paused = gameRef.paused;
+    final paused = gameRef.paused;
     if (!paused) {
       gameRef.gameController.send(this, GameControl.weaponBuilding);
       return false;

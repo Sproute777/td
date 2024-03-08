@@ -17,9 +17,11 @@ class AstarNode {
     g = (parent != null ? parent!.g : 0) + cost;
   }
 
+  @override
   bool operator ==(dynamic other) {
     return (x == other.x && y == other.y);
   }
 
+  @override
   int get hashCode => super.hashCode;
 }

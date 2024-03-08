@@ -53,7 +53,7 @@ class MineView extends GameComponent {
   @override
   void render(Canvas c) {
     if (maskGreen != null) {
-      Color? color = maskGreen! ? Colors.green[200] : Colors.red[200];
+      final Color? color = maskGreen! ? Colors.green[200] : Colors.red[200];
       c.drawRect(size.toRect(), Paint()..color = color!.withOpacity(0.3));
     }
     super.render(c);

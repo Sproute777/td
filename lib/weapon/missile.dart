@@ -10,21 +10,21 @@ class Missile extends WeaponComponent {
   static final WeaponSetting setting =
       GameSetting().weapons.weapon[WeaponType.missele.index];
   Missile({
-    required Vector2 position,
-  }) : super(position: position, size: setting.size) {
-    this.size = setting.size;
-    this.weaponType = WeaponType.missele;
-    this.range = setting.range;
-    this.fireInterval = setting.fireInterval;
-    this.sprite = setting.tower;
-    this.barrel.sprite = setting.barrel[0];
-    this.barrel.size = size;
-    this.barrel.rotateSpeed = setting.rotateSpeed;
+    required super.position,
+  }) : super(size: setting.size) {
+    size = setting.size;
+    weaponType = WeaponType.missele;
+    range = setting.range;
+    fireInterval = setting.fireInterval;
+    sprite = setting.tower;
+    barrel.sprite = setting.barrel[0];
+    barrel.size = size;
+    barrel.rotateSpeed = setting.rotateSpeed;
   }
 
   @override
   void fireBullet(Vector2 target) {
-    BulletComponent bullet =
+    final BulletComponent bullet =
         BulletComponent(position: _bulletPosition(), size: setting.bulletSize)
           ..angle = barrel.angle
           ..damage = setting.damage
@@ -37,10 +37,10 @@ class Missile extends WeaponComponent {
 
   Vector2 _bulletPosition() {
     // double bulletR = (setting.bulletSize.x + setting.bulletSize.y) / 4;
-    double r = radius /*+ bulletR*/;
+    final double r = radius /*+ bulletR*/;
     Vector2 localPosition =
         Vector2(r * sin(barrel.angle), -r * cos(barrel.angle));
-    localPosition += (size / 2);
+    localPosition += size / 2;
     return positionOf(localPosition);
   }
 

@@ -18,11 +18,15 @@ class Array2d<T> {
   operator [](int x) => array[x];
 
   set width(int v) {
-    while (array.length > v) array.removeLast();
+    while (array.length > v) {
+      array.removeLast();
+    }
     while (array.length < v) {
-      List<T> newList = [];
-      if (array.length > 0) {
-        for (int y = 0; y < array.first.length; y++) newList.add(defaultValue);
+      final List<T> newList = [];
+      if (array.isNotEmpty) {
+        for (int y = 0; y < array.first.length; y++) {
+          newList.add(defaultValue);
+        }
       }
       array.add(newList);
     }
@@ -30,10 +34,14 @@ class Array2d<T> {
 
   set height(int v) {
     while (array.first.length > v) {
-      for (int x = 0; x < array.length; x++) array[x].removeLast();
+      for (int x = 0; x < array.length; x++) {
+        array[x].removeLast();
+      }
     }
     while (array.first.length < v) {
-      for (int x = 0; x < array.length; x++) array[x].add(defaultValue);
+      for (int x = 0; x < array.length; x++) {
+        array[x].add(defaultValue);
+      }
     }
   }
 }

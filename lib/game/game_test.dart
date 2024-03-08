@@ -4,9 +4,6 @@ import '../base/game_component.dart';
 import '../base/radar.dart';
 import '../base/scanable.dart';
 import '../enemy/enemy_component.dart';
-import '../game_controller/game_controller.dart';
-import '../ui/inventory/bloc/inventory_bloc.dart';
-import '../ui/stage_bar/bloc/stage_bar_bloc.dart';
 import '../weapon/bullet_component.dart';
 import '../weapon/cannon.dart';
 import '../weapon/weapon_component.dart';
@@ -14,13 +11,9 @@ import 'game_main.dart';
 
 class GameTest extends GameMain with GameDebug {
   GameTest(
-      {required GameController gameController,
-      required StageBarBloc stageBarBloc,
-      required InventoryBloc inventoryBloc})
-      : super(
-            gameController: gameController,
-            stageBarBloc: stageBarBloc,
-            inventoryBloc: inventoryBloc);
+      {required super.gameController,
+      required super.stageBarBloc,
+      required super.inventoryBloc});
 
   @override
   Future<void> onLoad() async {
@@ -64,7 +57,7 @@ class GameTest extends GameMain with GameDebug {
 mixin GameDebug on GameMain {
   bool debug = false;
   int currentTimeMillis() {
-    return new DateTime.now().millisecondsSinceEpoch;
+    return DateTime.now().millisecondsSinceEpoch;
   }
 
   int timeRecord = 0;
@@ -78,8 +71,8 @@ mixin GameDebug on GameMain {
   void timeDelay(String m) {
     if (debug) {
       if (timeRecord > 0) {
-        int d = currentTimeMillis() - timeRecord;
-        print('$m takes $d');
+        final int d = currentTimeMillis() - timeRecord;
+        debugPrint('$m takes $d');
         timeRecord = 0;
       }
     }
@@ -95,7 +88,7 @@ mixin GameDebug on GameMain {
 
     int weapon = 0, enemy = 0, cannon = 0, bullet = 0, exp = 0;
     int radar = 0, scanable = 0;
-    GameComponent c = gameController;
+    final GameComponent c = gameController;
     // gameController;
 
     void _count(c) {

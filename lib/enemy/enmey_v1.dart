@@ -8,11 +8,11 @@ import 'enemy_component.dart';
 GameSetting setting = GameSetting();
 
 class EnemyV1 extends EnemyComponent {
-  late SpriteSheet spriteSheet;
-  EnemyV1({required Vector2 position, required EnemyType type})
-      : super(position: position, size: Vector2.zero()) {
+  late final SpriteSheet spriteSheet;
+  EnemyV1({required super.position, required EnemyType type})
+      : super(size: Vector2.zero()) {
     enemyType = type;
-    EnemySetting s = setting.enemies.enemy[enemyType.index];
+    final EnemySetting s = setting.enemies.enemy[enemyType.index];
     maxLife = s.life;
     speed = s.speed;
     size = setting.enemySize * s.scale;
@@ -21,30 +21,32 @@ class EnemyV1 extends EnemyComponent {
 
   double initAngle = pi / 2;
 
+  @override
   set angle(double a) {
     super.angle = a - initAngle;
   }
 
   @override
-  Future<void>? onLoad() {
+  Future<void> onLoad() async {
     super.onLoad();
     setLiveAnimation();
   }
 
+  @override
   void onKilled() {
     setDeadAnimation();
     super.onKilled();
   }
 
   void setLiveAnimation() {
-    List<Sprite> sprites = [];
+    final List<Sprite> sprites = [];
     sprites.add(spriteSheet.getSprite(0, 0));
     sprites.add(spriteSheet.getSprite(0, 1));
-    animation = SpriteAnimation.spriteList(sprites, stepTime: 0.4, loop: true);
+    animation = SpriteAnimation.spriteList(sprites, stepTime: 0.4);
   }
 
   void setDeadAnimation() {
-    List<Sprite> sprites = [];
+    final List<Sprite> sprites = [];
     sprites.add(spriteSheet.getSprite(0, 0));
     sprites.add(spriteSheet.getSprite(1, 0));
     sprites.add(spriteSheet.getSprite(2, 0));

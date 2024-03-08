@@ -31,11 +31,12 @@ class SmartRotateEffect extends RotateEffect {
 
   @override
   void onFinish() {
+    super.onFinish();
     if (target.angle < 0) {
-      target.angle += (pi * 2);
+      target.angle += pi * 2;
     }
     if (target.angle > (pi * 2)) {
-      target.angle -= (pi * 2);
+      target.angle -= pi * 2;
     }
     onComplete?.call();
   }
@@ -85,7 +86,7 @@ class WeaponComponent extends GameComponent
   WeaponComponent({
     required Vector2 position,
     required Vector2 size,
-    double life = 100,
+    // double life = 100,
   }) : super(position: position, size: size, priority: 20) {
     barrel = BarrelComponent(position: size / 2, size: size);
     add(barrel);
@@ -97,12 +98,12 @@ class WeaponComponent extends GameComponent
   bool blockEnemy = true;
   bool buildDone = false;
   bool active = true;
-  get buildAllowed => ((blockMap == false) && (blockEnemy == false));
+  bool get buildAllowed => (!blockMap) && (!blockEnemy);
 
   void fire(Vector2 target) {
     _targetEnemy = target;
-    double radians = angleNearTo(target);
-    double rotatePeriod = barrel.rotateTo(radians, _fireBullet);
+    final double radians = angleNearTo(target);
+    final double rotatePeriod = barrel.rotateTo(radians, _fireBullet);
     coolDown(rotatePeriod + fireInterval);
   }
 
@@ -158,8 +159,8 @@ class WeaponComponent extends GameComponent
 
   @override
   void render(Canvas canvas) {
-    if (buildDone == false) {
-      Color? color = buildAllowed ? Colors.green[200] : Colors.red[200];
+    if (!buildDone) {
+      final Color? color = buildAllowed ? Colors.green[200] : Colors.red[200];
       /*build indicator */
       canvas.drawRect(size.toRect(), Paint()..color = color!.withOpacity(0.3));
       canvas.drawCircle(
@@ -174,8 +175,8 @@ class WeaponComponent extends GameComponent
   }
 
   @override
-  bool onTapDown(TapDownInfo event) {
-    if (buildDone == false) {
+  bool onTapDown(TapDownInfo info) {
+    if (!buildDone) {
       if (buildAllowed) {
         gameRef.gameController.send(this, GameControl.weaponBuildDone);
         onBuildDone();
