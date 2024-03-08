@@ -14,13 +14,10 @@ class GameComponent extends PositionComponent with GameRef<GameMain>, HasPaint {
   // set sprite(Sprite s) => this.sprite = s;
 
   GameComponent({
-    Vector2? position,
-    Vector2? size,
-    int? priority,
+    super.position,
+    super.size,
+    super.priority,
   }) : super(
-            position: position,
-            size: size,
-            priority: priority,
             anchor: Anchor.center);
 
   bool active = true;
@@ -36,20 +33,22 @@ class GameComponent extends PositionComponent with GameRef<GameMain>, HasPaint {
       size: size,
       overridePaint: paint,
     );
-
-    animation?.getSprite().render(
-          canvas,
-          size: size,
-          overridePaint: paint,
-        );
+    animation?.frames.forEach((element) { 
+      element.sprite.render(canvas);
+    });
+    // animation?.getSprite().render(
+    //       canvas,
+    //       size: size,
+    //       overridePaint: paint,
+    //     );
     super.render(canvas);
   }
 
   @override
   void update(double dt) {
-    if ((animation != null) && playing!) {
-      animation!.update(dt);
-    }
+    // if ((animation != null) && playing!) {
+    //   animation!.update(dt);
+    // }
     super.update(dt);
   }
 
@@ -70,7 +69,7 @@ class GameComponent extends PositionComponent with GameRef<GameMain>, HasPaint {
   }
 
   Vector2 screenPosition() {
-    return gameRef.camera.worldToScreen(
+    return gameRef.camera.globalToLocal(
       position,
     );
   }

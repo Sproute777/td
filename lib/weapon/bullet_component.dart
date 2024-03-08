@@ -38,13 +38,13 @@ class BulletComponent extends GameComponent
   void onHitEnemy(GameComponent enemy) {
     radarOn = false;
     (enemy as EnemyComponent).receiveDamage(damage);
-    this.removeFromParent();
+    removeFromParent();
     onExplosion?.call(enemy);
   }
 
   void outOfRange() {
     radarOn = false;
-    this.removeFromParent();
+    removeFromParent();
   }
 }
 
@@ -53,12 +53,14 @@ class ExplosionComponent extends GameComponent {
     required Vector2 position,
     required Vector2 size,
   }) : super(position: position, size: size, priority: 55);
+  @override
   set animation(SpriteAnimation? a) {
     if (a == null) {
-      this.removeFromParent();
+      removeFromParent();
     }
     super.animation = a;
-    this.animation!.onComplete = this.removeFromParent;
+    // animation?.onComplete = this.removeFromParent;
+    removeFromParent();
     // this.debugMode = true;
   }
 }
