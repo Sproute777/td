@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:flame/input.dart';
+import 'package:flame/events.dart';
 // import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 import '../base/game_component.dart';
@@ -9,7 +9,7 @@ enum MapTileBuildStatus { Empty, BuildPreview, BuildDone }
 
 enum MapTileBuildEvent { None, BuildPreview, BuildDone, BuildCancel }
 
-class MapTileComponent extends GameComponent with Tappable {
+class MapTileComponent extends GameComponent with TapCallbacks {
   MapTileBuildStatus buildStatus = MapTileBuildStatus.Empty;
   GameComponent? refComponent;
   bool ableToBuild = true;
@@ -20,6 +20,7 @@ class MapTileComponent extends GameComponent with Tappable {
     super.size,
   });
 
+  @override
   void render(Canvas c) {
     super.render(c);
     // if (background != null) {
@@ -32,7 +33,7 @@ class MapTileComponent extends GameComponent with Tappable {
   }
 
   @override
-  bool onTapDown(TapDownInfo event) {
+  bool onTapDown(TapDownEvent event) {
     final paused = gameRef.paused;
     if (!paused) {
       gameRef.gameController.send(this, GameControl.weaponBuilding);

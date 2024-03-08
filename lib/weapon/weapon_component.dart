@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
+import 'package:flame/events.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import '../base/game_component.dart';
@@ -77,7 +78,7 @@ class BarrelComponent extends GameComponent {
 }
 
 class WeaponComponent extends GameComponent
-    with Tappable, Radar<EnemyComponent> {
+    with TapCallbacks, Radar<EnemyComponent> {
   late WeaponType weaponType;
   late double range;
   late double fireInterval;
@@ -175,7 +176,7 @@ class WeaponComponent extends GameComponent
   }
 
   @override
-  bool onTapDown(TapDownInfo info) {
+  bool onTapDown(TapDownEvent event) {
     if (!buildDone) {
       if (buildAllowed) {
         gameRef.gameController.send(this, GameControl.weaponBuildDone);

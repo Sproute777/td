@@ -1,4 +1,6 @@
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flutter/foundation.dart';
 
 import '../base/game_component.dart';
 import '../game_controller/game_controller.dart';
@@ -7,7 +9,7 @@ import '../ui/inventory/bloc/inventory_bloc.dart';
 import '../ui/stage_bar/bloc/stage_bar_bloc.dart';
 import 'game_setting.dart';
 
-class GameMain extends FlameGame with HasTappables {
+class GameMain extends FlameGame with TapCallbacks {
   late MapController mapController;
   final StageBarBloc stageBarBloc;
   final InventoryBloc inventoryBloc;
@@ -73,8 +75,8 @@ class GameMain extends FlameGame with HasTappables {
     setting.enemies.load();
 
     loadDone = true;
-    int d = currentTimeMillis() - timeRecord;
-    print("GameMain onLoad done takke $d");
+    final int d = currentTimeMillis() - timeRecord;
+    debugPrint("GameMain onLoad done takke $d");
     pauseEngine();
   }
 
