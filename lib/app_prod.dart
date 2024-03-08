@@ -35,7 +35,8 @@ class ProdApp extends StatelessWidget {
 }
 
 class _AppView extends StatefulWidget {
-  const _AppView({Key? key}) : super(key: key);
+  // ignore: unused_element
+  const _AppView({super.key});
 
   @override
   State<_AppView> createState() => _AppViewState();

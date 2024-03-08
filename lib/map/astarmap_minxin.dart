@@ -21,11 +21,13 @@ mixin AstarMapMixin {
   }
 
   AstarNode? astarMapResolve(Vector2 start, Vector2 end) {
-    AstarNode _start = _positionToNode(start);
-    AstarNode _end = _positionToNode(end);
-    AstarNode? goal = astarMap.astar(_start, _end);
+    final AstarNode start0 = _positionToNode(start);
+    final AstarNode end0 = _positionToNode(end);
+    final AstarNode? goal = astarMap.astar(start0, end0);
     AstarNode? node = goal;
-    if (goal == null) return null;
+    if (goal == null) {
+      return null;
+    }
 
     while (node!.parent != null) {
       node.parent!.next = node;
