@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'weapon_dto.dart';
+part of 'weapon_settings.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-WeaponDto _$WeaponDtoFromJson(Map<String, dynamic> json) {
-  return _WeaponDto.fromJson(json);
+WeaponSettings _$WeaponSettingsFromJson(Map<String, dynamic> json) {
+  return _WeaponSettings.fromJson(json);
 }
 
 /// @nodoc
-mixin _$WeaponDto {
-  String get lable => throw _privateConstructorUsedError;
+mixin _$WeaponSettings {
+  WeaponType get type => throw _privateConstructorUsedError;
   int get cost => throw _privateConstructorUsedError;
   double get range => throw _privateConstructorUsedError;
   double get damage => throw _privateConstructorUsedError;
@@ -43,9 +43,9 @@ mixin _$WeaponDto {
 
 /// @nodoc
 @JsonSerializable()
-class _$WeaponDtoImpl extends _WeaponDto {
-  const _$WeaponDtoImpl(
-      {required this.lable,
+class _$WeaponSettingsImpl extends _WeaponSettings {
+  const _$WeaponSettingsImpl(
+      {required this.type,
       required this.cost,
       required this.range,
       required this.damage,
@@ -64,11 +64,11 @@ class _$WeaponDtoImpl extends _WeaponDto {
       required this.bulletImg})
       : super._();
 
-  factory _$WeaponDtoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WeaponDtoImplFromJson(json);
+  factory _$WeaponSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WeaponSettingsImplFromJson(json);
 
   @override
-  final String lable;
+  final WeaponType type;
   @override
   final int cost;
   @override
@@ -104,15 +104,15 @@ class _$WeaponDtoImpl extends _WeaponDto {
 
   @override
   String toString() {
-    return 'WeaponDto(lable: $lable, cost: $cost, range: $range, damage: $damage, fireInterval: $fireInterval, rotateSpeed: $rotateSpeed, bulletSpeed: $bulletSpeed, sizeX: $sizeX, sizeY: $sizeY, bulletSizeX: $bulletSizeX, bulletSizeY: $bulletSizeY, exposionSizeX: $exposionSizeX, exposionSizeY: $exposionSizeY, barrelImg0: $barrelImg0, barrelImg1: $barrelImg1, barrelImg2: $barrelImg2, bulletImg: $bulletImg)';
+    return 'WeaponSettings(type: $type, cost: $cost, range: $range, damage: $damage, fireInterval: $fireInterval, rotateSpeed: $rotateSpeed, bulletSpeed: $bulletSpeed, sizeX: $sizeX, sizeY: $sizeY, bulletSizeX: $bulletSizeX, bulletSizeY: $bulletSizeY, exposionSizeX: $exposionSizeX, exposionSizeY: $exposionSizeY, barrelImg0: $barrelImg0, barrelImg1: $barrelImg1, barrelImg2: $barrelImg2, bulletImg: $bulletImg)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WeaponDtoImpl &&
-            (identical(other.lable, lable) || other.lable == lable) &&
+            other is _$WeaponSettingsImpl &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.cost, cost) || other.cost == cost) &&
             (identical(other.range, range) || other.range == range) &&
             (identical(other.damage, damage) || other.damage == damage) &&
@@ -146,7 +146,7 @@ class _$WeaponDtoImpl extends _WeaponDto {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      lable,
+      type,
       cost,
       range,
       damage,
@@ -166,15 +166,15 @@ class _$WeaponDtoImpl extends _WeaponDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$WeaponDtoImplToJson(
+    return _$$WeaponSettingsImplToJson(
       this,
     );
   }
 }
 
-abstract class _WeaponDto extends WeaponDto {
-  const factory _WeaponDto(
-      {required final String lable,
+abstract class _WeaponSettings extends WeaponSettings {
+  const factory _WeaponSettings(
+      {required final WeaponType type,
       required final int cost,
       required final double range,
       required final double damage,
@@ -190,14 +190,14 @@ abstract class _WeaponDto extends WeaponDto {
       required final String barrelImg0,
       required final String barrelImg1,
       required final String barrelImg2,
-      required final String bulletImg}) = _$WeaponDtoImpl;
-  const _WeaponDto._() : super._();
+      required final String bulletImg}) = _$WeaponSettingsImpl;
+  const _WeaponSettings._() : super._();
 
-  factory _WeaponDto.fromJson(Map<String, dynamic> json) =
-      _$WeaponDtoImpl.fromJson;
+  factory _WeaponSettings.fromJson(Map<String, dynamic> json) =
+      _$WeaponSettingsImpl.fromJson;
 
   @override
-  String get lable;
+  WeaponType get type;
   @override
   int get cost;
   @override

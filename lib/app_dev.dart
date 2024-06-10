@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'game/game_main.dart';
 import 'game/game_test.dart';
 import 'game_controller/game_controller.dart';
+import 'settings/weapon_settings.dart';
 import 'ui/components/weaponview_widget.dart';
 import 'ui/inventory/bloc/inventory_bloc.dart';
 import 'ui/inventory/view/inventory.dart';

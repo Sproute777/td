@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/stage_bar_bloc.dart';
 
 class StageBarView extends StatelessWidget {
-  const StageBarView({Key? key}) : super(key: key);
+  const StageBarView({super.key});
 
   @override
   Widget build(BuildContext context) {

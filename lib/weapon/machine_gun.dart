@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import '../base/game_component.dart';
 import '../game/game_setting.dart';
+import '../settings/weapon_settings.dart';
 import 'bullet_component.dart';
 import 'weapon_component.dart';
 

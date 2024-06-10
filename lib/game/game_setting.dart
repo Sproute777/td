@@ -7,7 +7,7 @@ import 'package:flame/sprite.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-import '../weapon_dto.dart';
+import '../settings/weapon_settings.dart';
 
 GameSetting gameSetting = GameSetting();
 
@@ -124,9 +124,9 @@ class WeaponSetting {
 
   WeaponSetting.empty();
 
-  Future<void> fill(
-      WeaponDto dto, double tileSize, Sprite weaponTower, Images images) async {
-    label = dto.lable;
+  Future<void> fill(WeaponSettings dto, double tileSize, Sprite weaponTower,
+      Images images) async {
+    label = dto.type.name;
     cost = dto.cost;
     range = dto.range * tileSize;
     damage = dto.damage;
@@ -171,10 +171,7 @@ class WeaponSettingV1 {
     final double tileSize = gameSetting.mapTileSize.length;
     List<Vector2> expFrame = [];
 
-    // final String weaponParamsString =
-    // await rootBundle.loadString('assets/weaponParams.json');
 
-    // final weaponParams = json.decode(weaponParamsString) as List;
 
     WeaponSetting w = WeaponSetting.empty()
       ..explosion = SpriteSheet.fromColumnsAndRows(
@@ -182,7 +179,7 @@ class WeaponSettingV1 {
         columns: 8,
         rows: 8,
       );
-    w.fill(WeaponDto.setttings[0], tileSize, weaponTower, images);
+    w.fill(WeaponSettings.list[0], tileSize, weaponTower, images);
 
     expFrame = [];
     expFrame = List<Vector2>.generate(8, (i) => Vector2(i % 8, 4));
@@ -195,7 +192,7 @@ class WeaponSettingV1 {
         columns: 6,
         rows: 1,
       );
-    w.fill(WeaponDto.setttings[1], tileSize, weaponTower, images);
+    w.fill(WeaponSettings.list[1], tileSize, weaponTower, images);
 
     expFrame = [];
     expFrame = List<Vector2>.generate(6, (i) => Vector2(0, i % 6));
@@ -208,7 +205,7 @@ class WeaponSettingV1 {
         columns: 5,
         rows: 3,
       );
-    w.fill(WeaponDto.setttings[2], tileSize, weaponTower, images);
+    w.fill(WeaponSettings.list[2], tileSize, weaponTower, images);
 
     expFrame = [];
     expFrame = List<Vector2>.generate(6, (i) => Vector2(i / 2, (i % 2) * 3));

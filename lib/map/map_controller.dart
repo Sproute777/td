@@ -28,14 +28,14 @@ class MapController extends GameComponent with AstarMapMixin {
       }
     }
 
-    astarMapInit(mapGrid);
+    super.astarInit(mapGrid);
   }
 
   bool testBlock(Vector2 position) {
-    astarMapAddObstacle(position);
-    final path = astarMapResolve(
-        gameRef.setting.enemySpawn, gameRef.setting.enemyTarget);
-    astarMapRemoveObstacle(position);
+    super.addBarrier(position);
+    final path =
+        super.findPath(gameRef.setting.enemySpawn, gameRef.setting.enemyTarget);
+    super.removeBarrier(position);
     return path.isEmpty;
   }
 }

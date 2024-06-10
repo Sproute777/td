@@ -37,9 +37,9 @@ mixin Movable on GameComponent {
       if (_movedLength > _totalLength) {
         moveFinish();
       }
-      double _delta = t * speed;
-      double dx = _delta * _direction.x;
-      double dy = _delta * _direction.y;
+      final delta = t * speed;
+      final dx = delta * _direction.x;
+      final dy = delta * _direction.y;
       //overwirte Vector2 to make sure it update area.
       position = position + Vector2(dx, dy);
       //OPT: check only after time expire, to avoid pow cacl in very tick

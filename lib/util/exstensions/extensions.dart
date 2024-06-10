@@ -1,10 +1,5 @@
-import 'dart:async';
 import 'dart:ui';
 import 'package:flame/components.dart';
-
-extension NullableExt<T> on T? {
-  FutureOr<void> let(FutureOr<void> Function(T i) call) => call(this!);
-}
 
 extension SpriteExt on Sprite {
   void renderWithOpacity(
@@ -20,7 +15,7 @@ extension SpriteExt on Sprite {
     if (overridePaint != null && overridePaint.color.opacity != opacity) {
       overridePaint.color = overridePaint.color.withOpacity(opacity);
     }
-    this.render(
+    render(
       canvas,
       position: position,
       size: size,

@@ -264,13 +264,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  dev_assets:
-    dependency: "direct main"
-    description:
-      path: "packages/dev_assets"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   dio:
     dependency: transitive
     description:

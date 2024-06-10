@@ -60,8 +60,4 @@ class StageBarBloc extends Bloc<StageBarEvent, StageBarState> {
   void _onReset(SbReset event, Emitter<StageBarState> emit) =>
       emit(const StageBarState.reset());
 
-  @override
-  Future<void> close() {
-    return super.close();
-  }
 }

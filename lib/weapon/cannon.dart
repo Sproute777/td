@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import '../base/game_component.dart';
 import '../game/game_setting.dart';
+import '../settings/weapon_settings.dart';
 import 'bullet_component.dart';
 import 'weapon_component.dart';
 
@@ -24,7 +25,7 @@ class Cannon extends WeaponComponent {
 
   @override
   void fireBullet(Vector2 target) {
-    BulletComponent bullet =
+    final BulletComponent bullet =
         BulletComponent(position: _bulletPosition(), size: setting.bulletSize)
           ..angle = barrel.angle
           ..damage = setting.damage
@@ -37,9 +38,8 @@ class Cannon extends WeaponComponent {
 
   Vector2 _bulletPosition() {
     // double bulletR = (setting.bulletSize.x + setting.bulletSize.y) / 4;
-    double r = radius /*+ bulletR*/;
     Vector2 localPosition =
-        Vector2(r * sin(barrel.angle), -r * cos(barrel.angle));
+        Vector2(radius * sin(barrel.angle), -radius * cos(barrel.angle));
     localPosition += size / 2;
     return positionOf(localPosition);
   }

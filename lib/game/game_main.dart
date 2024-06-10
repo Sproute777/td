@@ -80,19 +80,6 @@ class GameMain extends FlameGame with TapCallbacks {
     pauseEngine();
   }
 
-  @override
-  void update(double t) {
-    super.update(t);
-    // if (recordFps()) {
-    //   double _fps = fps();
-    //   int len = components.length;
-    //   print('GameMain FPS $_fps, components $len');
-    // }
-    // Iterable<Component> test = components
-    //     .where((o) => o is! MapTileComponent)
-    //     .where((o) => o is!  0x7d2b523304a0) (first time)
-    // print(test.length);
-  }
 
   void start() {
     if (loadDone) {

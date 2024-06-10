@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'weapon_dto.dart';
+part of 'weapon_settings.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$WeaponDtoImpl _$$WeaponDtoImplFromJson(Map<String, dynamic> json) =>
-    _$WeaponDtoImpl(
-      lable: json['lable'] as String,
+_$WeaponSettingsImpl _$$WeaponSettingsImplFromJson(Map<String, dynamic> json) =>
+    _$WeaponSettingsImpl(
+      type: $enumDecode(_$WeaponTypeEnumMap, json['type']),
       cost: (json['cost'] as num).toInt(),
       range: (json['range'] as num).toDouble(),
       damage: (json['damage'] as num).toDouble(),
@@ -27,9 +27,10 @@ _$WeaponDtoImpl _$$WeaponDtoImplFromJson(Map<String, dynamic> json) =>
       bulletImg: json['bulletImg'] as String,
     );
 
-Map<String, dynamic> _$$WeaponDtoImplToJson(_$WeaponDtoImpl instance) =>
+Map<String, dynamic> _$$WeaponSettingsImplToJson(
+        _$WeaponSettingsImpl instance) =>
     <String, dynamic>{
-      'lable': instance.lable,
+      'type': _$WeaponTypeEnumMap[instance.type]!,
       'cost': instance.cost,
       'range': instance.range,
       'damage': instance.damage,
@@ -47,3 +48,11 @@ Map<String, dynamic> _$$WeaponDtoImplToJson(_$WeaponDtoImpl instance) =>
       'barrelImg2': instance.barrelImg2,
       'bulletImg': instance.bulletImg,
     };
+
+const _$WeaponTypeEnumMap = {
+  WeaponType.cannon: 'cannon',
+  WeaponType.mg: 'mg',
+  WeaponType.missele: 'missele',
+  WeaponType.minner: 'minner',
+  WeaponType.none: 'none',
+};

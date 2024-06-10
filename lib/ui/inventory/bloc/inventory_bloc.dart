@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
+import '../../../settings/weapon_settings.dart';
 import '../../../weapon/weapon_component.dart';
 
 part 'inventory_event.dart';
@@ -22,24 +23,18 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
   }
 
   Future<void> _onInit(InvInit event, Emitter<InventoryState> emit) async {
-    final setting = await rootBundle.loadString('assets/weaponParams.json');
-    final _json = json.decode(setting);
 
-    final parameters = List<int>.from(_json.map((s) => s['cost'] as int));
 
-    final _listWeapons = List<WeaponType>.from(_json.map((s) {
-      final w = s['label'];
-      return WeaponType.values.firstWhere((v) => v.name == w);
-    }));
 
-    final subPath =
-        List<String>.from(_json.map((s) => s['barrelImg0'] as String));
 
-    emit(state.setParameters(
-        weaponBaseCost: parameters,
-        listWeapons: _listWeapons,
-        listCost: parameters,
-        weaponPath: subPath));
+    emit(
+      state.setParameters(
+        weaponBaseCost: WeaponSettings.list.map((i) => i.cost).toList(),
+        listWeapons: WeaponSettings.list.map((i) => i.type).toList(),
+        listCost: WeaponSettings.list.map((i) => i.cost).toList(),
+        weaponPath: WeaponSettings.list.map((i) => i.barrelImg0).toList(),
+      ),
+    );
   }
 
   void _onSelected(InvWeaponSelected event, Emitter<InventoryState> emit) {

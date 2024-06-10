@@ -1,7 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../base/game_component.dart';
 import '../../game/game_main.dart';
@@ -19,7 +18,6 @@ class WeaponViewWidget {
     debugPrint('fullSize $fullSize');
     final Vector2 screenSize =
         Vector2(GameSetting().screenSize.x, GameSetting().screenSize.x);
-    final Vector2 tileSize = GameSetting().mapTileSize;
     debugPrint('screenSize $screenSize');
 
     final double paddingY = fullSize.y - screenSize.y;

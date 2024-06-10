@@ -12,6 +12,7 @@ import '../enemy/enemy_component.dart';
 import '../enemy/enemy_factory.dart';
 import '../game/game_setting.dart';
 import '../neutual/neutual_component.dart';
+import '../settings/weapon_settings.dart';
 import '../ui/components/weaponview_widget.dart';
 import '../ui/inventory/bloc/inventory_bloc.dart';
 import '../util/priority_layer.dart';

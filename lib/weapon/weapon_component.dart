@@ -8,6 +8,7 @@ import '../base/game_component.dart';
 import '../base/radar.dart';
 import '../enemy/enemy_component.dart';
 import '../game_controller/game_controller.dart';
+import '../settings/weapon_settings.dart';
 
 class SmartRotateEffect extends RotateEffect {
   VoidCallback? onComplete;
@@ -49,7 +50,6 @@ class SmartRotateEffect extends RotateEffect {
   }
 }
 
-enum WeaponType { cannon, mg, missele, minner, none }
 
 class BarrelComponent extends GameComponent {
   BarrelComponent({required Vector2 position, required Vector2 size})

@@ -7,21 +7,21 @@ mixin AstarMapMixin on Component {
   late AStarSquareGrid astarMap;
   late Vector2 tileSize;
 
-  void astarMapInit(Vector2 size) {
+  void astarInit(Vector2 size) {
     astarMap = AStarSquareGrid(rows: size.x.toInt(), columns: size.y.toInt());
   }
 
-  void astarMapAddObstacle(Vector2 position) {
+  void addBarrier(Vector2 position) {
     final node = _positionToNode(position);
     astarMap.setBarrier(node.toBarrier(Barrier.block));
   }
 
-  void astarMapRemoveObstacle(Vector2 position) {
+  void removeBarrier(Vector2 position) {
     final node = _positionToNode(position);
     astarMap.setBarrier(node.toBarrier(Barrier.pass));
   }
 
-  List<Point<int>> astarMapResolve(Vector2 start, Vector2 end) {
+  List<Point<int>> findPath(Vector2 start, Vector2 end) {
     astarMap.calculateGrid();
     final start0 = _positionToNode(start);
     final end0 = _positionToNode(end);

@@ -36,8 +36,8 @@ class GameInstruction {
       case GameControl.weaponBuilding:
         WeaponViewWidget.hide();
         // controller.gameRef.read<InventoryBloc>().add();
-        final WeaponComponent? component = controller.buildWeapon(source.position,
-            controller.gameRef.inventoryBloc.state.weapon);
+        final WeaponComponent? component = controller.buildWeapon(
+            source.position, controller.gameRef.inventoryBloc.state.weapon);
         if (component != null) {
           controller.add(component);
           controller.buildingWeapon?.removeFromParent();
@@ -56,14 +56,13 @@ class GameInstruction {
       case GameControl.weaponBuildDone:
         // controller.buildingWeapon.buildDone = true;
         controller.onBuildDone(source as WeaponComponent);
-        controller.gameRef.mapController.astarMapAddObstacle(source.position);
+        controller.gameRef.mapController.addBarrier(source.position);
         controller.buildingWeapon = null;
         controller.processEnemySmartMove();
       case GameControl.weaponDestroyed:
         WeaponViewWidget.hide();
         controller.onDestroy(source as WeaponComponent);
-        controller.gameRef.mapController
-            .astarMapRemoveObstacle(source.position);
+        controller.gameRef.mapController.removeBarrier(source.position);
         controller.processEnemySmartMove();
       case GameControl.enemySpawn:
         controller.enemyFactory.start();
@@ -74,7 +73,7 @@ class GameInstruction {
         controller.gameRef.addKilled(1);
 
       case GameControl.enemyNexWave:
-      controller.gameRef.setWave(1);
+        controller.gameRef.setWave(1);
 
       case GameControl.weaponShowAction:
         WeaponViewWidget.show(source as WeaponComponent);

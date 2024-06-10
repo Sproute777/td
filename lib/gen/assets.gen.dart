@@ -180,10 +180,6 @@ class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
-  static const String weaponParams = 'assets/weaponParams.json';
-
-  /// List of all assets
-  static List<String> get values => [weaponParams];
 }
 
 class AssetGenImage {

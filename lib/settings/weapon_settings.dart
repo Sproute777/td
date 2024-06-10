@@ -2,16 +2,16 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'weapon_dto.freezed.dart';
-part 'weapon_dto.g.dart';
+part 'weapon_settings.freezed.dart';
+part 'weapon_settings.g.dart';
 
 @Freezed(
     map: FreezedMapOptions.none, when: FreezedWhenOptions.none, copyWith: false)
-class WeaponDto with _$WeaponDto {
-  const WeaponDto._();
+class WeaponSettings with _$WeaponSettings {
+  const WeaponSettings._();
 
-  const factory WeaponDto({
-    required String lable,
+  const factory WeaponSettings({
+    required WeaponType type,
     required int cost,
     required double range,
     required double damage,
@@ -28,15 +28,15 @@ class WeaponDto with _$WeaponDto {
     required String barrelImg1,
     required String barrelImg2,
     required String bulletImg,
-  }) = _WeaponDto;
+  }) = _WeaponSettings;
 
-  /// Generate WeaponDto class from Map<String, Object?>
-  factory WeaponDto.fromJson(Map<String, Object?> json) =>
-      _$WeaponDtoFromJson(json);
+  /// Generate WeaponSettings class from Map<String, Object?>
+  factory WeaponSettings.fromJson(Map<String, Object?> json) =>
+      _$WeaponSettingsFromJson(json);
 
-  static const setttings = <WeaponDto>[
-    WeaponDto(
-        lable: 'cannon',
+  static const list = <WeaponSettings>[
+    WeaponSettings(
+        type: WeaponType.cannon,
         cost: 10,
         damage: 10,
         range: 1.5,
@@ -53,8 +53,8 @@ class WeaponDto with _$WeaponDto {
         barrelImg1: 'Cannon2',
         barrelImg2: 'Cannon3',
         bulletImg: 'Bullet1'),
-    WeaponDto(
-        lable: 'mg',
+    WeaponSettings(
+        type: WeaponType.mg,
         cost: 15,
         damage: 5,
         range: 2.0,
@@ -71,8 +71,8 @@ class WeaponDto with _$WeaponDto {
         barrelImg1: 'MG2',
         barrelImg2: 'MG3',
         bulletImg: 'Bullet2'),
-    WeaponDto(
-        lable: 'missele',
+    WeaponSettings(
+        type: WeaponType.missele,
         cost: 30,
         range: 3.0,
         damage: 40,
@@ -92,55 +92,4 @@ class WeaponDto with _$WeaponDto {
   ];
 }
 
-final json = '''[
- {
- 
- {
-  "label": "mg",
-  "cost": 15,
-  "range": 2.0,
-  "damage": 5.0,
-  "fireInterval": 0.2,
-  "rotateSpeed": 4.0,
-  "bulletSpeed": 5.0,
-  "sizeX": 0.8,
-  "sizeY": 0.8,
-  "bulletSizeX": 0.1,
-  "bulletSizeY": 0.3,
-  "explosionSizeX": 0.5,
-  "explosionSizeY": 0.5,
-
- },
- {
-  "label": "missele",
-  "cost": 30,
-  "range": 3.0,
-  "damage": 30.0,
-  "fireInterval": 1.5,
-  "rotateSpeed": 1.0,
-  "bulletSpeed": 0.7,
-  "sizeX": 0.9,
-  "sizeY": 0.9,
-  "bulletSizeX": 0.3,
-  "bulletSizeY": 0.4,
-  "explosionSizeX": 0.7,
-  "explosionSizeY": 0.7,
-
- }
-]''';
-
-  // "barrelImg0": "Cannon",
-  // "barrelImg1": "Cannon2",
-  // "barrelImg2": "Cannon3",
-  // "bulletImg": "Bullet1"
-
-
-  //   "barrelImg0": "MG",
-  // "barrelImg1": "MG2",
-  // "barrelImg2": "MG3",
-  // "bulletImg": "Bullet2"
-
-  //   "barrelImg0": "Missile_Launcher",
-  // "barrelImg1": "Missile_Launcher2",
-  // "barrelImg2": "Missile_Launcher3",
-  // "bulletImg": "Missile"
+enum WeaponType { cannon, mg, missele, minner, none }

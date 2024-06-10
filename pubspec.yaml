@@ -17,8 +17,6 @@ dependencies:
   flutter_bloc: ^8.0.1
   bloc: ^8.0.2
   flame: ">=1.15.0"
-  dev_assets:
-    path: packages/dev_assets
   astar_dart:
     path: packages/astar_dart
   bloc_concurrency: ^0.2.5
@@ -58,8 +56,6 @@ flutter:
     - assets/images/enemy/
     - assets/images/neutual/
     - assets/images/
-    - assets/weaponParams.json
-    - assets/weaponParams.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

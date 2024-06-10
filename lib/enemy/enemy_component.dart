@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flutter/foundation.dart';
@@ -33,8 +32,8 @@ class EnemyComponent extends GameComponent
   }
 
   @override
-  void update(double t) {
-    super.update(t);
+  void update(double dt) {
+    super.update(dt);
 
     if (life < 0) {
       if (!dead) {
@@ -45,14 +44,14 @@ class EnemyComponent extends GameComponent
     }
 
     if (active) {
-      updateMovable(t);
+      updateMovable(dt);
     }
   }
 
   @override
-  void render(Canvas c) {
-    super.render(c);
-    renderLifIndicator(c);
+  void render(canvas) {
+    super.render(canvas);
+    renderLifIndicator(canvas);
   }
 
   @override
@@ -87,7 +86,7 @@ mixin EnemySmartMove on GameComponent {
   final path = <Point<int>>[];
   void moveSmart(Vector2 to) {
     path.clear();
-    path.addAll(gameRef.mapController.astarMapResolve(position, to));
+    path.addAll(gameRef.mapController.findPath(position, to));
     debugPrint('PATH ${path.length}');
     if (path.isNotEmpty) {
       pathNextMove();
@@ -107,11 +106,11 @@ mixin EnemySmartMove on GameComponent {
     // } else {
 
     Vector2 lefttop = gameRef.mapController.nodeToPosition(node);
-    Vector2 randomArea = Vector2(gameRef.mapController.tileSize.x - size.x,
+    final randomArea = Vector2(gameRef.mapController.tileSize.x - size.x,
         gameRef.mapController.tileSize.y - size.y);
     lefttop = lefttop + Vector2(size.x / 2, size.y / 2);
-    double rndx = Random().nextDouble();
-    double rndy = Random().nextDouble();
+    final rndx = Random().nextDouble();
+    final rndy = Random().nextDouble();
     return lefttop + Vector2(randomArea.x * rndx, randomArea.y * rndy);
     // }
   }
