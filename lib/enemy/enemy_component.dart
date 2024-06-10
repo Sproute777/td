@@ -2,8 +2,8 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:flutter/foundation.dart';
 
-import '../astar/astarnode.dart';
 import '../base/game_component.dart';
 import '../base/life_indicator.dart';
 import '../base/movable.dart';
@@ -24,7 +24,9 @@ class EnemyComponent extends GameComponent
     required Vector2 size,
   }) : super(position: position, size: size, priority: 30);
 
+  @override
   double get maxLife => _maxLife;
+  @override
   set maxLife(double m) {
     _maxLife = m;
     life = m;
@@ -55,7 +57,7 @@ class EnemyComponent extends GameComponent
 
   @override
   void onRemove() {
-    pathNode = null;
+    path.clear();
     super.onRemove();
   }
 
@@ -82,36 +84,35 @@ class EnemyComponent extends GameComponent
 
 mixin EnemySmartMove on GameComponent {
   /*Enemy move path controller */
-  AstarNode? pathNode;
+  final path = <Point<int>>[];
   void moveSmart(Vector2 to) {
-    pathNode = gameRef.mapController.astarMapResolve(position, to);
-    if (pathNode != null) {
+    path.clear();
+    path.addAll(gameRef.mapController.astarMapResolve(position, to));
+    debugPrint('PATH ${path.length}');
+    if (path.isNotEmpty) {
       pathNextMove();
     }
   }
 
   void pathNextMove() {
-    if (pathNode != null) {
-      pathNode = pathNode!.next;
-      if (pathNode != null) {
-        (this as Movable).moveTo(moveRadomPosition(pathNode!), pathNextMove);
-      }
-    }
+    final next = path.removeAt(0);
+    (this as Movable).moveTo(moveRadomPosition(next), pathNextMove);
   }
 
-  Vector2 moveRadomPosition(AstarNode node) {
-    if (node.next == null) {
-      /*target goto center*/
-      Vector2 lefttop = gameRef.mapController.nodeToPosition(node);
-      return lefttop + (gameRef.mapController.tileSize / 2);
-    } else {
-      Vector2 lefttop = gameRef.mapController.nodeToPosition(node);
-      Vector2 randomArea = Vector2(gameRef.mapController.tileSize.x - size.x,
-          gameRef.mapController.tileSize.y - size.y);
-      lefttop = lefttop + Vector2(size.x / 2, size.y / 2);
-      double rndx = Random().nextDouble();
-      double rndy = Random().nextDouble();
-      return lefttop + Vector2(randomArea.x * rndx, randomArea.y * rndy);
-    }
+  Vector2 moveRadomPosition(Point<int> node) {
+    // if (node.next == null) {
+    //   /*target goto center*/
+    //   Vector2 lefttop = gameRef.mapController.nodeToPosition(node);
+    //   return lefttop + (gameRef.mapController.tileSize / 2);
+    // } else {
+
+    Vector2 lefttop = gameRef.mapController.nodeToPosition(node);
+    Vector2 randomArea = Vector2(gameRef.mapController.tileSize.x - size.x,
+        gameRef.mapController.tileSize.y - size.y);
+    lefttop = lefttop + Vector2(size.x / 2, size.y / 2);
+    double rndx = Random().nextDouble();
+    double rndy = Random().nextDouble();
+    return lefttop + Vector2(randomArea.x * rndx, randomArea.y * rndy);
+    // }
   }
 }
