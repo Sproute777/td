@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math' as math;
 import 'dart:math';
 
@@ -7,6 +6,8 @@ import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+
+import '../weapon_dto.dart';
 
 GameSetting gameSetting = GameSetting();
 
@@ -123,31 +124,27 @@ class WeaponSetting {
 
   WeaponSetting.empty();
 
-  Future<void> fill(Map<String, dynamic> weaponParam, double tileSize,
-      Sprite weaponTower, Images images) async {
-    label = weaponParam['label'];
-    cost = weaponParam['cost'];
-    range = weaponParam['range'] * tileSize;
-    damage = weaponParam['damage'];
-    fireInterval = weaponParam['fireInterval'];
-    rotateSpeed = pi * weaponParam['rotateSpeed'];
-    bulletSpeed = tileSize * weaponParam['bulletSpeed'];
-    size = gameSetting
-        .scaleOnMapTile(Vector2(weaponParam['sizeX'], weaponParam['sizeY']));
-    bulletSize = gameSetting.scaleOnMapTile(
-        Vector2(weaponParam['bulletSizeX'], weaponParam['bulletSizeY']));
-    explosionSize = gameSetting.scaleOnMapTile(
-        Vector2(weaponParam['explosionSizeX'], weaponParam['explosionSizeY']));
+  Future<void> fill(
+      WeaponDto dto, double tileSize, Sprite weaponTower, Images images) async {
+    label = dto.lable;
+    cost = dto.cost;
+    range = dto.range * tileSize;
+    damage = dto.damage;
+    fireInterval = dto.fireInterval;
+    rotateSpeed = pi * dto.rotateSpeed;
+    bulletSpeed = tileSize * dto.bulletSpeed;
+    size = gameSetting.scaleOnMapTile(Vector2(dto.sizeX, dto.sizeY));
+    bulletSize =
+        gameSetting.scaleOnMapTile(Vector2(dto.bulletSizeX, dto.bulletSizeY));
+    explosionSize = gameSetting
+        .scaleOnMapTile(Vector2(dto.exposionSizeX, dto.exposionSizeY));
     tower = weaponTower;
-    barrel[0] =
-        Sprite(await images.load('weapon/${weaponParam['barrelImg0']}.png'));
-    barrel[1] =
-        Sprite(await images.load('weapon/${weaponParam['barrelImg1']}.png'));
-    barrel[2] =
-        Sprite(await images.load('weapon/${weaponParam['barrelImg2']}.png'));
+    barrel[0] = Sprite(await images.load('weapon/${dto.barrelImg0}.png'));
+    barrel[1] = Sprite(await images.load('weapon/${dto.barrelImg1}.png'));
+    barrel[2] = Sprite(await images.load('weapon/${dto.barrelImg2}.png'));
     bullet =
         // Sprite(await images.load('weapon/${weaponParam['bulletImg']}.png'));
-        Sprite(await images.load('weapon/${weaponParam['bulletImg']}.png'));
+        Sprite(await images.load('weapon/${dto.bulletImg}.png'));
   }
 
   void createExpolosionAnimation(List<Vector2> frameLocation, double stepTime) {
@@ -174,10 +171,10 @@ class WeaponSettingV1 {
     final double tileSize = gameSetting.mapTileSize.length;
     List<Vector2> expFrame = [];
 
-    final String weaponParamsString =
-        await rootBundle.loadString('assets/weaponParams.json');
+    // final String weaponParamsString =
+    // await rootBundle.loadString('assets/weaponParams.json');
 
-    final weaponParams = json.decode(weaponParamsString) as List;
+    // final weaponParams = json.decode(weaponParamsString) as List;
 
     WeaponSetting w = WeaponSetting.empty()
       ..explosion = SpriteSheet.fromColumnsAndRows(
@@ -185,7 +182,7 @@ class WeaponSettingV1 {
         columns: 8,
         rows: 8,
       );
-    w.fill(weaponParams[0], tileSize, weaponTower, images);
+    w.fill(WeaponDto.setttings[0], tileSize, weaponTower, images);
 
     expFrame = [];
     expFrame = List<Vector2>.generate(8, (i) => Vector2(i % 8, 4));
@@ -198,7 +195,7 @@ class WeaponSettingV1 {
         columns: 6,
         rows: 1,
       );
-    w.fill(weaponParams[1], tileSize, weaponTower, images);
+    w.fill(WeaponDto.setttings[1], tileSize, weaponTower, images);
 
     expFrame = [];
     expFrame = List<Vector2>.generate(6, (i) => Vector2(0, i % 6));
@@ -211,7 +208,7 @@ class WeaponSettingV1 {
         columns: 5,
         rows: 3,
       );
-    w.fill(weaponParams[2], tileSize, weaponTower, images);
+    w.fill(WeaponDto.setttings[2], tileSize, weaponTower, images);
 
     expFrame = [];
     expFrame = List<Vector2>.generate(6, (i) => Vector2(i / 2, (i % 2) * 3));

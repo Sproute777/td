@@ -15,10 +15,7 @@ dependencies:
   flame_bloc: ^1.10.0
   equatable: ^2.0.3
   flutter_bloc: ^8.0.1
-  # flame_tiled: ^1.2.1
-  # fast_immutable_collections: ^7.1.3
   bloc: ^8.0.2
-  # flame: '>=1.9.0 <1.10.0'
   flame: ">=1.15.0"
   dev_assets:
     path: packages/dev_assets
@@ -27,7 +24,6 @@ dependencies:
   bloc_concurrency: ^0.2.5
   injectable: ^2.4.2
   get_it: ^7.7.0
-  # tiledjsonreader: ^1.0.9
 
 dev_dependencies:
   flutter_test:
@@ -64,8 +60,6 @@ flutter:
     - assets/images/
     - assets/weaponParams.json
     - assets/weaponParams.json
-    - packages/dev_assets/images/weapon/Cannon.png
-    - packages/dev_assets/images/weapon/Bullet1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

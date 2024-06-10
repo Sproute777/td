@@ -11,7 +11,6 @@
 import 'package:flame/components.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:td/bloc/control_bloc.dart' as _i5;
 import 'package:td/game_controller/game_controller.dart' as _i3;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -29,8 +28,6 @@ extension GetItInjectableX on _i1.GetIt {
           position: gh<_i4.Vector2>(),
           size: gh<_i4.Vector2>(),
         ));
-    gh.factory<_i5.ControlBloc>(
-        () => _i5.ControlBloc(gh<_i3.GameController>()));
     return this;
   }
 }

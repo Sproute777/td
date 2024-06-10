@@ -1,16 +1,13 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-// import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 import '../base/game_component.dart';
 import '../game_controller/game_controller.dart';
 
-enum MapTileBuildStatus { Empty, BuildPreview, BuildDone }
 
-enum MapTileBuildEvent { None, BuildPreview, BuildDone, BuildCancel }
 
 class MapTileComponent extends GameComponent with TapCallbacks {
-  MapTileBuildStatus buildStatus = MapTileBuildStatus.Empty;
+  // MapTileBuildStatus buildStatus = MapTileBuildStatus.Empty;
   GameComponent? refComponent;
   bool ableToBuild = true;
   Sprite? background;
@@ -29,7 +26,7 @@ class MapTileComponent extends GameComponent with TapCallbacks {
         size.toRect(),
         Paint()
           ..style = PaintingStyle.stroke
-          ..color = Colors.green);
+          ..color = Colors.cyan);
   }
 
   @override
