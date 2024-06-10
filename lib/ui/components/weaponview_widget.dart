@@ -27,59 +27,50 @@ class WeaponViewWidget {
 
     final Vector2 size = Vector2(
         GameSetting().screenSize.x * 0.28, GameSetting().screenSize.x * 0.2);
-    final Vector2 arrowSize = Vector2(4, 4);
-    if (_selected == null) return const Center();
+    if (_selected == null) {
+      return const SizedBox();
+    }
 
-    Vector2 anchor =
-        game.gameController.absolutePositionOf(_selected!.position);
-    if (anchor.y >= fullSize.y - (paddingY / 2) - (tileSize.y * 2)) {
-      anchor.y = fullSize.y - (paddingY / 2) - (tileSize.y * 4);
-    }
-    if (anchor.y <= ((paddingY / 2) + (tileSize.y * 2))) {
-      anchor.y = tileSize.y * 2;
-      // - size.y
-    }
-    if (anchor.x >= fullScreenSize.width - tileSize.x) {
-      anchor.x = fullScreenSize.width - tileSize.x - size.x;
-      // - size.y
-    } else  {
-      anchor = Vector2(anchor.x - size.x / 2,
-          anchor.y + _selected!.size.y / 2 + arrowSize.y);
-    }
-    anchor.x = GameSetting().screenSize.x / 2 - size.x / 2;
-    return Positioned(
-        top: anchor.y,
-        left: anchor.x,
+    return Center(
         child: SizedBox.fromSize(
-          size: Size(size.x, size.y),
-          child: DecoratedBox(
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/diaglog.png'),
-                      fit: BoxFit.fill)),
-              child: Stack(alignment: Alignment.center, children: [
-                Positioned(
-                    bottom: 100,
-                    child: SpriteButton.asset(
-                      path: 'destroy.png',
-                      pressedPath: 'destroy2.png',
-                      width: 50,
-                      height: 50,
-                      onPressed: () {
-                        _selected?.active = false;
-                        _selected?.removeFromParent();
-                        _selected?.gameRef.gameController.send(
-                            _selected as GameComponent,
-                            GameControl.weaponDestroyed);
-                        hide();
-                      },
-                      label: const Text(
-                        'Destroy',
-                        style: TextStyle(color: Color(0xFF5D275D)),
-                      ),
-                    ))
-              ])),
-        ));
+      size: Size(size.x, size.y),
+      child: DecoratedBox(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/diaglog.png'),
+                  fit: BoxFit.fill)),
+          child: Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SpriteButton.asset(
+                  path: 'destroy.png',
+                  pressedPath: 'destroy2.png',
+                  width: 50,
+                  height: 50,
+                  onPressed: () {
+                    _selected?.active = false;
+                    _selected?.removeFromParent();
+                    _selected?.gameRef.gameController.send(
+                        _selected! as GameComponent,
+                        GameControl.weaponDestroyed);
+                    hide();
+                  },
+                  label: const SizedBox(),
+                ),
+                const Center(
+                  child: Material(
+                    type: MaterialType.transparency,
+                    child: Text(
+                      'Destroy',
+                      style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                
+              ],
+            ),
+          )),
+    ));
   }
 
   static WeaponComponent? _selected;

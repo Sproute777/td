@@ -16,7 +16,7 @@ class GameMain extends FlameGame with TapCallbacks {
   // late WeaponFactoryView weaponFactory;
   GameController gameController;
   // late GamebarView gamebarView;
-  bool started = false;
+  // bool started = false;
 
   bool loadDone = false;
 

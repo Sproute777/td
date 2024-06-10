@@ -27,7 +27,8 @@ class GameInstruction {
   void process(GameController controller) {
     switch (instruction) {
       case GameControl.gameStarted:
-        controller.gameRef.started;
+        // controller.gameRef.started;
+        break;
       case GameControl.gameResumed:
         controller.gameRef.resumeEngine();
       case GameControl.gamePaused:

@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
+import 'package:injectable/injectable.dart';
 
 import '../base/game_component.dart';
 import '../base/radar.dart';
@@ -23,6 +24,7 @@ part 'controller_process.dart';
 
 enum GameStatus { paused, play }
 
+@injectable
 class GameController extends GameComponent {
   WeaponComponent? buildingWeapon;
   EnemyFactory enemyFactory = EnemyFactory();
@@ -151,5 +153,4 @@ class GameController extends GameComponent {
     gameRef.inventoryBloc.add(InvSubstractCost(index: c.weaponType.index));
   }
 
-  void showWeaponDialog() {}
 }

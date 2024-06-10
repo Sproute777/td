@@ -11,9 +11,9 @@ class MapController extends GameComponent with AstarMapMixin {
   MapController({
     required this.tileSize,
     required this.mapGrid,
-    position,
-    size,
-  }) : super(position: position, size: size);
+    super.position,
+    super.size,
+  });
 
   @override
   Future<void> onLoad() async {
@@ -28,18 +28,14 @@ class MapController extends GameComponent with AstarMapMixin {
       }
     }
 
-    initBackground();
     astarMapInit(mapGrid);
   }
 
-  void initBackground() {}
-
   bool testBlock(Vector2 position) {
     astarMapAddObstacle(position);
-    final goal = astarMapResolve(
+    final path = astarMapResolve(
         gameRef.setting.enemySpawn, gameRef.setting.enemyTarget);
     astarMapRemoveObstacle(position);
-    final testResult = goal.length == 1;
-    return testResult;
+    return path.isEmpty;
   }
 }

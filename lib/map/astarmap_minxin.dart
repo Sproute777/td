@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:astar_dart/astar_dart.dart';
 import 'package:flame/components.dart';
 
-mixin AstarMapMixin {
+mixin AstarMapMixin on Component {
   late AStarSquareGrid astarMap;
   late Vector2 tileSize;
 

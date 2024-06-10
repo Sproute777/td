@@ -62,6 +62,7 @@ class AStarSquareGrid extends AstarGrid {
     _createGrid(rows: _rows, columns: _columns);
   }
 
+/// return path without start point
   @override
   List<Point<int>> findPath(
       {void Function(List<Point<int>>)? doneList,
@@ -87,7 +88,6 @@ class AStarSquareGrid extends AstarGrid {
     if (winner == null && !_isNeighbors(_start, _end)) {
       path.clear();
     }
-    path.add(start);
 
     return path.reversed.toList();
   }
