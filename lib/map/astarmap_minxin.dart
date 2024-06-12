@@ -26,7 +26,7 @@ mixin AstarMapMixin on Component {
     final start0 = _positionToNode(start);
     final end0 = _positionToNode(end);
     final path = astarMap.findPath(start: start0, end: end0);
-    return path;
+    return path.toPointList();
   }
 
   Point<int> _positionToNode(Vector2 position) {
