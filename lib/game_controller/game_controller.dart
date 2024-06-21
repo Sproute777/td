@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/foundation.dart';
-import 'package:injectable/injectable.dart';
+import 'package:get_it/get_it.dart';
 
 import '../base/game_component.dart';
 import '../base/radar.dart';
@@ -13,28 +13,27 @@ import '../enemy/enemy_component.dart';
 import '../enemy/enemy_factory.dart';
 import '../game/game_setting.dart';
 import '../neutual/neutual_component.dart';
-import '../settings/weapon_settings.dart';
 import '../ui/components/weaponview_widget.dart';
 import '../ui/inventory/bloc/inventory_bloc.dart';
 import '../util/priority_layer.dart';
-import '../weapon/cannon.dart';
-import '../weapon/machine_gun.dart';
-import '../weapon/missile.dart';
 import '../weapon/weapon_component.dart';
 import 'game_event.dart';
+import 'game_repository.dart';
 
 part 'controller_process.dart';
 
 enum GameStatus { paused, play }
 
-@injectable
 class GameController extends GameComponent {
   WeaponComponent? buildingWeapon;
+  late final GameRepository repository;
   EnemyFactory enemyFactory = EnemyFactory();
   GameController({
     super.position,
     super.size,
   }) : super(priority: LayerPriority.getAbovePriority(1)) {
+    repository = GetIt.I.get<GameRepository>();
+
     add(enemyFactory);
   }
 
@@ -133,7 +132,8 @@ class GameController extends GameComponent {
 
   void onBuildDone(WeaponComponent c) {
     gameRef.inventoryBloc.add(InvAddCost(index: c.weaponType.index));
-    gameRef.subsractMinerals(c.weaponType.index);
+    final int cost = gameRef.inventoryBloc.state.weaponCost[c.weaponType.index];
+    repository.subtractMinerals(cost);
   }
 
   void onDestroy(WeaponComponent c) {

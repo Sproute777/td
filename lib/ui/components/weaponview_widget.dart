@@ -2,10 +2,8 @@ import 'package:flame/components.dart';
 import 'package:flame/widgets.dart';
 import 'package:flutter/material.dart';
 
-import '../../base/game_component.dart';
 import '../../game/game_main.dart';
 import '../../game/game_setting.dart';
-import '../../game_controller/game_controller.dart';
 import '../../game_controller/game_event.dart';
 import '../../weapon/weapon_component.dart';
 

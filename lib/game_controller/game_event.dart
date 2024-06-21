@@ -2,7 +2,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../base/game_component.dart';
 import '../weapon/weapon_component.dart';
-import 'game_controller.dart';
 
 part 'game_event.freezed.dart';
 
@@ -26,6 +25,6 @@ sealed class GameEvent with _$GameEvent {
   const factory GameEvent.weaponShowProfile() = WeaponShowProfileGE;
   const factory GameEvent.enemySpawn() = EnemySpawnGE;
   const factory GameEvent.enemyMissed() = EnemyMissedGE;
-  const factory GameEvent.enemyKilled() = EnemyKilledGE;
+  const factory GameEvent.enemyKilled({required int mineValue}) = EnemyKilledGE;
   const factory GameEvent.enemyNextWave() = EnemyNextWaveGE;
 }

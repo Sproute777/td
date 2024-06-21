@@ -2,7 +2,6 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import '../base/game_component.dart';
-import '../game_controller/game_controller.dart';
 import '../game_controller/game_event.dart';
 
 class MapTileComponent extends GameComponent with TapCallbacks {

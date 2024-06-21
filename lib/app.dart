@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import 'game/game_main.dart';
 import 'game/game_test.dart';
@@ -9,9 +10,8 @@ import 'settings/weapon_settings.dart';
 import 'ui/components/weaponview_widget.dart';
 import 'ui/inventory/bloc/inventory_bloc.dart';
 import 'ui/inventory/view/inventory.dart';
-import 'ui/stage_bar/bloc/stage_bar_bloc.dart';
+import 'ui/stage_bar/bloc/stage_bar_cubit.dart';
 import 'ui/stage_bar/view/stage_bar_view.dart';
-import 'weapon/weapon_component.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -23,11 +23,11 @@ class App extends StatelessWidget {
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => InventoryBloc()..add(InvInit()),
+              lazy: false,
+              create: (_) => GetIt.I.get<InventoryBloc>()..add(InvInit()),
             ),
             BlocProvider(
-              create: (context) =>
-                  StageBarBloc(bloc: context.read<InventoryBloc>()),
+              create: (_) => GetIt.I.get<StageBarCubit>(),
             ),
           ],
           child: const MaterialApp(home: _AppView()),
@@ -54,7 +54,7 @@ class _AppViewState extends State<_AppView> {
         child: GameWidget<GameMain>(
           game: GameTest(
             gameController: RepositoryProvider.of<GameController>(context),
-            stageBarBloc: context.read<StageBarBloc>(),
+            // stageBarBloc: context.read<StageBarCubit>(),
             inventoryBloc: context.read<InventoryBloc>(),
           ),
           overlayBuilderMap: {

@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:flame/components.dart';
 
 import '../base/game_component.dart';
-import '../game_controller/game_controller.dart';
 import '../game_controller/game_event.dart';
 import 'enemy_component.dart';
 import 'enmey_v1.dart';

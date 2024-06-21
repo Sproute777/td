@@ -12,7 +12,7 @@ import 'game_main.dart';
 class GameTest extends GameMain with GameDebug {
   GameTest(
       {required super.gameController,
-      required super.stageBarBloc,
+      // required super.stageBarBloc,
       required super.inventoryBloc});
 
   @override

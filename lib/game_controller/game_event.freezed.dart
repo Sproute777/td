@@ -354,26 +354,35 @@ abstract class EnemyMissedGE extends GameEvent {
 /// @nodoc
 
 class _$EnemyKilledGEImpl extends EnemyKilledGE {
-  const _$EnemyKilledGEImpl() : super._();
+  const _$EnemyKilledGEImpl({required this.mineValue}) : super._();
+
+  @override
+  final int mineValue;
 
   @override
   String toString() {
-    return 'GameEvent.enemyKilled()';
+    return 'GameEvent.enemyKilled(mineValue: $mineValue)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$EnemyKilledGEImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$EnemyKilledGEImpl &&
+            (identical(other.mineValue, mineValue) ||
+                other.mineValue == mineValue));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, mineValue);
 }
 
 abstract class EnemyKilledGE extends GameEvent {
-  const factory EnemyKilledGE() = _$EnemyKilledGEImpl;
+  const factory EnemyKilledGE({required final int mineValue}) =
+      _$EnemyKilledGEImpl;
   const EnemyKilledGE._() : super._();
+
+  int get mineValue;
 }
 
 /// @nodoc
