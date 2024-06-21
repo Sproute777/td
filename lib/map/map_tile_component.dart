@@ -3,8 +3,7 @@ import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import '../base/game_component.dart';
 import '../game_controller/game_controller.dart';
-
-
+import '../game_controller/game_event.dart';
 
 class MapTileComponent extends GameComponent with TapCallbacks {
   // MapTileBuildStatus buildStatus = MapTileBuildStatus.Empty;
@@ -18,7 +17,7 @@ class MapTileComponent extends GameComponent with TapCallbacks {
   });
 
   @override
-  void render( canvas) {
+  void render(canvas) {
     super.render(canvas);
     // if (background != null) {
     // background!.renderRect(c, size.toRect());
@@ -33,7 +32,7 @@ class MapTileComponent extends GameComponent with TapCallbacks {
   bool onTapDown(TapDownEvent event) {
     final paused = gameRef.paused;
     if (!paused) {
-      gameRef.gameController.send(this, GameControl.weaponBuilding);
+      gameRef.gameController.send(GameEvent.weaponBuilding(component: this));
       return false;
     }
     return false;

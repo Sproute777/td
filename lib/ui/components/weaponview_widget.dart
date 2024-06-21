@@ -6,6 +6,7 @@ import '../../base/game_component.dart';
 import '../../game/game_main.dart';
 import '../../game/game_setting.dart';
 import '../../game_controller/game_controller.dart';
+import '../../game_controller/game_event.dart';
 import '../../weapon/weapon_component.dart';
 
 class WeaponViewWidget {
@@ -49,9 +50,8 @@ class WeaponViewWidget {
                   onPressed: () {
                     _selected?.active = false;
                     _selected?.removeFromParent();
-                    _selected?.gameRef.gameController.send(
-                        _selected! as GameComponent,
-                        GameControl.weaponDestroyed);
+                    _selected?.gameRef.gameController
+                        .send(GameEvent.weaponDestroyed(weapon: _selected!));
                     hide();
                   },
                   label: const SizedBox(),
@@ -59,12 +59,10 @@ class WeaponViewWidget {
                 const Center(
                   child: Material(
                     type: MaterialType.transparency,
-                    child: Text(
-                      'Destroy',
-                      style: TextStyle(color: Colors.white)),
-                    ),
+                    child:
+                        Text('Destroy', style: TextStyle(color: Colors.white)),
                   ),
-                
+                ),
               ],
             ),
           )),

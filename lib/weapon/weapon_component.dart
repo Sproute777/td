@@ -8,7 +8,11 @@ import '../base/game_component.dart';
 import '../base/radar.dart';
 import '../enemy/enemy_component.dart';
 import '../game_controller/game_controller.dart';
+import '../game_controller/game_event.dart';
 import '../settings/weapon_settings.dart';
+import 'cannon.dart';
+import 'machine_gun.dart';
+import 'missile.dart';
 
 class SmartRotateEffect extends RotateEffect {
   VoidCallback? onComplete;
@@ -50,12 +54,11 @@ class SmartRotateEffect extends RotateEffect {
   }
 }
 
-
 class BarrelComponent extends GameComponent {
   BarrelComponent({required Vector2 position, required Vector2 size})
       : super(position: position, size: size, priority: 21);
   double rotateSpeed = 6.0; /* radians/second */
-  double rotateTo(double radians,VoidCallback onComplete) {
+  double rotateTo(double radians, VoidCallback onComplete) {
     final double duration = (radians - angle).abs() / rotateSpeed;
     if (duration <= 0) {
       onComplete.call();
@@ -178,18 +181,35 @@ class WeaponComponent extends GameComponent
   bool onTapDown(TapDownEvent event) {
     if (!buildDone) {
       if (buildAllowed) {
-        gameRef.gameController.send(this, GameControl.weaponBuildDone);
+        gameRef.gameController.send(GameEvent.weaponBuildDone(weapon: this));
         onBuildDone();
+      } else {
+        gameRef.gameController.send(const GameEvent.weaponBlocked());
       }
     } else {
       if (active) {
-        gameRef.gameController.send(this, GameControl.weaponShowAction);
+        gameRef.gameController.send(GameEvent.weaponShowAction(weapon: this));
       } else {
         return true;
-        // gameRef.gameController.send(this, GameControl.WEAPON_SHOW_PROFILE);
+        // gameRef.gameController.send(this, GameEvent.WEAPON_SHOW_PROFILE);
       }
     }
 
     return false;
+  }
+
+  factory WeaponComponent.create(Vector2 anchor, WeaponType weaponType) {
+    switch (weaponType) {
+      first:
+      case WeaponType.cannon:
+        return Cannon(position: anchor);
+      case WeaponType.mg:
+        return MachineGun(position: anchor);
+      case WeaponType.missele:
+        return Missile(position: anchor);
+      case WeaponType.minner:
+      case WeaponType.none:
+        continue first;
+    }
   }
 }

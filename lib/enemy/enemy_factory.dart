@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 
 import '../base/game_component.dart';
 import '../game_controller/game_controller.dart';
+import '../game_controller/game_event.dart';
 import 'enemy_component.dart';
 import 'enmey_v1.dart';
 
@@ -37,7 +38,7 @@ class EnemyFactory extends GameComponent {
 
   void nextWave() {
     currentWave++;
-    gameRef.gameController.send(this, GameControl.enemyNexWave);
+    gameRef.gameController.send(const GameEvent.enemyNextWave());
     switch (currentWave) {
       case 1:
         spawnEnemy(20, 1.2, spawnEnemyA);
@@ -62,9 +63,7 @@ class EnemyFactory extends GameComponent {
   void spawnEnemyLoop(Function spawnF) {
     if (_spwanCount <= 0) {
       add(TimerComponent(
-          period: _interval,
-          removeOnFinish: true,
-          onTick: () => nextWave()));
+          period: _interval, removeOnFinish: true, onTick: () => nextWave()));
     } else {
       spawnF();
       add(TimerComponent(

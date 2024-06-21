@@ -13,10 +13,8 @@ import 'ui/stage_bar/bloc/stage_bar_bloc.dart';
 import 'ui/stage_bar/view/stage_bar_view.dart';
 import 'weapon/weapon_component.dart';
 
-
-
-class DevApp extends StatelessWidget {
-  const DevApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +36,8 @@ class DevApp extends StatelessWidget {
 }
 
 class _AppView extends StatefulWidget {
-  const _AppView();
+  // ignore: unused_element
+  const _AppView({super.key});
 
   @override
   State<_AppView> createState() => _AppViewState();
@@ -46,7 +45,6 @@ class _AppView extends StatefulWidget {
 
 class _AppViewState extends State<_AppView> {
   bool pause = true;
- 
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +53,10 @@ class _AppViewState extends State<_AppView> {
       Expanded(
         child: GameWidget<GameMain>(
           game: GameTest(
-              gameController: RepositoryProvider.of<GameController>(context), stageBarBloc: context.read<StageBarBloc>(), inventoryBloc: context.read<InventoryBloc>(),),
+            gameController: RepositoryProvider.of<GameController>(context),
+            stageBarBloc: context.read<StageBarBloc>(),
+            inventoryBloc: context.read<InventoryBloc>(),
+          ),
           overlayBuilderMap: {
             WeaponViewWidget.name: WeaponViewWidget.builder,
             'start': _pauseMenuBuilder,
@@ -76,7 +77,8 @@ class _AppViewState extends State<_AppView> {
       child: Center(
           child: TextButton(
         style: TextButton.styleFrom(
-          foregroundColor: Colors.white, padding: const EdgeInsets.all(16.0),
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.all(16.0),
           textStyle: const TextStyle(fontSize: 20),
         ),
         onPressed: () {

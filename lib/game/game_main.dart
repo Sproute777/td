@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 
 import '../base/game_component.dart';
 import '../game_controller/game_controller.dart';
+import '../game_controller/game_event.dart';
 import '../map/map_controller.dart';
 import '../ui/inventory/bloc/inventory_bloc.dart';
 import '../ui/stage_bar/bloc/stage_bar_bloc.dart';
@@ -80,10 +81,9 @@ class GameMain extends FlameGame with TapCallbacks {
     pauseEngine();
   }
 
-
   void start() {
     if (loadDone) {
-      gameController.send(GameComponent(), GameControl.enemySpawn);
+      gameController.send(const GameEvent.enemySpawn());
       stageBarBloc.add(const SbSetKilled(0));
       stageBarBloc.add(const SbSetMissed(0));
       stageBarBloc.add(const SbSetMinerals(400));

@@ -16,11 +16,12 @@ dependencies:
   equatable: ^2.0.3
   flutter_bloc: ^8.0.1
   bloc: ^8.0.2
-  flame: ">=1.15.0"
-  astar_dart: ^0.0.7
+  flame: ">=1.18.0"
+  astar_dart: ^0.0.10
   bloc_concurrency: ^0.2.5
   injectable: ^2.4.2
   get_it: ^7.7.0
+  bonfire: ^3.6.2
 
 dev_dependencies:
   flutter_test:

@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'app_dev.dart';
+import 'app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,5 +12,5 @@ void main() async {
   }
   await Flame.device.setOrientation(DeviceOrientation.portraitUp);
 
-  runApp(const DevApp());
+  runApp(const App());
 }

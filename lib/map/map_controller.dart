@@ -31,10 +31,10 @@ class MapController extends GameComponent with AstarMapMixin {
     super.astarInit(mapGrid);
   }
 
-  bool testBlock(Vector2 position) {
+  Future<bool> isBlockPath(Vector2 position) async {
     super.addBarrier(position);
-    final path =
-        super.findPath(gameRef.setting.enemySpawn, gameRef.setting.enemyTarget);
+    final path = await super
+        .findPath(gameRef.setting.enemySpawn, gameRef.setting.enemyTarget);
     super.removeBarrier(position);
     return path.isEmpty;
   }

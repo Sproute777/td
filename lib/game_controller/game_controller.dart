@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 import '../base/game_component.dart';
@@ -20,6 +21,7 @@ import '../weapon/cannon.dart';
 import '../weapon/machine_gun.dart';
 import '../weapon/missile.dart';
 import '../weapon/weapon_component.dart';
+import 'game_event.dart';
 
 part 'controller_process.dart';
 
@@ -50,8 +52,8 @@ class GameController extends GameComponent {
   /* Instruction Queue*/
   // ignore: prefer_final_fields
   Queue _instructQ = Queue<GameInstruction>();
-  void send(GameComponent source, GameControl instruct) {
-    _instructQ.add(GameInstruction(source, instruct));
+  void send(GameEvent instruct) {
+    _instructQ.add(GameInstruction(instruct));
   }
 
   void processInstruction() {
@@ -63,13 +65,12 @@ class GameController extends GameComponent {
 
   /* Process Routine */
   void processRadarScan() {
-    final Iterable<Component> radars =
-        children.where((e) => e is Radar && e.radarOn).cast();
-    final Iterable<Component> scanbles =
-        children.where((e) => e is Scanable && e.scanable).cast();
-
+    final radars = children.where((r) => r is Radar && r.radarOn).cast<Radar>();
+    final scanbles = children
+        .where((r) => r is Scanable && r.scanable)
+        .cast<GameComponent>();
     for (final element in radars) {
-      (element as Radar).radarScan(scanbles);
+      element.radarScan(scanbles);
     }
   }
 
@@ -130,21 +131,6 @@ class GameController extends GameComponent {
     add(gateEnd);
   }
 
-  WeaponComponent? buildWeapon(Vector2 anchor, WeaponType weaponType) {
-    late WeaponComponent? weapon;
-    switch (weaponType) {
-      case WeaponType.cannon:
-        weapon = Cannon(position: anchor);
-      case WeaponType.mg:
-        weapon = MachineGun(position: anchor);
-      case WeaponType.missele:
-        weapon = Missile(position: anchor);
-      default:
-        break;
-    }
-    return weapon;
-  }
-
   void onBuildDone(WeaponComponent c) {
     gameRef.inventoryBloc.add(InvAddCost(index: c.weaponType.index));
     gameRef.subsractMinerals(c.weaponType.index);
@@ -153,5 +139,4 @@ class GameController extends GameComponent {
   void onDestroy(WeaponComponent c) {
     gameRef.inventoryBloc.add(InvSubstractCost(index: c.weaponType.index));
   }
-
 }

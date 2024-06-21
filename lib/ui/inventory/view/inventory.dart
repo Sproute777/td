@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../game_controller/game_controller.dart';
+import '../../../game_controller/game_event.dart';
 import '../../../settings/weapon_settings.dart';
 import '../bloc/inventory_bloc.dart';
 
@@ -27,7 +28,7 @@ class _InventoryState extends State<Inventory> {
                 onTap: () {
                   if (weapons[i] != state.weapon) {
                     final controller = context.read<GameController>();
-                    controller.send(controller, GameControl.weaponSelected);
+                    controller.send(const GameEvent.weaponSelected());
                     context
                         .read<InventoryBloc>()
                         .add(InvWeaponSelected(weapons[i]));

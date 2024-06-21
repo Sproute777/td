@@ -8,6 +8,7 @@ import '../base/life_indicator.dart';
 import '../base/movable.dart';
 import '../base/scanable.dart';
 import '../game_controller/game_controller.dart';
+import '../game_controller/game_event.dart';
 
 enum EnemyType { enemyA, enemyB, enemyC, enemyD }
 
@@ -67,14 +68,14 @@ class EnemyComponent extends GameComponent
   void onArrived() {
     if (!dead) {
       active = false;
-      gameRef.gameController.send(this, GameControl.enemyMissed);
+      gameRef.gameController.send(const GameEvent.enemyMissed());
       removeFromParent();
     }
   }
 
   void onKilled() {
     active = false;
-    gameRef.gameController.send(this, GameControl.enemyKilled);
+    gameRef.gameController.send(const GameEvent.enemyKilled());
     gameRef.addMinerals(mineValue);
     // gameRef.gamebarView.mineCollected += mineValue;
     removeFromParent();
@@ -84,34 +85,34 @@ class EnemyComponent extends GameComponent
 mixin EnemySmartMove on GameComponent {
   /*Enemy move path controller */
   final path = <Point<int>>[];
-  void moveSmart(Vector2 to) {
+  Future<void> moveSmart(Vector2 to) async {
+    final p = await gameRef.mapController.findPath(position, to);
     path.clear();
-    path.addAll(gameRef.mapController.findPath(position, to));
-    debugPrint('PATH ${path.length}');
-    if (path.isNotEmpty) {
-      pathNextMove();
-    }
+    path.addAll(p);
+    pathNextMove();
   }
 
   void pathNextMove() {
-    final next = path.removeAt(0);
-    (this as Movable).moveTo(moveRadomPosition(next), pathNextMove);
+    if (path.isNotEmpty) {
+      final next = path.removeLast();
+      (this as Movable).moveTo(moveRadomPosition(next), pathNextMove);
+    }
   }
 
   Vector2 moveRadomPosition(Point<int> node) {
     // if (node.next == null) {
     //   /*target goto center*/
-    //   Vector2 lefttop = gameRef.mapController.nodeToPosition(node);
-    //   return lefttop + (gameRef.mapController.tileSize / 2);
+    final Vector2 mapPoint = gameRef.mapController.nodeToPosition(node);
+    return mapPoint + (gameRef.mapController.tileSize / 2);
     // } else {
 
-    Vector2 lefttop = gameRef.mapController.nodeToPosition(node);
-    final randomArea = Vector2(gameRef.mapController.tileSize.x - size.x,
-        gameRef.mapController.tileSize.y - size.y);
-    lefttop = lefttop + Vector2(size.x / 2, size.y / 2);
-    final rndx = Random().nextDouble();
-    final rndy = Random().nextDouble();
-    return lefttop + Vector2(randomArea.x * rndx, randomArea.y * rndy);
+    // Vector2 lefttop = gameRef.mapController.nodeToPosition(node);
+    // final randomArea = Vector2(gameRef.mapController.tileSize.x - size.x,
+    //     gameRef.mapController.tileSize.y - size.y);
+    // lefttop = lefttop + Vector2(size.x / 2, size.y / 2);
+    // final rndx = Random().nextDouble();
+    // final rndy = Random().nextDouble();
+    // return lefttop + Vector2(randomArea.x * rndx, randomArea.y * rndy);
     // }
   }
 }

@@ -21,11 +21,11 @@ mixin AstarMapMixin on Component {
     astarMap.setBarrier(node.toBarrier(Barrier.pass));
   }
 
-  List<Point<int>> findPath(Vector2 start, Vector2 end) {
+  Future<List<Point<int>>> findPath(Vector2 start, Vector2 end) async {
     astarMap.calculateGrid();
     final start0 = _positionToNode(start);
     final end0 = _positionToNode(end);
-    final path = astarMap.findPath(start: start0, end: end0);
+    final path = await astarMap.findPath(start: start0, end: end0);
     return path.toPointList();
   }
 

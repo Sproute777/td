@@ -2,81 +2,71 @@ part of 'game_controller.dart';
 
 GameSetting gameSetting = GameSetting();
 
-enum GameControl {
-  gameStarted,
-  gamePaused,
-  gameResumed,
-  weaponBuilding,
-  weaponSelected,
-  /*change type */
-  weaponBuildDone,
-  weaponDestroyed,
-  weaponShowAction,
-  weaponShowProfile,
-  enemySpawn,
-  enemyMissed,
-  enemyKilled,
-  enemyNexWave,
-}
-
 class GameInstruction {
-  GameControl instruction;
-  GameComponent source;
+  GameEvent event;
 
-  GameInstruction(this.source, this.instruction);
-  void process(GameController controller) {
-    switch (instruction) {
-      case GameControl.gameStarted:
+  GameInstruction(this.event);
+  Future<void> process(GameController controller) async {
+    switch (event) {
+      case StartedGE():
         // controller.gameRef.started;
         break;
-      case GameControl.gameResumed:
+      case ResumedGE():
         controller.gameRef.resumeEngine();
-      case GameControl.gamePaused:
+      case PausedGE():
         controller.gameRef.pauseEngine();
-      case GameControl.weaponBuilding:
+      case WeaponBuildingGE(:final component):
+        debugPrint('WEAPON BUILDING');
         WeaponViewWidget.hide();
         // controller.gameRef.read<InventoryBloc>().add();
-        final WeaponComponent? component = controller.buildWeapon(
-            source.position, controller.gameRef.inventoryBloc.state.weapon);
-        if (component != null) {
-          controller.add(component);
-          controller.buildingWeapon?.removeFromParent();
-          controller.buildingWeapon = component;
-          component.blockMap = component.collision(controller.gateStart) ||
-              component.collision(controller.gateEnd) ||
-              controller.gameRef.mapController.testBlock(component.position);
-        }
-      case GameControl.weaponSelected:
+        final weapon = WeaponComponent.create(
+            component.position, controller.gameRef.inventoryBloc.state.weapon);
+        controller.add(weapon);
+        controller.buildingWeapon?.removeFromParent();
+        controller.buildingWeapon = weapon;
+        weapon.blockMap = weapon.collision(controller.gateStart) ||
+            weapon.collision(controller.gateEnd) ||
+            (await controller.gameRef.mapController
+                .isBlockPath(weapon.position));
+      case WeaponSelectedGE():
+        debugPrint('WEAPON SELECTED');
         WeaponViewWidget.hide();
         // controller.gameRef.weaponFactory.select(source as SingleWeaponView);
         if (controller.buildingWeapon != null) {
           controller.send(
-              controller.buildingWeapon!, GameControl.weaponBuilding);
+              GameEvent.weaponBuilding(component: controller.buildingWeapon!));
         }
-      case GameControl.weaponBuildDone:
+      case WeaponBuildDoneGE(:final weapon):
+        debugPrint('WEAPON BUILDING DONE');
         // controller.buildingWeapon.buildDone = true;
-        controller.onBuildDone(source as WeaponComponent);
-        controller.gameRef.mapController.addBarrier(source.position);
+        controller.onBuildDone(weapon);
+        controller.gameRef.mapController.addBarrier(weapon.position);
         controller.buildingWeapon = null;
         controller.processEnemySmartMove();
-      case GameControl.weaponDestroyed:
+      case WeaponBlockedGE():
+        debugPrint('WEAPON BLOCKED');
+      case WeaponDestroyedGE(:final weapon):
+        debugPrint('WEAPON DESTROYED');
         WeaponViewWidget.hide();
-        controller.onDestroy(source as WeaponComponent);
-        controller.gameRef.mapController.removeBarrier(source.position);
+        controller.onDestroy(weapon);
+        controller.gameRef.mapController.removeBarrier(weapon.position);
         controller.processEnemySmartMove();
-      case GameControl.enemySpawn:
+      case EnemySpawnGE():
+        debugPrint('ENEMY SPAWN');
         controller.enemyFactory.start();
-      case GameControl.enemyMissed:
+      case EnemyMissedGE():
         controller.gameRef.addMissed(1);
 
-      case GameControl.enemyKilled:
+      case EnemyKilledGE():
+        debugPrint('ENEMY KILLED');
         controller.gameRef.addKilled(1);
-
-      case GameControl.enemyNexWave:
+      case EnemyNextWaveGE():
+        debugPrint('ENEMY NEXT WAVE');
         controller.gameRef.setWave(1);
 
-      case GameControl.weaponShowAction:
-        WeaponViewWidget.show(source as WeaponComponent);
+      case WeaponShowActionGE(:final weapon):
+        debugPrint('WEAPON SHOW ACTION');
+        WeaponViewWidget.show(weapon);
       default:
     }
   }
