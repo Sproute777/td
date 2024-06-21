@@ -1,13 +1,11 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:flutter/foundation.dart';
 
 import '../base/game_component.dart';
 import '../base/life_indicator.dart';
 import '../base/movable.dart';
 import '../base/scanable.dart';
-import '../game_controller/game_controller.dart';
 import '../game_controller/game_event.dart';
 
 enum EnemyType { enemyA, enemyB, enemyC, enemyD }
@@ -75,8 +73,8 @@ class EnemyComponent extends GameComponent
 
   void onKilled() {
     active = false;
-    gameRef.gameController.send(const GameEvent.enemyKilled());
-    gameRef.addMinerals(mineValue);
+    gameRef.gameController.send( GameEvent.enemyKilled(mineValue: mineValue));
+    // gameRef.addMinerals(mineValue);
     // gameRef.gamebarView.mineCollected += mineValue;
     removeFromParent();
   }

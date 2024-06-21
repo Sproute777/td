@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import '../base/game_component.dart';
 import '../base/radar.dart';
 import '../enemy/enemy_component.dart';
-import '../game_controller/game_controller.dart';
 import '../game_controller/game_event.dart';
 import '../settings/weapon_settings.dart';
 import 'cannon.dart';

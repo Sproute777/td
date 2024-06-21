@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/stage_bar_bloc.dart';
+import '../bloc/stage_bar_cubit.dart';
 
 class StageBarView extends StatelessWidget {
   const StageBarView({super.key});
@@ -11,7 +11,7 @@ class StageBarView extends StatelessWidget {
     return Material(
       child: SizedBox.fromSize(
           size: Size(size.width, 60),
-          child: BlocBuilder<StageBarBloc, StageBarState>(
+          child: BlocBuilder<StageBarCubit, StageBarState>(
             builder: (context, state) {
               return SingleChildScrollView(
                 child: Row(

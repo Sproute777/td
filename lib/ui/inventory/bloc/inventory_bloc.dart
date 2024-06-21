@@ -1,14 +1,13 @@
-import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/services.dart';
+import 'package:injectable/injectable.dart';
 import '../../../settings/weapon_settings.dart';
-import '../../../weapon/weapon_component.dart';
 
 part 'inventory_event.dart';
 part 'inventory_state.dart';
 
+@injectable
 class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
   InventoryBloc() : super(const InventoryState.empty()) {
     on<InvWeaponSelected>(_onSelected);

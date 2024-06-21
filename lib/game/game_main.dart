@@ -2,17 +2,15 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/foundation.dart';
 
-import '../base/game_component.dart';
 import '../game_controller/game_controller.dart';
 import '../game_controller/game_event.dart';
 import '../map/map_controller.dart';
 import '../ui/inventory/bloc/inventory_bloc.dart';
-import '../ui/stage_bar/bloc/stage_bar_bloc.dart';
 import 'game_setting.dart';
 
 class GameMain extends FlameGame with TapCallbacks {
   late MapController mapController;
-  final StageBarBloc stageBarBloc;
+  // final StageBarCubit stageBarBloc;
   final InventoryBloc inventoryBloc;
   // late WeaponFactoryView weaponFactory;
   GameController gameController;
@@ -30,7 +28,7 @@ class GameMain extends FlameGame with TapCallbacks {
 
   GameMain(
       {required this.gameController,
-      required this.stageBarBloc,
+      // required this.stageBarBloc,
       required this.inventoryBloc});
 
   @override
@@ -84,29 +82,19 @@ class GameMain extends FlameGame with TapCallbacks {
   void start() {
     if (loadDone) {
       gameController.send(const GameEvent.enemySpawn());
-      stageBarBloc.add(const SbSetKilled(0));
-      stageBarBloc.add(const SbSetMissed(0));
-      stageBarBloc.add(const SbSetMinerals(400));
+      // stageBarBloc.add(const SbSetKilled(0));
+      // stageBarBloc.add(const SbSetMissed(0));
+      // stageBarBloc.add(const SbSetMinerals(400));
     }
   }
 
-  void addMinerals(int value) {
-    stageBarBloc.add(SbAddMinerals(value));
-  }
+  // @Deprecated('Reason')
+  // void addMinerals(int value) {
+  //   // stageBarBloc.add(SbAddMinerals(value));
+  // }
 
-  void addMissed(int value) {
-    stageBarBloc.add(SbAddMissed(value));
-  }
+ 
 
-  void addKilled(int value) {
-    stageBarBloc.add(SbAddKilled(value));
-  }
-
-  void subsractMinerals(int value) {
-    stageBarBloc.add(SbSubtractMinerals(value));
-  }
-
-  void setWave(int value) {
-    stageBarBloc.add(SbAddWave(value));
-  }
+  
+  
 }

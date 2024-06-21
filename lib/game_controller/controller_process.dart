@@ -55,14 +55,16 @@ class GameInstruction {
         debugPrint('ENEMY SPAWN');
         controller.enemyFactory.start();
       case EnemyMissedGE():
-        controller.gameRef.addMissed(1);
+        controller.repository.incrementMissed();
 
-      case EnemyKilledGE():
+      case EnemyKilledGE(:final mineValue):
         debugPrint('ENEMY KILLED');
-        controller.gameRef.addKilled(1);
+        controller.repository.incrementKilled();
+        controller.repository.addMinerals(mineValue);
+
       case EnemyNextWaveGE():
         debugPrint('ENEMY NEXT WAVE');
-        controller.gameRef.setWave(1);
+        controller.repository.incrementWave();
 
       case WeaponShowActionGE(:final weapon):
         debugPrint('WEAPON SHOW ACTION');
