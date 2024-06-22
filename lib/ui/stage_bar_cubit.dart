@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import '../../../game_controller/game_repository.dart';
+import '../game_controller/game_repository.dart';
 
 part 'stage_bar_cubit.freezed.dart';
 
@@ -19,19 +19,19 @@ class StageBarCubit extends Cubit<StageBarState> {
 
   void _init() {
     _merge = Listenable.merge([
-      _repository.killedNTF,
-      _repository.mineralsNTF,
-      _repository.missedNTF
+      _repository.killedNotifier,
+      _repository.mineralsNotifier,
+      _repository.missedNotifier
     ]);
     _merge?.addListener(_listen);
   }
 
   void _listen() {
     emit(StageBarState(
-      killed: _repository.killedNTF.value,
-      missed: _repository.missedNTF.value,
-      wave: _repository.waveNTF.value,
-      minerals: _repository.mineralsNTF.value,
+      killed: _repository.killedNotifier.value,
+      missed: _repository.missedNotifier.value,
+      wave: _repository.waveNotifier.value,
+      minerals: _repository.mineralsNotifier.value,
     ));
   }
 

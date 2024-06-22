@@ -8,10 +8,11 @@ import 'game/game_test.dart';
 import 'game_controller/game_controller.dart';
 import 'settings/weapon_settings.dart';
 import 'ui/components/weaponview_widget.dart';
-import 'ui/inventory/bloc/inventory_bloc.dart';
-import 'ui/inventory/view/inventory.dart';
-import 'ui/stage_bar/bloc/stage_bar_cubit.dart';
-import 'ui/stage_bar/view/stage_bar_view.dart';
+import 'ui/inventory_bloc.dart';
+import 'ui/inventory.dart';
+import 'ui/selected_weapon_cubit.dart';
+import 'ui/stage_bar_cubit.dart';
+import 'ui/stage_bar_view.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -24,7 +25,11 @@ class App extends StatelessWidget {
           providers: [
             BlocProvider(
               lazy: false,
-              create: (_) => GetIt.I.get<InventoryBloc>()..add(InvInit()),
+              create: (_) => GetIt.I.get<InventoryCubit>()..init(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (_) => GetIt.I.get<SelectedWeaponCubit>()..init(),
             ),
             BlocProvider(
               create: (_) => GetIt.I.get<StageBarCubit>(),
@@ -55,7 +60,7 @@ class _AppViewState extends State<_AppView> {
           game: GameTest(
             gameController: RepositoryProvider.of<GameController>(context),
             // stageBarBloc: context.read<StageBarCubit>(),
-            inventoryBloc: context.read<InventoryBloc>(),
+            inventoryBloc: context.read<InventoryCubit>(),
           ),
           overlayBuilderMap: {
             WeaponViewWidget.name: WeaponViewWidget.builder,
@@ -85,9 +90,6 @@ class _AppViewState extends State<_AppView> {
           if (pause) {
             game.resumeEngine();
             game.start();
-            ctx
-                .read<InventoryBloc>()
-                .add(const InvWeaponSelected(WeaponType.mg));
             game.overlays.remove('start');
           }
         },

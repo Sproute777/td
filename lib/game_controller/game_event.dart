@@ -9,22 +9,23 @@ part 'game_event.freezed.dart';
     map: FreezedMapOptions.none, when: FreezedWhenOptions.none, copyWith: false)
 sealed class GameEvent with _$GameEvent {
   const GameEvent._();
-  const factory GameEvent.started() = StartedGE;
-  const factory GameEvent.paused() = PausedGE;
-  const factory GameEvent.resumed() = ResumedGE;
+  const factory GameEvent.started() = StartedGameEvent;
+  const factory GameEvent.paused() = PausedGameEvent;
+  const factory GameEvent.resumed() = ResumedGameEvent;
   const factory GameEvent.weaponBuilding({required GameComponent component}) =
-      WeaponBuildingGE;
-  const factory GameEvent.weaponSelected() = WeaponSelectedGE;
+      WeaponBuildingGameEvent;
+  const factory GameEvent.weaponSelected() = WeaponSelectedGameEvent;
   const factory GameEvent.weaponBuildDone({required WeaponComponent weapon}) =
-      WeaponBuildDoneGE;
+      WeaponBuildDoneGameEvent;
   const factory GameEvent.weaponDestroyed({required WeaponComponent weapon}) =
-      WeaponDestroyedGE;
-  const factory GameEvent.weaponBlocked() = WeaponBlockedGE;
+      WeaponDestroyedGameEvent;
+  const factory GameEvent.weaponBlocked() = WeaponBlockedGameEvent;
   const factory GameEvent.weaponShowAction({required WeaponComponent weapon}) =
-      WeaponShowActionGE;
-  const factory GameEvent.weaponShowProfile() = WeaponShowProfileGE;
-  const factory GameEvent.enemySpawn() = EnemySpawnGE;
-  const factory GameEvent.enemyMissed() = EnemyMissedGE;
-  const factory GameEvent.enemyKilled({required int mineValue}) = EnemyKilledGE;
-  const factory GameEvent.enemyNextWave() = EnemyNextWaveGE;
+      WeaponShowActionGameEvent;
+  const factory GameEvent.weaponShowProfile() = WeaponShowProfileGameEvent;
+  const factory GameEvent.enemySpawn() = EnemySpawnGameEvent;
+  const factory GameEvent.enemyMissed() = EnemyMissedGameEvent;
+  const factory GameEvent.enemyKilled({required int mineValue}) =
+      EnemyKilledGameEvent;
+  const factory GameEvent.enemyNextWave() = EnemyNextWaveGameEvent;
 }
