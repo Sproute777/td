@@ -29,7 +29,7 @@ mixin GameRef<T extends GameMain> on Component {
     _gameRef = null;
   }
 
-void  registerToGame() {
+  void registerToGame() {
     gameRef.add(this);
   }
 }

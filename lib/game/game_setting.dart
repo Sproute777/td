@@ -171,8 +171,6 @@ class WeaponSettingV1 {
     final double tileSize = gameSetting.mapTileSize.length;
     List<Vector2> expFrame = [];
 
-
-
     WeaponSetting w = WeaponSetting.empty()
       ..explosion = SpriteSheet.fromColumnsAndRows(
         image: await images.load('weapon/explosion1.png'),

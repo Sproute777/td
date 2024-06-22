@@ -23,7 +23,7 @@ class GameRepository {
   }
 
   void subtractMinerals(int value) {
-    mineralsNTF.value -=  value;
+    mineralsNTF.value -= value;
   }
 
   void addMinerals(int value) {

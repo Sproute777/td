@@ -92,9 +92,4 @@ class GameMain extends FlameGame with TapCallbacks {
   // void addMinerals(int value) {
   //   // stageBarBloc.add(SbAddMinerals(value));
   // }
-
- 
-
-  
-  
 }
