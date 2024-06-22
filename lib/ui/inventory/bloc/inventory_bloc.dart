@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
@@ -22,10 +21,6 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
   }
 
   Future<void> _onInit(InvInit event, Emitter<InventoryState> emit) async {
-
-
-
-
     emit(
       state.setParameters(
         weaponBaseCost: WeaponSettings.list.map((i) => i.cost).toList(),

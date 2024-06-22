@@ -11,7 +11,6 @@ class GameComponent extends PositionComponent with GameRef<GameMain>, HasPaint {
   SpriteAnimation? animation;
   bool? playing = true;
 
-
   GameComponent({
     super.position,
     super.size,
@@ -35,7 +34,6 @@ class GameComponent extends PositionComponent with GameRef<GameMain>, HasPaint {
 
     super.render(canvas);
   }
-
 
   double angleNearTo(Vector2 target) {
     final double distance = position.distanceTo(target);

@@ -73,7 +73,7 @@ class EnemyComponent extends GameComponent
 
   void onKilled() {
     active = false;
-    gameRef.gameController.send( GameEvent.enemyKilled(mineValue: mineValue));
+    gameRef.gameController.send(GameEvent.enemyKilled(mineValue: mineValue));
     // gameRef.addMinerals(mineValue);
     // gameRef.gamebarView.mineCollected += mineValue;
     removeFromParent();
