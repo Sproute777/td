@@ -19,8 +19,8 @@ mixin _$GameEvent {}
 
 /// @nodoc
 
-class _$StartedGEImpl extends StartedGE {
-  const _$StartedGEImpl() : super._();
+class _$StartedGameEventImpl extends StartedGameEvent {
+  const _$StartedGameEventImpl() : super._();
 
   @override
   String toString() {
@@ -30,22 +30,22 @@ class _$StartedGEImpl extends StartedGE {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StartedGEImpl);
+        (other.runtimeType == runtimeType && other is _$StartedGameEventImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class StartedGE extends GameEvent {
-  const factory StartedGE() = _$StartedGEImpl;
-  const StartedGE._() : super._();
+abstract class StartedGameEvent extends GameEvent {
+  const factory StartedGameEvent() = _$StartedGameEventImpl;
+  const StartedGameEvent._() : super._();
 }
 
 /// @nodoc
 
-class _$PausedGEImpl extends PausedGE {
-  const _$PausedGEImpl() : super._();
+class _$PausedGameEventImpl extends PausedGameEvent {
+  const _$PausedGameEventImpl() : super._();
 
   @override
   String toString() {
@@ -55,22 +55,22 @@ class _$PausedGEImpl extends PausedGE {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PausedGEImpl);
+        (other.runtimeType == runtimeType && other is _$PausedGameEventImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class PausedGE extends GameEvent {
-  const factory PausedGE() = _$PausedGEImpl;
-  const PausedGE._() : super._();
+abstract class PausedGameEvent extends GameEvent {
+  const factory PausedGameEvent() = _$PausedGameEventImpl;
+  const PausedGameEvent._() : super._();
 }
 
 /// @nodoc
 
-class _$ResumedGEImpl extends ResumedGE {
-  const _$ResumedGEImpl() : super._();
+class _$ResumedGameEventImpl extends ResumedGameEvent {
+  const _$ResumedGameEventImpl() : super._();
 
   @override
   String toString() {
@@ -80,22 +80,22 @@ class _$ResumedGEImpl extends ResumedGE {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ResumedGEImpl);
+        (other.runtimeType == runtimeType && other is _$ResumedGameEventImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class ResumedGE extends GameEvent {
-  const factory ResumedGE() = _$ResumedGEImpl;
-  const ResumedGE._() : super._();
+abstract class ResumedGameEvent extends GameEvent {
+  const factory ResumedGameEvent() = _$ResumedGameEventImpl;
+  const ResumedGameEvent._() : super._();
 }
 
 /// @nodoc
 
-class _$WeaponBuildingGEImpl extends WeaponBuildingGE {
-  const _$WeaponBuildingGEImpl({required this.component}) : super._();
+class _$WeaponBuildingGameEventImpl extends WeaponBuildingGameEvent {
+  const _$WeaponBuildingGameEventImpl({required this.component}) : super._();
 
   @override
   final GameComponent component;
@@ -109,7 +109,7 @@ class _$WeaponBuildingGEImpl extends WeaponBuildingGE {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WeaponBuildingGEImpl &&
+            other is _$WeaponBuildingGameEventImpl &&
             (identical(other.component, component) ||
                 other.component == component));
   }
@@ -118,18 +118,18 @@ class _$WeaponBuildingGEImpl extends WeaponBuildingGE {
   int get hashCode => Object.hash(runtimeType, component);
 }
 
-abstract class WeaponBuildingGE extends GameEvent {
-  const factory WeaponBuildingGE({required final GameComponent component}) =
-      _$WeaponBuildingGEImpl;
-  const WeaponBuildingGE._() : super._();
+abstract class WeaponBuildingGameEvent extends GameEvent {
+  const factory WeaponBuildingGameEvent(
+      {required final GameComponent component}) = _$WeaponBuildingGameEventImpl;
+  const WeaponBuildingGameEvent._() : super._();
 
   GameComponent get component;
 }
 
 /// @nodoc
 
-class _$WeaponSelectedGEImpl extends WeaponSelectedGE {
-  const _$WeaponSelectedGEImpl() : super._();
+class _$WeaponSelectedGameEventImpl extends WeaponSelectedGameEvent {
+  const _$WeaponSelectedGameEventImpl() : super._();
 
   @override
   String toString() {
@@ -139,22 +139,23 @@ class _$WeaponSelectedGEImpl extends WeaponSelectedGE {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$WeaponSelectedGEImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$WeaponSelectedGameEventImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class WeaponSelectedGE extends GameEvent {
-  const factory WeaponSelectedGE() = _$WeaponSelectedGEImpl;
-  const WeaponSelectedGE._() : super._();
+abstract class WeaponSelectedGameEvent extends GameEvent {
+  const factory WeaponSelectedGameEvent() = _$WeaponSelectedGameEventImpl;
+  const WeaponSelectedGameEvent._() : super._();
 }
 
 /// @nodoc
 
-class _$WeaponBuildDoneGEImpl extends WeaponBuildDoneGE {
-  const _$WeaponBuildDoneGEImpl({required this.weapon}) : super._();
+class _$WeaponBuildDoneGameEventImpl extends WeaponBuildDoneGameEvent {
+  const _$WeaponBuildDoneGameEventImpl({required this.weapon}) : super._();
 
   @override
   final WeaponComponent weapon;
@@ -168,7 +169,7 @@ class _$WeaponBuildDoneGEImpl extends WeaponBuildDoneGE {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WeaponBuildDoneGEImpl &&
+            other is _$WeaponBuildDoneGameEventImpl &&
             (identical(other.weapon, weapon) || other.weapon == weapon));
   }
 
@@ -176,18 +177,18 @@ class _$WeaponBuildDoneGEImpl extends WeaponBuildDoneGE {
   int get hashCode => Object.hash(runtimeType, weapon);
 }
 
-abstract class WeaponBuildDoneGE extends GameEvent {
-  const factory WeaponBuildDoneGE({required final WeaponComponent weapon}) =
-      _$WeaponBuildDoneGEImpl;
-  const WeaponBuildDoneGE._() : super._();
+abstract class WeaponBuildDoneGameEvent extends GameEvent {
+  const factory WeaponBuildDoneGameEvent(
+      {required final WeaponComponent weapon}) = _$WeaponBuildDoneGameEventImpl;
+  const WeaponBuildDoneGameEvent._() : super._();
 
   WeaponComponent get weapon;
 }
 
 /// @nodoc
 
-class _$WeaponDestroyedGEImpl extends WeaponDestroyedGE {
-  const _$WeaponDestroyedGEImpl({required this.weapon}) : super._();
+class _$WeaponDestroyedGameEventImpl extends WeaponDestroyedGameEvent {
+  const _$WeaponDestroyedGameEventImpl({required this.weapon}) : super._();
 
   @override
   final WeaponComponent weapon;
@@ -201,7 +202,7 @@ class _$WeaponDestroyedGEImpl extends WeaponDestroyedGE {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WeaponDestroyedGEImpl &&
+            other is _$WeaponDestroyedGameEventImpl &&
             (identical(other.weapon, weapon) || other.weapon == weapon));
   }
 
@@ -209,18 +210,18 @@ class _$WeaponDestroyedGEImpl extends WeaponDestroyedGE {
   int get hashCode => Object.hash(runtimeType, weapon);
 }
 
-abstract class WeaponDestroyedGE extends GameEvent {
-  const factory WeaponDestroyedGE({required final WeaponComponent weapon}) =
-      _$WeaponDestroyedGEImpl;
-  const WeaponDestroyedGE._() : super._();
+abstract class WeaponDestroyedGameEvent extends GameEvent {
+  const factory WeaponDestroyedGameEvent(
+      {required final WeaponComponent weapon}) = _$WeaponDestroyedGameEventImpl;
+  const WeaponDestroyedGameEvent._() : super._();
 
   WeaponComponent get weapon;
 }
 
 /// @nodoc
 
-class _$WeaponBlockedGEImpl extends WeaponBlockedGE {
-  const _$WeaponBlockedGEImpl() : super._();
+class _$WeaponBlockedGameEventImpl extends WeaponBlockedGameEvent {
+  const _$WeaponBlockedGameEventImpl() : super._();
 
   @override
   String toString() {
@@ -230,22 +231,23 @@ class _$WeaponBlockedGEImpl extends WeaponBlockedGE {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$WeaponBlockedGEImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$WeaponBlockedGameEventImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class WeaponBlockedGE extends GameEvent {
-  const factory WeaponBlockedGE() = _$WeaponBlockedGEImpl;
-  const WeaponBlockedGE._() : super._();
+abstract class WeaponBlockedGameEvent extends GameEvent {
+  const factory WeaponBlockedGameEvent() = _$WeaponBlockedGameEventImpl;
+  const WeaponBlockedGameEvent._() : super._();
 }
 
 /// @nodoc
 
-class _$WeaponShowActionGEImpl extends WeaponShowActionGE {
-  const _$WeaponShowActionGEImpl({required this.weapon}) : super._();
+class _$WeaponShowActionGameEventImpl extends WeaponShowActionGameEvent {
+  const _$WeaponShowActionGameEventImpl({required this.weapon}) : super._();
 
   @override
   final WeaponComponent weapon;
@@ -259,7 +261,7 @@ class _$WeaponShowActionGEImpl extends WeaponShowActionGE {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WeaponShowActionGEImpl &&
+            other is _$WeaponShowActionGameEventImpl &&
             (identical(other.weapon, weapon) || other.weapon == weapon));
   }
 
@@ -267,18 +269,19 @@ class _$WeaponShowActionGEImpl extends WeaponShowActionGE {
   int get hashCode => Object.hash(runtimeType, weapon);
 }
 
-abstract class WeaponShowActionGE extends GameEvent {
-  const factory WeaponShowActionGE({required final WeaponComponent weapon}) =
-      _$WeaponShowActionGEImpl;
-  const WeaponShowActionGE._() : super._();
+abstract class WeaponShowActionGameEvent extends GameEvent {
+  const factory WeaponShowActionGameEvent(
+          {required final WeaponComponent weapon}) =
+      _$WeaponShowActionGameEventImpl;
+  const WeaponShowActionGameEvent._() : super._();
 
   WeaponComponent get weapon;
 }
 
 /// @nodoc
 
-class _$WeaponShowProfileGEImpl extends WeaponShowProfileGE {
-  const _$WeaponShowProfileGEImpl() : super._();
+class _$WeaponShowProfileGameEventImpl extends WeaponShowProfileGameEvent {
+  const _$WeaponShowProfileGameEventImpl() : super._();
 
   @override
   String toString() {
@@ -289,22 +292,22 @@ class _$WeaponShowProfileGEImpl extends WeaponShowProfileGE {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WeaponShowProfileGEImpl);
+            other is _$WeaponShowProfileGameEventImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class WeaponShowProfileGE extends GameEvent {
-  const factory WeaponShowProfileGE() = _$WeaponShowProfileGEImpl;
-  const WeaponShowProfileGE._() : super._();
+abstract class WeaponShowProfileGameEvent extends GameEvent {
+  const factory WeaponShowProfileGameEvent() = _$WeaponShowProfileGameEventImpl;
+  const WeaponShowProfileGameEvent._() : super._();
 }
 
 /// @nodoc
 
-class _$EnemySpawnGEImpl extends EnemySpawnGE {
-  const _$EnemySpawnGEImpl() : super._();
+class _$EnemySpawnGameEventImpl extends EnemySpawnGameEvent {
+  const _$EnemySpawnGameEventImpl() : super._();
 
   @override
   String toString() {
@@ -314,22 +317,23 @@ class _$EnemySpawnGEImpl extends EnemySpawnGE {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$EnemySpawnGEImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$EnemySpawnGameEventImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class EnemySpawnGE extends GameEvent {
-  const factory EnemySpawnGE() = _$EnemySpawnGEImpl;
-  const EnemySpawnGE._() : super._();
+abstract class EnemySpawnGameEvent extends GameEvent {
+  const factory EnemySpawnGameEvent() = _$EnemySpawnGameEventImpl;
+  const EnemySpawnGameEvent._() : super._();
 }
 
 /// @nodoc
 
-class _$EnemyMissedGEImpl extends EnemyMissedGE {
-  const _$EnemyMissedGEImpl() : super._();
+class _$EnemyMissedGameEventImpl extends EnemyMissedGameEvent {
+  const _$EnemyMissedGameEventImpl() : super._();
 
   @override
   String toString() {
@@ -339,22 +343,23 @@ class _$EnemyMissedGEImpl extends EnemyMissedGE {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$EnemyMissedGEImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$EnemyMissedGameEventImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class EnemyMissedGE extends GameEvent {
-  const factory EnemyMissedGE() = _$EnemyMissedGEImpl;
-  const EnemyMissedGE._() : super._();
+abstract class EnemyMissedGameEvent extends GameEvent {
+  const factory EnemyMissedGameEvent() = _$EnemyMissedGameEventImpl;
+  const EnemyMissedGameEvent._() : super._();
 }
 
 /// @nodoc
 
-class _$EnemyKilledGEImpl extends EnemyKilledGE {
-  const _$EnemyKilledGEImpl({required this.mineValue}) : super._();
+class _$EnemyKilledGameEventImpl extends EnemyKilledGameEvent {
+  const _$EnemyKilledGameEventImpl({required this.mineValue}) : super._();
 
   @override
   final int mineValue;
@@ -368,7 +373,7 @@ class _$EnemyKilledGEImpl extends EnemyKilledGE {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$EnemyKilledGEImpl &&
+            other is _$EnemyKilledGameEventImpl &&
             (identical(other.mineValue, mineValue) ||
                 other.mineValue == mineValue));
   }
@@ -377,18 +382,18 @@ class _$EnemyKilledGEImpl extends EnemyKilledGE {
   int get hashCode => Object.hash(runtimeType, mineValue);
 }
 
-abstract class EnemyKilledGE extends GameEvent {
-  const factory EnemyKilledGE({required final int mineValue}) =
-      _$EnemyKilledGEImpl;
-  const EnemyKilledGE._() : super._();
+abstract class EnemyKilledGameEvent extends GameEvent {
+  const factory EnemyKilledGameEvent({required final int mineValue}) =
+      _$EnemyKilledGameEventImpl;
+  const EnemyKilledGameEvent._() : super._();
 
   int get mineValue;
 }
 
 /// @nodoc
 
-class _$EnemyNextWaveGEImpl extends EnemyNextWaveGE {
-  const _$EnemyNextWaveGEImpl() : super._();
+class _$EnemyNextWaveGameEventImpl extends EnemyNextWaveGameEvent {
+  const _$EnemyNextWaveGameEventImpl() : super._();
 
   @override
   String toString() {
@@ -398,14 +403,15 @@ class _$EnemyNextWaveGEImpl extends EnemyNextWaveGE {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$EnemyNextWaveGEImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$EnemyNextWaveGameEventImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class EnemyNextWaveGE extends GameEvent {
-  const factory EnemyNextWaveGE() = _$EnemyNextWaveGEImpl;
-  const EnemyNextWaveGE._() : super._();
+abstract class EnemyNextWaveGameEvent extends GameEvent {
+  const factory EnemyNextWaveGameEvent() = _$EnemyNextWaveGameEventImpl;
+  const EnemyNextWaveGameEvent._() : super._();
 }

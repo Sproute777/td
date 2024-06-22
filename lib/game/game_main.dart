@@ -5,13 +5,13 @@ import 'package:flutter/foundation.dart';
 import '../game_controller/game_controller.dart';
 import '../game_controller/game_event.dart';
 import '../map/map_controller.dart';
-import '../ui/inventory/bloc/inventory_bloc.dart';
+import '../ui/inventory_bloc.dart';
 import 'game_setting.dart';
 
 class GameMain extends FlameGame with TapCallbacks {
   late MapController mapController;
   // final StageBarCubit stageBarBloc;
-  final InventoryBloc inventoryBloc;
+  final InventoryCubit inventoryBloc;
   // late WeaponFactoryView weaponFactory;
   GameController gameController;
   // late GamebarView gamebarView;

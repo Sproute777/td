@@ -14,7 +14,6 @@ import '../enemy/enemy_factory.dart';
 import '../game/game_setting.dart';
 import '../neutual/neutual_component.dart';
 import '../ui/components/weaponview_widget.dart';
-import '../ui/inventory/bloc/inventory_bloc.dart';
 import '../util/priority_layer.dart';
 import '../weapon/weapon_component.dart';
 import 'game_event.dart';
@@ -131,12 +130,11 @@ class GameController extends GameComponent {
   }
 
   void onBuildDone(WeaponComponent c) {
-    gameRef.inventoryBloc.add(InvAddCost(index: c.weaponType.index));
-    final int cost = gameRef.inventoryBloc.state.weaponCost[c.weaponType.index];
-    repository.subtractMinerals(cost);
+    repository.addCost(c.weaponType.index);
+    repository.subtractMinerals(c.weaponType);
   }
 
   void onDestroy(WeaponComponent c) {
-    gameRef.inventoryBloc.add(InvSubstractCost(index: c.weaponType.index));
+    repository.subtractCost(c.weaponType.index);
   }
 }
