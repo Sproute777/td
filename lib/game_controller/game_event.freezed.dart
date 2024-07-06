@@ -154,6 +154,32 @@ abstract class WeaponSelectedGameEvent extends GameEvent {
 
 /// @nodoc
 
+class _$WeaponUnSelectedGameEventImpl extends WeaponUnSelectedGameEvent {
+  const _$WeaponUnSelectedGameEventImpl() : super._();
+
+  @override
+  String toString() {
+    return 'GameEvent.weaponUnSelected()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WeaponUnSelectedGameEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+}
+
+abstract class WeaponUnSelectedGameEvent extends GameEvent {
+  const factory WeaponUnSelectedGameEvent() = _$WeaponUnSelectedGameEventImpl;
+  const WeaponUnSelectedGameEvent._() : super._();
+}
+
+/// @nodoc
+
 class _$WeaponBuildDoneGameEventImpl extends WeaponBuildDoneGameEvent {
   const _$WeaponBuildDoneGameEventImpl({required this.weapon}) : super._();
 
@@ -188,34 +214,27 @@ abstract class WeaponBuildDoneGameEvent extends GameEvent {
 /// @nodoc
 
 class _$WeaponDestroyedGameEventImpl extends WeaponDestroyedGameEvent {
-  const _$WeaponDestroyedGameEventImpl({required this.weapon}) : super._();
-
-  @override
-  final WeaponComponent weapon;
+  const _$WeaponDestroyedGameEventImpl() : super._();
 
   @override
   String toString() {
-    return 'GameEvent.weaponDestroyed(weapon: $weapon)';
+    return 'GameEvent.weaponDestroyed()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WeaponDestroyedGameEventImpl &&
-            (identical(other.weapon, weapon) || other.weapon == weapon));
+            other is _$WeaponDestroyedGameEventImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, weapon);
+  int get hashCode => runtimeType.hashCode;
 }
 
 abstract class WeaponDestroyedGameEvent extends GameEvent {
-  const factory WeaponDestroyedGameEvent(
-      {required final WeaponComponent weapon}) = _$WeaponDestroyedGameEventImpl;
+  const factory WeaponDestroyedGameEvent() = _$WeaponDestroyedGameEventImpl;
   const WeaponDestroyedGameEvent._() : super._();
-
-  WeaponComponent get weapon;
 }
 
 /// @nodoc

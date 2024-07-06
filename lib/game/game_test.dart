@@ -1,19 +1,20 @@
 import 'package:flutter/cupertino.dart';
 
-import '../base/game_component.dart';
-import '../base/radar.dart';
-import '../base/scanable.dart';
-import '../enemy/enemy_component.dart';
-import '../weapon/bullet_component.dart';
-import '../weapon/cannon.dart';
-import '../weapon/weapon_component.dart';
+import 'base/game_component.dart';
+import 'base/radar.dart';
+import 'base/scanable.dart';
+import 'enemy/enemy_component.dart';
+import 'weapon/bullet_component.dart';
+import 'weapon/cannon.dart';
+import 'weapon/weapon_component.dart';
 import 'game_main.dart';
 
 class GameTest extends GameMain with GameDebug {
-  GameTest(
-      {required super.gameController,
-      // required super.stageBarBloc,
-      required super.inventoryBloc});
+  GameTest({
+    required super.gameController,
+    // required super.stageBarBloc,
+    // required super.inventoryBloc
+  });
 
   @override
   Future<void> onLoad() async {

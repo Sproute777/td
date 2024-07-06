@@ -1,35 +1,27 @@
+import 'dart:async';
+
+import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/foundation.dart';
 
 import '../game_controller/game_controller.dart';
 import '../game_controller/game_event.dart';
-import '../map/map_controller.dart';
-import '../ui/inventory_bloc.dart';
 import 'game_setting.dart';
+import 'map/map_controller.dart';
 
 class GameMain extends FlameGame with TapCallbacks {
   late MapController mapController;
-  // final StageBarCubit stageBarBloc;
-  final InventoryCubit inventoryBloc;
-  // late WeaponFactoryView weaponFactory;
   GameController gameController;
-  // late GamebarView gamebarView;
-  // bool started = false;
 
   bool loadDone = false;
 
-  // GameView view = GameView();
   GameSetting setting = GameSetting();
-  // GameController controller = GameController();
-  // EnemySpawner enemySpawner = EnemySpawner();
-  // StatusBar statusBar;
-  // GameUtil util;
 
-  GameMain(
-      {required this.gameController,
-      // required this.stageBarBloc,
-      required this.inventoryBloc});
+  GameMain({
+    required this.gameController,
+  });
+  StreamSubscription? _weaponMenuSubscription;
 
   @override
   void onGameResize(Vector2 size) {
@@ -60,17 +52,16 @@ class GameMain extends FlameGame with TapCallbacks {
     gameController = gameController
       ..position = setting.mapPosition
       ..size = setting.mapSize;
-
-    // gamebarView = GamebarView();
-    // weaponFactory = WeaponFactoryView();
-
     await setting.weapons.load();
 
     add(mapController);
     add(gameController);
-    // add(gamebarView);
-    // add(weaponFactory);
-    // await add(interface ?? GameInterface());
+    if (kDebugMode) {
+      add(
+        FpsTextComponent(position: Vector2(0, size.y - 24)),
+      );
+    }
+
     setting.enemies.load();
 
     loadDone = true;
@@ -82,14 +73,12 @@ class GameMain extends FlameGame with TapCallbacks {
   void start() {
     if (loadDone) {
       gameController.send(const GameEvent.enemySpawn());
-      // stageBarBloc.add(const SbSetKilled(0));
-      // stageBarBloc.add(const SbSetMissed(0));
-      // stageBarBloc.add(const SbSetMinerals(400));
     }
   }
 
-  // @Deprecated('Reason')
-  // void addMinerals(int value) {
-  //   // stageBarBloc.add(SbAddMinerals(value));
-  // }
+  @override
+  void onDispose() {
+    _weaponMenuSubscription?.cancel();
+    super.onDispose();
+  }
 }
