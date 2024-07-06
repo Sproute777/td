@@ -1,5 +1,4 @@
-
-mport 'package:flame/components.dart';
+import 'package:flame/components.dart';
 
 class ExplosionComponent extends SpriteAnimationComponent with HasGameRef {
   ExplosionComponent({super.position, super.priority})
