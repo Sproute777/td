@@ -84,7 +84,9 @@ class GameInstruction {
       case WeaponShowActionGameEvent(:final weapon):
         debugPrint('WEAPON SHOW ACTION');
         weapon.gameRef.camera.moveTo(weapon.position);
-        controller.repository.setSelectedWeapon(weapon);
+        controller.repository
+          ..setSelectedWeapon(null)
+          ..setSelectedWeapon(weapon);
         controller.gameRef.add(WeaponRowButtonsComponent(
           pos: weapon.absolutePosition,
         ));

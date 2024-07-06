@@ -6,6 +6,7 @@ import '../../settings/weapon_settings.dart';
 import '../base/game_component.dart';
 import '../game_setting.dart';
 import 'bullet_component.dart';
+import 'expolotion_component.dart';
 import 'weapon_component.dart';
 
 class MachineGun extends WeaponComponent {
@@ -47,9 +48,10 @@ class MachineGun extends WeaponComponent {
   }
 
   void bulletExplosion(GameComponent enemy) {
-    enemy.add(ExplosionComponent(
-        position: enemy.size / 2, size: setting.explosionSize)
-      ..animation = SpriteAnimation.spriteList(setting.explosionSprites,
-          stepTime: 0.06, loop: false));
+    enemy.add(
+      ExplosionComponent(
+        position: enemy.size / 2,
+      ),
+    );
   }
 }

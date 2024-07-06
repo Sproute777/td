@@ -118,7 +118,6 @@ class WeaponSetting {
   late final Sprite tower;
   late final List<Sprite?> barrel = List.filled(3, null);
   late final Sprite bullet;
-  late final SpriteSheet explosion;
   late final Vector2 explosionSize;
   late final List<Sprite> explosionSprites;
 
@@ -146,16 +145,6 @@ class WeaponSetting {
         // Sprite(await images.load('weapon/${weaponParam['bulletImg']}.png'));
         Sprite(await images.load('weapon/${dto.bulletImg}.png'));
   }
-
-  void createExpolosionAnimation(List<Vector2> frameLocation, double stepTime) {
-    final List<Sprite> sprites = [];
-    for (final v in frameLocation) {
-      sprites.add(explosion.getSprite(v.x.toInt(), v.y.toInt()));
-    }
-    explosionSprites = sprites;
-    // explosionAnimation =
-    //     SpriteAnimation.spriteList(sprites, stepTime: stepTime, loop: false);
-  }
 }
 
 Future<String> loadAsset(String assetFileName) {
@@ -169,45 +158,21 @@ class WeaponSettingV1 {
     final images = Images();
     final Sprite weaponTower = Sprite(await images.load('weapon/Tower.png'));
     final double tileSize = gameSetting.mapTileSize.length;
-    List<Vector2> expFrame = [];
 
-    WeaponSetting w = WeaponSetting.empty()
-      ..explosion = SpriteSheet.fromColumnsAndRows(
-        image: await images.load('weapon/explosion1.png'),
-        columns: 8,
-        rows: 8,
-      );
+    WeaponSetting w = WeaponSetting.empty();
     w.fill(WeaponSettings.list[0], tileSize, weaponTower, images);
 
-    expFrame = [];
-    expFrame = List<Vector2>.generate(8, (i) => Vector2(i % 8, 4));
-    w.createExpolosionAnimation(expFrame, 1.5);
     weapon.add(w);
 
-    w = WeaponSetting.empty()
-      ..explosion = SpriteSheet.fromColumnsAndRows(
-        image: await images.load('weapon/explosion2.png'),
-        columns: 6,
-        rows: 1,
-      );
+    w = WeaponSetting.empty();
     w.fill(WeaponSettings.list[1], tileSize, weaponTower, images);
 
-    expFrame = [];
-    expFrame = List<Vector2>.generate(6, (i) => Vector2(0, i % 6));
-    w.createExpolosionAnimation(expFrame, 0.05);
     weapon.add(w);
 
-    w = WeaponSetting.empty()
-      ..explosion = SpriteSheet.fromColumnsAndRows(
-        image: await images.load('weapon/explosion3.png'),
-        columns: 5,
-        rows: 3,
-      );
+    w = WeaponSetting.empty();
+
     w.fill(WeaponSettings.list[2], tileSize, weaponTower, images);
 
-    expFrame = [];
-    expFrame = List<Vector2>.generate(6, (i) => Vector2(i / 2, (i % 2) * 3));
-    w.createExpolosionAnimation(expFrame, 0.1);
     weapon.add(w);
   }
 }
