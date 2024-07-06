@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
-import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 
 import '../../game_controller/game_event.dart';
@@ -14,7 +13,6 @@ import '../enemy/enemy_component.dart';
 import 'cannon.dart';
 import 'machine_gun.dart';
 import 'missile.dart';
-import 'weapon_buttons_component.dart';
 
 class SmartRotateEffect extends RotateEffect {
   VoidCallback? onComplete;

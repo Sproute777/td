@@ -6,6 +6,7 @@ import 'base/scanable.dart';
 import 'enemy/enemy_component.dart';
 import 'weapon/bullet_component.dart';
 import 'weapon/cannon.dart';
+import 'weapon/expolotion_component.dart';
 import 'weapon/weapon_component.dart';
 import 'game_main.dart';
 

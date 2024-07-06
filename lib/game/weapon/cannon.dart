@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
+
+import '../../settings/weapon_settings.dart';
 import '../base/game_component.dart';
 import '../game_setting.dart';
-import '../../settings/weapon_settings.dart';
 import 'bullet_component.dart';
+import 'expolotion_component.dart';
 import 'weapon_component.dart';
 
 class Cannon extends WeaponComponent {
@@ -46,8 +48,7 @@ class Cannon extends WeaponComponent {
 
   void bulletExplosion(GameComponent enemy) {
     enemy.add(ExplosionComponent(
-        position: enemy.size / 2, size: setting.explosionSize)
-      ..animation = SpriteAnimation.spriteList(setting.explosionSprites,
-          stepTime: 0.06, loop: false));
+      position: enemy.size / 2,
+    ));
   }
 }
