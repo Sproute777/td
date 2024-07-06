@@ -17,10 +17,11 @@ class GameInstruction {
         controller.gameRef.pauseEngine();
       case WeaponBuildingGameEvent(:final component):
         debugPrint('WEAPON BUILDING');
-        WeaponViewWidget.hide();
+        // hide
+        controller.repository.setSelectedWeapon(null);
         // controller.gameRef.read<InventoryBloc>().add();
-        final weapon = WeaponComponent.create(component.position,
-            controller.repository.selectedTypeNotifier.value);
+        final weapon = WeaponComponent.create(
+            component.position, controller.repository.weaponTypeNotifier.value);
         controller.add(weapon);
         controller.buildingWeapon?.removeFromParent();
         controller.buildingWeapon = weapon;
@@ -30,12 +31,20 @@ class GameInstruction {
                 .isBlockPath(weapon.position));
       case WeaponSelectedGameEvent():
         debugPrint('WEAPON SELECTED');
-        WeaponViewWidget.hide();
+        // hide
+        controller.repository.setSelectedWeapon(null);
+
+        // WeaponViewWidget.hide();
         // controller.gameRef.weaponFactory.select(source as SingleWeaponView);
         if (controller.buildingWeapon != null) {
           controller.send(
               GameEvent.weaponBuilding(component: controller.buildingWeapon!));
         }
+      case WeaponUnSelectedGameEvent():
+        debugPrint('WEAPON UNSELECTED');
+        // hide
+        controller.repository.setSelectedWeapon(null);
+
       case WeaponBuildDoneGameEvent(:final weapon):
         debugPrint('WEAPON BUILDING DONE');
         // controller.buildingWeapon.buildDone = true;
@@ -45,10 +54,16 @@ class GameInstruction {
         controller.processEnemySmartMove();
       case WeaponBlockedGameEvent():
         debugPrint('WEAPON BLOCKED');
-      case WeaponDestroyedGameEvent(:final weapon):
+      case WeaponDestroyedGameEvent():
         debugPrint('WEAPON DESTROYED');
-        WeaponViewWidget.hide();
+        // hide
+        final weapon = controller.repository.selectedWeaponSubject.value;
+        if (weapon == null) return;
+        debugPrint('WEAPON DESTROYED 2');
+        weapon.removeFromParent();
         controller.onDestroy(weapon);
+        controller.repository.setSelectedWeapon(null);
+
         controller.gameRef.mapController.removeBarrier(weapon.position);
         controller.processEnemySmartMove();
       case EnemySpawnGameEvent():
@@ -68,7 +83,11 @@ class GameInstruction {
 
       case WeaponShowActionGameEvent(:final weapon):
         debugPrint('WEAPON SHOW ACTION');
-        WeaponViewWidget.show(weapon);
+        weapon.gameRef.camera.moveTo(weapon.position);
+        controller.repository.setSelectedWeapon(weapon);
+        controller.gameRef.add(WeaponRowButtonsComponent(
+          pos: weapon.absolutePosition,
+        ));
       default:
     }
   }

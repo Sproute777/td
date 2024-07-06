@@ -3,21 +3,22 @@ import 'dart:math';
 
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
+import 'package:flame/layout.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 
-import '../base/game_component.dart';
-import '../base/radar.dart';
-import '../base/scanable.dart';
-import '../enemy/enemy_component.dart';
-import '../enemy/enemy_factory.dart';
+import '../game/base/game_component.dart';
+import '../game/base/radar.dart';
+import '../game/base/scanable.dart';
+import '../game/enemy/enemy_component.dart';
+import '../game/enemy/enemy_factory.dart';
 import '../game/game_setting.dart';
-import '../neutual/neutual_component.dart';
-import '../ui/components/weaponview_widget.dart';
-import '../util/priority_layer.dart';
-import '../weapon/weapon_component.dart';
+import '../game/neutual/neutual_component.dart';
+import '../game/util/priority_layer.dart';
+import '../game/weapon/weapon_buttons_component.dart';
+import '../game/weapon/weapon_component.dart';
+import 'domain/game_repository.dart';
 import 'game_event.dart';
-import 'game_repository.dart';
 
 part 'controller_process.dart';
 

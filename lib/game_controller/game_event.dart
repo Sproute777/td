@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../base/game_component.dart';
-import '../weapon/weapon_component.dart';
+import '../game/base/game_component.dart';
+import '../game/weapon/weapon_component.dart';
 
 part 'game_event.freezed.dart';
 
@@ -15,10 +15,10 @@ sealed class GameEvent with _$GameEvent {
   const factory GameEvent.weaponBuilding({required GameComponent component}) =
       WeaponBuildingGameEvent;
   const factory GameEvent.weaponSelected() = WeaponSelectedGameEvent;
+  const factory GameEvent.weaponUnSelected() = WeaponUnSelectedGameEvent;
   const factory GameEvent.weaponBuildDone({required WeaponComponent weapon}) =
       WeaponBuildDoneGameEvent;
-  const factory GameEvent.weaponDestroyed({required WeaponComponent weapon}) =
-      WeaponDestroyedGameEvent;
+  const factory GameEvent.weaponDestroyed() = WeaponDestroyedGameEvent;
   const factory GameEvent.weaponBlocked() = WeaponBlockedGameEvent;
   const factory GameEvent.weaponShowAction({required WeaponComponent weapon}) =
       WeaponShowActionGameEvent;

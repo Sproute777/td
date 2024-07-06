@@ -16,6 +16,9 @@ class $AssetsImagesGen {
   AssetGenImage get blackhole =>
       const AssetGenImage('assets/images/blackhole.png');
 
+  /// File path: assets/images/buttons.png
+  AssetGenImage get buttons => const AssetGenImage('assets/images/buttons.png');
+
   /// File path: assets/images/destroy.png
   AssetGenImage get destroy => const AssetGenImage('assets/images/destroy.png');
 
@@ -45,7 +48,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [blackhole, destroy, destroy2, diagArrow, diaglog, whitehole];
+      [blackhole, buttons, destroy, destroy2, diagArrow, diaglog, whitehole];
 }
 
 class $AssetsImagesEnemyGen {
