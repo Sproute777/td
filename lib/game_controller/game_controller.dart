@@ -13,7 +13,7 @@ import '../game/enemy/enemy_factory.dart';
 import '../game/game_main.dart';
 import '../game/game_setting.dart';
 import '../game/neutual/neutual_component.dart';
-import '../game/util/priority_layer.dart';
+import '../game/util/priority.dart';
 import '../game/weapon/weapon_buttons_component.dart';
 import '../game/weapon/weapon_component.dart';
 import 'domain/game_repository.dart';
@@ -23,11 +23,12 @@ part 'controller_process.dart';
 
 enum GameStatus { paused, play }
 
-class GameController extends Component with HasGameRef<GameMain> {
+class GameController extends PositionComponent with HasGameRef<GameMain> {
   WeaponComponent? buildingWeapon;
   late final GameRepository repository;
   EnemyFactory enemyFactory = EnemyFactory();
-  GameController() : super(priority: LayerPriority.getAbovePriority(1)) {
+  GameController()
+      : super(priority: Priority.controller, position: Vector2.zero()) {
     repository = GetIt.I.get<GameRepository>();
 
     add(enemyFactory);

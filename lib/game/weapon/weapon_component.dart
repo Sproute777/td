@@ -1,9 +1,15 @@
+import 'dart:async';
+import 'dart:js_interop';
 import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
+import 'package:flame/input.dart';
+import 'package:flame/layout.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../game_controller/game_event.dart';
 import '../../settings/weapon_settings.dart';
@@ -11,9 +17,11 @@ import '../base/game_component.dart';
 import '../base/radar.dart';
 import '../enemy/enemy_component.dart';
 import '../game_main.dart';
+import '../util/priority.dart';
 import 'cannon.dart';
 import 'machine_gun.dart';
 import 'missile.dart';
+import 'weapon_buttons_component.dart';
 
 class SmartRotateEffect extends RotateEffect {
   final VoidCallback? _onComplete;
@@ -65,7 +73,7 @@ class TurretComponent extends PositionComponent with HasPaint {
       : super(
             position: position,
             size: size,
-            priority: 21,
+            priority: Priority.turret,
             anchor: Anchor.center);
   double rotateSpeed = 6.0; /* radians/second */
   double rotateTo(double radians, VoidCallback onComplete) {
@@ -102,7 +110,12 @@ class TurretComponent extends PositionComponent with HasPaint {
 }
 
 class WeaponComponent extends PositionComponent
-    with TapCallbacks, Radar<EnemyComponent>, HasPaint, HasGameRef<GameMain> {
+    with
+        TapCallbacks,
+        Radar<EnemyComponent>,
+        HasPaint,
+        HasGameRef<GameMain>,
+        MixinWeaponButtons {
   late WeaponType weaponType;
   late double range;
   late double fireInterval;
@@ -115,7 +128,7 @@ class WeaponComponent extends PositionComponent
   }) : super(
           position: position,
           size: size,
-          priority: 20,
+          priority: Priority.weapon,
           anchor: Anchor.topLeft,
         ) {
     turret = TurretComponent(position: size / 2, size: size);
@@ -212,7 +225,6 @@ class WeaponComponent extends PositionComponent
   @override
   bool onTapDown(TapDownEvent event) {
     if (!buildDone) {
-      debugPrint("NOT BUILD DONE");
       if (buildAllowed) {
         gameRef.gameController.send(GameEvent.weaponBuildDone(weapon: this));
 
