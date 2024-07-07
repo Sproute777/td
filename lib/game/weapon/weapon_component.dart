@@ -10,14 +10,19 @@ import '../../settings/weapon_settings.dart';
 import '../base/game_component.dart';
 import '../base/radar.dart';
 import '../enemy/enemy_component.dart';
+import '../game_main.dart';
 import 'cannon.dart';
 import 'machine_gun.dart';
 import 'missile.dart';
 
 class SmartRotateEffect extends RotateEffect {
-  VoidCallback? onComplete;
-  SmartRotateEffect.to(double angle, EffectController controller)
-      : _destinationAngle = angle,
+  final VoidCallback? _onComplete;
+  SmartRotateEffect.to(
+    double angle,
+    EffectController controller,
+    void Function()? onComplete,
+  )   : _destinationAngle = angle,
+        _onComplete = onComplete,
         super.by(0, controller);
 
   double _angle = 0;
@@ -43,7 +48,7 @@ class SmartRotateEffect extends RotateEffect {
     if (target.angle > (pi * 2)) {
       target.angle -= pi * 2;
     }
-    onComplete?.call();
+    _onComplete?.call();
   }
 
   @override
@@ -54,9 +59,14 @@ class SmartRotateEffect extends RotateEffect {
   }
 }
 
-class BarrelComponent extends GameComponent {
-  BarrelComponent({required Vector2 position, required Vector2 size})
-      : super(position: position, size: size, priority: 21);
+class TurretComponent extends PositionComponent with HasPaint {
+  Sprite? sprite;
+  TurretComponent({required Vector2 position, required Vector2 size})
+      : super(
+            position: position,
+            size: size,
+            priority: 21,
+            anchor: Anchor.center);
   double rotateSpeed = 6.0; /* radians/second */
   double rotateTo(double radians, VoidCallback onComplete) {
     final double duration = (radians - angle).abs() / rotateSpeed;
@@ -72,27 +82,44 @@ class BarrelComponent extends GameComponent {
           curve: Curves.easeOut,
           // infinite: false,
         ),
-      )..onComplete = onComplete,
+        onComplete,
+      ),
     );
 
     return duration;
   }
+
+  @override
+  void render(Canvas canvas) {
+    sprite?.render(
+      canvas,
+      size: size,
+      overridePaint: paint,
+    );
+
+    super.render(canvas);
+  }
 }
 
-class WeaponComponent extends GameComponent
-    with TapCallbacks, Radar<EnemyComponent> {
+class WeaponComponent extends PositionComponent
+    with TapCallbacks, Radar<EnemyComponent>, HasPaint, HasGameRef<GameMain> {
   late WeaponType weaponType;
   late double range;
   late double fireInterval;
-  late BarrelComponent barrel;
-
+  late TurretComponent turret;
+  Sprite? sprite;
   WeaponComponent({
     required Vector2 position,
     required Vector2 size,
     // double life = 100,
-  }) : super(position: position, size: size, priority: 20) {
-    barrel = BarrelComponent(position: size / 2, size: size);
-    add(barrel);
+  }) : super(
+          position: position,
+          size: size,
+          priority: 20,
+          anchor: Anchor.topLeft,
+        ) {
+    turret = TurretComponent(position: size / 2, size: size);
+    add(turret);
 
     onBuilding();
   }
@@ -105,8 +132,8 @@ class WeaponComponent extends GameComponent
 
   void fire(Vector2 target) {
     _targetEnemy = target;
-    final double radians = angleNearTo(target);
-    final double rotatePeriod = barrel.rotateTo(radians, _fireBullet);
+    final double radians = position.angleNearTo(target);
+    final double rotatePeriod = turret.rotateTo(radians, _fireBullet);
     coolDown(rotatePeriod + fireInterval);
   }
 
@@ -148,7 +175,7 @@ class WeaponComponent extends GameComponent
     radarCollisionDepth = 0;
   }
 
-  void onEnemyBlock(GameComponent target) {
+  void onEnemyBlock(PositionComponent target) {
     blockEnemy = true;
   }
 
@@ -156,7 +183,7 @@ class WeaponComponent extends GameComponent
     blockEnemy = false;
   }
 
-  void onEnemyAttack(GameComponent target) {
+  void onEnemyAttack(PositionComponent target) {
     fire(target.position);
   }
 
@@ -173,6 +200,11 @@ class WeaponComponent extends GameComponent
             ..style = PaintingStyle.stroke
             ..color = Colors.green);
     }
+    sprite?.render(
+      canvas,
+      size: size,
+      overridePaint: paint,
+    );
 
     super.render(canvas);
   }
@@ -180,6 +212,7 @@ class WeaponComponent extends GameComponent
   @override
   bool onTapDown(TapDownEvent event) {
     if (!buildDone) {
+      debugPrint("NOT BUILD DONE");
       if (buildAllowed) {
         gameRef.gameController.send(GameEvent.weaponBuildDone(weapon: this));
 

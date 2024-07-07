@@ -2,15 +2,13 @@ import 'dart:math' as math;
 
 import 'package:flame/components.dart';
 
-import '../base/game_component.dart';
 import '../../game_controller/game_event.dart';
+import '../game_main.dart';
 import 'enemy_component.dart';
 import 'enmey_v1.dart';
 
-class EnemyFactory extends GameComponent {
-  EnemyFactory() : super(position: Vector2.zero(), size: Vector2.zero()) {
-    active = false;
-  }
+class EnemyFactory extends Component with HasGameRef<GameMain> {
+  EnemyFactory();
 
   EnemyComponent spawnEnemey(Vector2 anchor, EnemyType type) {
     late EnemyComponent enemy;
@@ -25,7 +23,7 @@ class EnemyFactory extends GameComponent {
     enemy = spawnEnemey(initPosition, type);
     gameRef.gameController.add(enemy);
     enpowerEnemy(enemy);
-    enemy.moveSmart(gameRef.gameController.gateEnd.position);
+    enemy.moveSmart(enemy.position, gameRef.gameController.gateEnd.position);
     return enemy;
   }
 

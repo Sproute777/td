@@ -1,3 +1,4 @@
+import 'package:flame/components.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../game/base/game_component.dart';
@@ -12,8 +13,8 @@ sealed class GameEvent with _$GameEvent {
   const factory GameEvent.started() = StartedGameEvent;
   const factory GameEvent.paused() = PausedGameEvent;
   const factory GameEvent.resumed() = ResumedGameEvent;
-  const factory GameEvent.weaponBuilding({required GameComponent component}) =
-      WeaponBuildingGameEvent;
+  const factory GameEvent.weaponBuilding(
+      {required PositionComponent component}) = WeaponBuildingGameEvent;
   const factory GameEvent.weaponSelected() = WeaponSelectedGameEvent;
   const factory GameEvent.weaponUnSelected() = WeaponUnSelectedGameEvent;
   const factory GameEvent.weaponBuildDone({required WeaponComponent weapon}) =

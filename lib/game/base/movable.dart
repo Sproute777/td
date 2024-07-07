@@ -4,7 +4,7 @@ import 'package:flame/components.dart';
 
 import 'game_component.dart';
 
-mixin Movable on GameComponent {
+mixin Movable on PositionComponent {
   double speed = 0;
   Function? onMoveFinish;
   bool _finish = true;
@@ -27,7 +27,7 @@ mixin Movable on GameComponent {
     _movedLength = 0;
     _finish = false;
     onMoveFinish = onFinish;
-    angle = angleNearTo(to);
+    angle = position.angleNearTo(to);
   }
 
   void updateMovable(double t) {

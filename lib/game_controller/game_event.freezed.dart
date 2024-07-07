@@ -98,7 +98,7 @@ class _$WeaponBuildingGameEventImpl extends WeaponBuildingGameEvent {
   const _$WeaponBuildingGameEventImpl({required this.component}) : super._();
 
   @override
-  final GameComponent component;
+  final PositionComponent component;
 
   @override
   String toString() {
@@ -120,10 +120,11 @@ class _$WeaponBuildingGameEventImpl extends WeaponBuildingGameEvent {
 
 abstract class WeaponBuildingGameEvent extends GameEvent {
   const factory WeaponBuildingGameEvent(
-      {required final GameComponent component}) = _$WeaponBuildingGameEventImpl;
+          {required final PositionComponent component}) =
+      _$WeaponBuildingGameEventImpl;
   const WeaponBuildingGameEvent._() : super._();
 
-  GameComponent get component;
+  PositionComponent get component;
 }
 
 /// @nodoc

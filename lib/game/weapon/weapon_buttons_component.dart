@@ -6,12 +6,11 @@ import 'package:flame/input.dart';
 import 'package:flame/layout.dart';
 import 'package:flutter/material.dart';
 import '../../game_controller/game_event.dart';
-import '../base/game_component.dart';
 import '../game_main.dart';
 
 enum ButtonState { unpressed, pressed }
 
-class WeaponRowButtonsComponent extends GameComponent {
+class WeaponRowButtonsComponent extends Component with HasGameRef<GameMain> {
   WeaponRowButtonsComponent({
     required this.pos,
   });

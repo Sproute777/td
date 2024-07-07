@@ -1,12 +1,13 @@
 import 'package:flame/components.dart';
+import '../enemy/enemy_component.dart';
 import 'game_component.dart';
 
-mixin Radar<T> on GameComponent {
+mixin Radar<T> on PositionComponent {
   bool _radarOn = false;
   bool radarScanBest = false;
   double radarRange = 0;
   double radarCollisionDepth = 0.1;
-  void Function(GameComponent)? radarScanAlert;
+  void Function(PositionComponent)? radarScanAlert;
   void Function()? radarScanNothing;
 
   set radarOn(bool e) {
@@ -19,10 +20,10 @@ mixin Radar<T> on GameComponent {
     if (radarOn) {
       _bestDistance = 100000;
       final Iterable<Component> targets0 = targets
-          .where((e) => (e is T) && ((e as GameComponent).active))
+          .where((e) => (e is T) && ((e as EnemyComponent).active))
           .cast();
       targets0
-          .takeWhile((value) => _collisionTest(value as GameComponent))
+          .takeWhile((value) => _collisionTest(value as PositionComponent))
           .forEach((element) {});
 
       if (_bestTarget != null) {
@@ -35,9 +36,9 @@ mixin Radar<T> on GameComponent {
   }
 
   double _bestDistance = 100000;
-  GameComponent? _bestTarget;
+  PositionComponent? _bestTarget;
 
-  bool _collisionTest(GameComponent target) {
+  bool _collisionTest(PositionComponent target) {
     final Vector2 targetPosition = target.position;
     final double targetCollisionSize = (target.size.x + target.size.y) / 4;
     double collisionRange = targetCollisionSize + radarRange;
@@ -58,7 +59,7 @@ mixin Radar<T> on GameComponent {
     return true;
   }
 
-  bool collision(GameComponent target) {
+  bool collision(PositionComponent target) {
     final Vector2 targetPosition = target.position;
     final double targetCollisionSize = (target.size.x + target.size.y) / 4;
     double collisionRange = targetCollisionSize + radarRange;

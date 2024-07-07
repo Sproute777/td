@@ -20,16 +20,16 @@ class Cannon extends WeaponComponent {
     range = setting.range;
     fireInterval = setting.fireInterval;
     sprite = setting.tower;
-    barrel.sprite = setting.barrel[0];
-    barrel.size = size;
-    barrel.rotateSpeed = setting.rotateSpeed;
+    turret.sprite = setting.barrel[0];
+    turret.size = size;
+    turret.rotateSpeed = setting.rotateSpeed;
   }
 
   @override
   void fireBullet(Vector2 target) {
     final BulletComponent bullet =
         BulletComponent(position: _bulletPosition(), size: setting.bulletSize)
-          ..angle = barrel.angle
+          ..angle = turret.angle
           ..damage = setting.damage
           ..sprite = setting.bullet
           ..speed = setting.bulletSpeed
@@ -40,13 +40,13 @@ class Cannon extends WeaponComponent {
 
   Vector2 _bulletPosition() {
     // double bulletR = (setting.bulletSize.x + setting.bulletSize.y) / 4;
-    Vector2 localPosition =
-        Vector2(radius * sin(barrel.angle), -radius * cos(barrel.angle));
+    Vector2 localPosition = Vector2(
+        size.radius * sin(turret.angle), -size.radius * cos(turret.angle));
     localPosition += size / 2;
     return positionOf(localPosition);
   }
 
-  void bulletExplosion(GameComponent enemy) {
+  void bulletExplosion(PositionComponent enemy) {
     enemy.add(ExplosionComponent(
       position: enemy.size / 2,
     ));

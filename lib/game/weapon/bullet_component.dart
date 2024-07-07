@@ -1,17 +1,17 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flame/components.dart';
-import '../base/game_component.dart';
 import '../base/movable.dart';
 import '../base/radar.dart';
 import '../enemy/enemy_component.dart';
-import '../game_main.dart';
 
-class BulletComponent extends GameComponent
-    with Movable, Radar<EnemyComponent> {
+class BulletComponent extends PositionComponent
+    with Movable, Radar<EnemyComponent>, HasPaint {
   // double range = 0;
   Function? onExplosion;
   double damage = 0;
+  Sprite? sprite;
   BulletComponent({
     required Vector2 position,
     required Vector2 size,
@@ -30,13 +30,11 @@ class BulletComponent extends GameComponent
 
   @override
   void update(double dt) {
-    if (active) {
-      updateMovable(dt);
-    }
+    updateMovable(dt);
     super.update(dt);
   }
 
-  void onHitEnemy(GameComponent enemy) {
+  void onHitEnemy(PositionComponent enemy) {
     radarOn = false;
     (enemy as EnemyComponent).receiveDamage(damage);
     removeFromParent();
@@ -46,6 +44,17 @@ class BulletComponent extends GameComponent
   void outOfRange() {
     radarOn = false;
     removeFromParent();
+  }
+
+  @override
+  void render(Canvas canvas) {
+    sprite?.render(
+      canvas,
+      size: size,
+      overridePaint: paint,
+    );
+
+    super.render(canvas);
   }
 }
 

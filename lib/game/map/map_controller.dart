@@ -1,18 +1,18 @@
+import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 
 import '../base/game_component.dart';
+import '../game_main.dart';
 import 'astarmap_minxin.dart';
 import 'map_tile_component.dart';
 
-class MapController extends GameComponent with AstarMapMixin {
+class MapController extends Component with AstarMapMixin, HasGameRef<GameMain> {
   late Vector2 tileSize;
   late Vector2 mapGrid;
 
   MapController({
     required this.tileSize,
     required this.mapGrid,
-    super.position,
-    super.size,
   });
 
   @override
