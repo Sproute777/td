@@ -24,7 +24,7 @@ Controls:
  
  
 # sound explosions 
-```
+================================================================
 © Mattis Flettner (mattflat), 2021
 
 License: CC BY-ND 3.0 - https://creativecommons.org/licenses/by-nd/3.0/
@@ -38,4 +38,4 @@ Feel free to use them in your next game!
 
 
 Feedback is always welcome: mattflat@mail.de
-```
+================================================================
