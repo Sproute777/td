@@ -7,14 +7,16 @@ import '../base/life_indicator.dart';
 import '../base/movable.dart';
 import '../base/scanable.dart';
 import '../../game_controller/game_event.dart';
+import '../game_main.dart';
 
 enum EnemyType { enemyA, enemyB, enemyC, enemyD }
 
-class EnemyComponent extends GameComponent
-    with Scanable, Movable, EnemySmartMove, LifeIndicator {
+class EnemyComponent extends PositionComponent
+    with Scanable, Movable, LifeIndicator, HasGameRef<GameMain> {
   double _maxLife = 0;
   double life = 0;
   int mineValue = 5;
+  bool active = true;
   bool dead = false;
   late EnemyType enemyType;
   EnemyComponent({
@@ -50,7 +52,27 @@ class EnemyComponent extends GameComponent
   @override
   void render(canvas) {
     super.render(canvas);
-    renderLifIndicator(canvas);
+    renderLifIndicator(canvas, size);
+  }
+
+  final path = <Point<int>>[];
+  Future<void> moveSmart(Vector2 from, Vector2 to) async {
+    final p = await gameRef.mapController.findPath(from, to);
+    path.clear();
+    path.addAll(p);
+    pathNextMove();
+  }
+
+  void pathNextMove() {
+    if (path.isNotEmpty) {
+      final next = path.removeLast();
+      (this as Movable).moveTo(moveRadomPosition(next), pathNextMove);
+    }
+  }
+
+  Vector2 moveRadomPosition(Point<int> node) {
+    final Vector2 mapPoint = gameRef.mapController.nodeToPosition(node);
+    return mapPoint + (gameRef.mapController.tileSize / 2);
   }
 
   @override
@@ -74,43 +96,10 @@ class EnemyComponent extends GameComponent
   void onKilled() {
     active = false;
     gameRef.gameController.send(GameEvent.enemyKilled(mineValue: mineValue));
-    // gameRef.addMinerals(mineValue);
-    // gameRef.gamebarView.mineCollected += mineValue;
     removeFromParent();
   }
 }
 
-mixin EnemySmartMove on GameComponent {
+mixin EnemySmartMove on HasGameRef<GameMain> {
   /*Enemy move path controller */
-  final path = <Point<int>>[];
-  Future<void> moveSmart(Vector2 to) async {
-    final p = await gameRef.mapController.findPath(position, to);
-    path.clear();
-    path.addAll(p);
-    pathNextMove();
-  }
-
-  void pathNextMove() {
-    if (path.isNotEmpty) {
-      final next = path.removeLast();
-      (this as Movable).moveTo(moveRadomPosition(next), pathNextMove);
-    }
-  }
-
-  Vector2 moveRadomPosition(Point<int> node) {
-    // if (node.next == null) {
-    //   /*target goto center*/
-    final Vector2 mapPoint = gameRef.mapController.nodeToPosition(node);
-    return mapPoint + (gameRef.mapController.tileSize / 2);
-    // } else {
-
-    // Vector2 lefttop = gameRef.mapController.nodeToPosition(node);
-    // final randomArea = Vector2(gameRef.mapController.tileSize.x - size.x,
-    //     gameRef.mapController.tileSize.y - size.y);
-    // lefttop = lefttop + Vector2(size.x / 2, size.y / 2);
-    // final rndx = Random().nextDouble();
-    // final rndy = Random().nextDouble();
-    // return lefttop + Vector2(randomArea.x * rndx, randomArea.y * rndy);
-    // }
-  }
 }

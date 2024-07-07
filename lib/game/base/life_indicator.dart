@@ -1,12 +1,11 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'game_component.dart';
 
-mixin LifeIndicator on GameComponent {
+mixin LifeIndicator on Component {
   double maxLife = 0;
   double life = 0;
 
-  void renderLifIndicator(Canvas c) {
+  void renderLifIndicator(Canvas c, Vector2 size) {
     if (maxLife == 0) {
       return;
     }

@@ -3,15 +3,14 @@ import 'dart:math';
 
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
-import 'package:flame/layout.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 
-import '../game/base/game_component.dart';
 import '../game/base/radar.dart';
 import '../game/base/scanable.dart';
 import '../game/enemy/enemy_component.dart';
 import '../game/enemy/enemy_factory.dart';
+import '../game/game_main.dart';
 import '../game/game_setting.dart';
 import '../game/neutual/neutual_component.dart';
 import '../game/util/priority_layer.dart';
@@ -24,14 +23,11 @@ part 'controller_process.dart';
 
 enum GameStatus { paused, play }
 
-class GameController extends GameComponent {
+class GameController extends Component with HasGameRef<GameMain> {
   WeaponComponent? buildingWeapon;
   late final GameRepository repository;
   EnemyFactory enemyFactory = EnemyFactory();
-  GameController({
-    super.position,
-    super.size,
-  }) : super(priority: LayerPriority.getAbovePriority(1)) {
+  GameController() : super(priority: LayerPriority.getAbovePriority(1)) {
     repository = GetIt.I.get<GameRepository>();
 
     add(enemyFactory);
@@ -67,7 +63,7 @@ class GameController extends GameComponent {
     final radars = children.where((r) => r is Radar && r.radarOn).cast<Radar>();
     final scanbles = children
         .where((r) => r is Scanable && r.scanable)
-        .cast<GameComponent>();
+        .cast<PositionComponent>();
     for (final element in radars) {
       element.radarScan(scanbles);
     }
@@ -77,7 +73,7 @@ class GameController extends GameComponent {
     final Iterable<Component> enemies =
         children.where((e) => e is EnemyComponent && e.active).cast();
     for (final element in enemies) {
-      (element as EnemyComponent).moveSmart(gateEnd.position);
+      (element as EnemyComponent).moveSmart(element.position, gateEnd.position);
     }
   }
 

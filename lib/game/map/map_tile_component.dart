@@ -1,12 +1,13 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
-import '../base/game_component.dart';
 import '../../game_controller/game_event.dart';
+import '../game_main.dart';
 
-class MapTileComponent extends GameComponent with TapCallbacks {
+class MapTileComponent extends PositionComponent
+    with TapCallbacks, HasGameRef<GameMain> {
   // MapTileBuildStatus buildStatus = MapTileBuildStatus.Empty;
-  GameComponent? refComponent;
+  // GameComponent? refComponent;
   bool ableToBuild = true;
   Sprite? background;
 

@@ -1,5 +1,5 @@
-import 'game_component.dart';
+import 'package:flame/components.dart';
 
-mixin Scanable on GameComponent {
+mixin Scanable on Component {
   bool scanable = true;
 }

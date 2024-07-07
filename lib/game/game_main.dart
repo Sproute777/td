@@ -44,14 +44,10 @@ class GameMain extends FlameGame with TapCallbacks {
     await setting.neutual.load();
 
     mapController = MapController(
-        tileSize: setting.mapTileSize,
-        mapGrid: setting.mapGrid,
-        position: setting.mapPosition,
-        size: setting.mapSize);
+      tileSize: setting.mapTileSize,
+      mapGrid: setting.mapGrid,
+    );
     /*game controller should have same range as map */
-    gameController = gameController
-      ..position = setting.mapPosition
-      ..size = setting.mapSize;
     await setting.weapons.load();
 
     add(mapController);
