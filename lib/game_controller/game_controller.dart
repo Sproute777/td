@@ -14,7 +14,6 @@ import '../game/game_main.dart';
 import '../game/game_setting.dart';
 import '../game/neutual/neutual_component.dart';
 import '../game/util/priority.dart';
-import '../game/weapon/weapon_buttons_component.dart';
 import '../game/weapon/weapon_component.dart';
 import 'domain/game_repository.dart';
 import 'game_event.dart';

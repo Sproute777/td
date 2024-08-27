@@ -9,7 +9,7 @@ abstract class Priority {
   static const int turret = 29;
   // ignore: constant_identifier_names
   static const int components = 30;
-  static const int overlay = 35;
+  static const int overlay = 100;
 
   // static int getComponentPriority(int bottom) {
   //   return _COMPONENTS + bottom;

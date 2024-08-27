@@ -6,17 +6,17 @@ import '../../settings/weapon_settings.dart';
 import '../base/game_component.dart';
 import '../game_setting.dart';
 import 'bullet_component.dart';
-import 'expolotion_component.dart';
+import 'explosion_component.dart';
 import 'weapon_component.dart';
 
 class Missile extends WeaponComponent {
   static final WeaponSetting setting =
-      GameSetting().weapons.weapon[WeaponType.missele.index];
+      GameSetting().weapons.weapon[WeaponType.missile.index];
   Missile({
     required super.position,
   }) : super(size: setting.size) {
     size = setting.size;
-    weaponType = WeaponType.missele;
+    weaponType = WeaponType.missile;
     range = setting.range;
     fireInterval = setting.fireInterval;
     sprite = setting.tower;

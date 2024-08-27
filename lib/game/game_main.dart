@@ -37,7 +37,6 @@ class GameMain extends FlameGame with TapCallbacks {
 
   @override
   Future<void> onLoad() async {
-    final int timeRecord = currentTimeMillis();
     await super.onLoad();
 
     // await setting.onLoad();
@@ -61,8 +60,6 @@ class GameMain extends FlameGame with TapCallbacks {
     setting.enemies.load();
 
     loadDone = true;
-    final int d = currentTimeMillis() - timeRecord;
-    debugPrint('GameMain onLoad done takke $d');
     pauseEngine();
   }
 

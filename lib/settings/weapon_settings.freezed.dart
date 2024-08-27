@@ -31,8 +31,8 @@ mixin _$WeaponSettings {
   double get sizeY => throw _privateConstructorUsedError;
   double get bulletSizeX => throw _privateConstructorUsedError;
   double get bulletSizeY => throw _privateConstructorUsedError;
-  double get exposionSizeX => throw _privateConstructorUsedError;
-  double get exposionSizeY => throw _privateConstructorUsedError;
+  double get explosionSizeX => throw _privateConstructorUsedError;
+  double get explosionSizeY => throw _privateConstructorUsedError;
   String get barrelImg0 => throw _privateConstructorUsedError;
   String get barrelImg1 => throw _privateConstructorUsedError;
   String get barrelImg2 => throw _privateConstructorUsedError;
@@ -56,8 +56,8 @@ class _$WeaponSettingsImpl extends _WeaponSettings {
       required this.sizeY,
       required this.bulletSizeX,
       required this.bulletSizeY,
-      required this.exposionSizeX,
-      required this.exposionSizeY,
+      required this.explosionSizeX,
+      required this.explosionSizeY,
       required this.barrelImg0,
       required this.barrelImg1,
       required this.barrelImg2,
@@ -90,9 +90,9 @@ class _$WeaponSettingsImpl extends _WeaponSettings {
   @override
   final double bulletSizeY;
   @override
-  final double exposionSizeX;
+  final double explosionSizeX;
   @override
-  final double exposionSizeY;
+  final double explosionSizeY;
   @override
   final String barrelImg0;
   @override
@@ -104,7 +104,7 @@ class _$WeaponSettingsImpl extends _WeaponSettings {
 
   @override
   String toString() {
-    return 'WeaponSettings(type: $type, cost: $cost, range: $range, damage: $damage, fireInterval: $fireInterval, rotateSpeed: $rotateSpeed, bulletSpeed: $bulletSpeed, sizeX: $sizeX, sizeY: $sizeY, bulletSizeX: $bulletSizeX, bulletSizeY: $bulletSizeY, exposionSizeX: $exposionSizeX, exposionSizeY: $exposionSizeY, barrelImg0: $barrelImg0, barrelImg1: $barrelImg1, barrelImg2: $barrelImg2, bulletImg: $bulletImg)';
+    return 'WeaponSettings(type: $type, cost: $cost, range: $range, damage: $damage, fireInterval: $fireInterval, rotateSpeed: $rotateSpeed, bulletSpeed: $bulletSpeed, sizeX: $sizeX, sizeY: $sizeY, bulletSizeX: $bulletSizeX, bulletSizeY: $bulletSizeY, explosionSizeX: $explosionSizeX, explosionSizeY: $explosionSizeY, barrelImg0: $barrelImg0, barrelImg1: $barrelImg1, barrelImg2: $barrelImg2, bulletImg: $bulletImg)';
   }
 
   @override
@@ -128,10 +128,10 @@ class _$WeaponSettingsImpl extends _WeaponSettings {
                 other.bulletSizeX == bulletSizeX) &&
             (identical(other.bulletSizeY, bulletSizeY) ||
                 other.bulletSizeY == bulletSizeY) &&
-            (identical(other.exposionSizeX, exposionSizeX) ||
-                other.exposionSizeX == exposionSizeX) &&
-            (identical(other.exposionSizeY, exposionSizeY) ||
-                other.exposionSizeY == exposionSizeY) &&
+            (identical(other.explosionSizeX, explosionSizeX) ||
+                other.explosionSizeX == explosionSizeX) &&
+            (identical(other.explosionSizeY, explosionSizeY) ||
+                other.explosionSizeY == explosionSizeY) &&
             (identical(other.barrelImg0, barrelImg0) ||
                 other.barrelImg0 == barrelImg0) &&
             (identical(other.barrelImg1, barrelImg1) ||
@@ -157,8 +157,8 @@ class _$WeaponSettingsImpl extends _WeaponSettings {
       sizeY,
       bulletSizeX,
       bulletSizeY,
-      exposionSizeX,
-      exposionSizeY,
+      explosionSizeX,
+      explosionSizeY,
       barrelImg0,
       barrelImg1,
       barrelImg2,
@@ -185,8 +185,8 @@ abstract class _WeaponSettings extends WeaponSettings {
       required final double sizeY,
       required final double bulletSizeX,
       required final double bulletSizeY,
-      required final double exposionSizeX,
-      required final double exposionSizeY,
+      required final double explosionSizeX,
+      required final double explosionSizeY,
       required final String barrelImg0,
       required final String barrelImg1,
       required final String barrelImg2,
@@ -219,9 +219,9 @@ abstract class _WeaponSettings extends WeaponSettings {
   @override
   double get bulletSizeY;
   @override
-  double get exposionSizeX;
+  double get explosionSizeX;
   @override
-  double get exposionSizeY;
+  double get explosionSizeY;
   @override
   String get barrelImg0;
   @override

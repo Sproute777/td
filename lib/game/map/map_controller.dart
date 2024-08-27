@@ -2,7 +2,7 @@ import 'package:flame/components.dart';
 
 import '../game_main.dart';
 import '../util/priority.dart';
-import 'astarmap_minxin.dart';
+import 'astarmap_mixin.dart';
 import 'map_tile_component.dart';
 
 class MapController extends Component with AstarMapMixin, HasGameRef<GameMain> {

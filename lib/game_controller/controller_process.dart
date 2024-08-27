@@ -58,7 +58,9 @@ class GameInstruction {
         debugPrint('WEAPON DESTROYED');
         // hide
         final weapon = controller.repository.selectedWeaponSubject.value;
-        if (weapon == null) return;
+        if (weapon == null) {
+          return;
+        }
         debugPrint('WEAPON DESTROYED 2');
         weapon.removeFromParent();
         controller.onDestroy(weapon);
