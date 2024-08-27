@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import '../base/game_component.dart';
 import '../base/radar.dart';
 import '../enemy/enemy_component.dart';
 

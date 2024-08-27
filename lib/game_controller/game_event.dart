@@ -1,7 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../game/base/game_component.dart';
 import '../game/weapon/weapon_component.dart';
 
 part 'game_event.freezed.dart';

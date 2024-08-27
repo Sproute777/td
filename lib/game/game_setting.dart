@@ -27,22 +27,15 @@ class GameSetting {
   Vector2 mapGrid = Vector2(10, 10);
   late Vector2 mapPosition;
   late Vector2 mapSize;
-  late Vector2 viewPosition;
-  late Vector2 viewSize;
-  late Vector2 barPosition;
-  late Vector2 barSize;
   late Vector2 mapTileSize;
 
-  double cannonBulletSpeed = 400;
-  double cannonBulletDamage = 10;
-
-  Vector2 enemySizeCale = Vector2(0.5, 0.5);
+  final Vector2 _enemySizeCale = Vector2(0.5, 0.5);
   late Vector2 enemySize;
   late Vector2 enemySpawn;
   late Vector2 enemyTarget;
   double enemySpeed = 80;
 
-  late Vector2 screenSize;
+  late Vector2 _screenSize;
 
   Vector2 dotMultiple(Vector2 x, Vector2 y) {
     return Vector2(x.x * y.x, x.y * y.y);
@@ -56,16 +49,22 @@ class GameSetting {
     return dotMultiple(mapTileSize, scale);
   }
 
+  void setMapConstrainst({
+    required Vector2 screenSize,
+  }) {
+    _screenSize = screenSize;
+  }
+
   void setScreenSize(Vector2 size) {
-    screenSize = size;
+    _screenSize = size;
     optimizeMapGrid(size);
 
-    enemySize = dotMultiple(enemySizeCale, mapTileSize);
+    enemySize = dotMultiple(_enemySizeCale, mapTileSize);
     enemySpawn = Vector2(0, 0) + (mapTileSize / 2);
     enemyTarget = mapSize - (mapTileSize / 2);
 
     debugPrint(
-        'screenSize $screenSize,  mapGrid $mapGrid, mapTileSize $mapTileSize');
+        '_screenSize $_screenSize,  mapGrid $mapGrid, mapTileSize $mapTileSize');
   }
 
   void optimizeMapGrid(Vector2 size) {
@@ -74,14 +73,9 @@ class GameSetting {
     final Vector2 optSize = size / grid;
     grid = math.min(optSize.x, optSize.y);
 
-    /*Bar at top*/
-    barPosition = Vector2(size.x / 2, grid / 2);
-    barSize = Vector2(size.x, grid);
-    viewPosition = Vector2(size.x / 2, size.y - (grid / 2));
-    viewSize = Vector2(size.x, grid * 1.5);
     /*Map in the middle*/
     mapPosition = Vector2(size.x / 2, size.y / 2);
-    mapSize = Vector2(size.x - 2, size.y - barSize.y - viewSize.y - 2);
+    mapSize = Vector2(size.x - 2, size.y - 2);
     mapGrid = mapSize / grid;
     mapGrid =
         Vector2(mapGrid.x.toInt().toDouble(), mapGrid.y.toInt().toDouble());
