@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../game/game_main.dart';
-import '../game/game_test.dart';
 import '../game_controller/game_controller.dart';
 import '../inventory/inventory_bar.dart';
 import '../inventory/inventory_bloc.dart';
@@ -55,7 +54,7 @@ class _AppViewState extends State<_AppView> {
       const StageBarView(),
       Expanded(
         child: GameWidget<GameMain>(
-          game: GameTest(
+          game: GameMain(
             gameController: RepositoryProvider.of<GameController>(context),
 
             // stageBarBloc: context.read<StageBarCubit>(),

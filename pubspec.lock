@@ -37,10 +37,10 @@ packages:
     dependency: "direct main"
     description:
       name: astar_dart
-      sha256: b1a0cc6948183661b4aada7fe93de4b24261353d2dcc66d8b7523ae414635e93
+      sha256: "3efb96256cebdea85d4b0fac305db0c29c373fc2482675f1c8384609af2e0626"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.11"
+    version: "0.0.12"
   async:
     dependency: transitive
     description:

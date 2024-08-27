@@ -3,6 +3,7 @@ import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import '../../game_controller/game_event.dart';
 import '../game_main.dart';
+import '../util/priority.dart';
 
 class MapTileComponent extends PositionComponent
     with TapCallbacks, HasGameRef<GameMain> {
@@ -11,10 +12,8 @@ class MapTileComponent extends PositionComponent
   bool ableToBuild = true;
   Sprite? background;
 
-  MapTileComponent({
-    super.position,
-    super.size,
-  });
+  MapTileComponent(
+      {super.position, super.size, super.priority = Priority.controller});
 
   @override
   void render(canvas) {

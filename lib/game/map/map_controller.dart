@@ -1,8 +1,7 @@
 import 'package:flame/components.dart';
-import 'package:flame/extensions.dart';
 
-import '../base/game_component.dart';
 import '../game_main.dart';
+import '../util/priority.dart';
 import 'astarmap_minxin.dart';
 import 'map_tile_component.dart';
 
@@ -10,10 +9,10 @@ class MapController extends Component with AstarMapMixin, HasGameRef<GameMain> {
   late Vector2 tileSize;
   late Vector2 mapGrid;
 
-  MapController({
-    required this.tileSize,
-    required this.mapGrid,
-  });
+  MapController(
+      {required this.tileSize,
+      required this.mapGrid,
+      super.priority = Priority.controller});
 
   @override
   Future<void> onLoad() async {

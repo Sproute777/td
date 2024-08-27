@@ -2,12 +2,12 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 
-import '../base/game_component.dart';
+import '../../game_controller/game_event.dart';
 import '../base/life_indicator.dart';
 import '../base/movable.dart';
 import '../base/scanable.dart';
-import '../../game_controller/game_event.dart';
 import '../game_main.dart';
+import '../util/priority.dart';
 
 enum EnemyType { enemyA, enemyB, enemyC, enemyD }
 
@@ -22,7 +22,7 @@ class EnemyComponent extends PositionComponent
   EnemyComponent({
     required Vector2 position,
     required Vector2 size,
-  }) : super(position: position, size: size, priority: 30);
+  }) : super(position: position, size: size, priority: Priority.units);
 
   @override
   double get maxLife => _maxLife;
