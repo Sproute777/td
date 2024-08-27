@@ -2,22 +2,6 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 
-import '../game_main.dart';
-
-// class GameComponent extends PositionComponent with HasGameRef<GameMain> {
-//   GameComponent({
-//     super.position,
-//     super.size,
-//     super.priority,
-//   }) : super(anchor: Anchor.center);
-
-//   // Vector2 screenPosition() {
-//   //   return gameRef.camera.globalToLocal(
-//   //     position,
-//   //   );
-//   // }
-// }
-
 extension ExtVector2 on Vector2 {
   double angleNearTo(Vector2 target) {
     final double distance = distanceTo(target);
@@ -31,7 +15,7 @@ extension ExtVector2 on Vector2 {
     return radians;
   }
 
-  Vector2 positionInPrarent(Vector2 point) {
+  Vector2 positionInParent(Vector2 point) {
     return point + this;
   }
 

@@ -29,7 +29,7 @@ class GameSetting {
   late Vector2 mapSize;
   late Vector2 mapTileSize;
 
-  final Vector2 _enemySizeCale = Vector2(0.5, 0.5);
+  final Vector2 _enemySizeScale = Vector2(0.5, 0.5);
   late Vector2 enemySize;
   late Vector2 enemySpawn;
   late Vector2 enemyTarget;
@@ -59,7 +59,7 @@ class GameSetting {
     _screenSize = size;
     optimizeMapGrid(size);
 
-    enemySize = dotMultiple(_enemySizeCale, mapTileSize);
+    enemySize = dotMultiple(_enemySizeScale, mapTileSize);
     enemySpawn = Vector2(0, 0) + (mapTileSize / 2);
     enemyTarget = mapSize - (mapTileSize / 2);
 
@@ -130,7 +130,7 @@ class WeaponSetting {
     bulletSize =
         gameSetting.scaleOnMapTile(Vector2(dto.bulletSizeX, dto.bulletSizeY));
     explosionSize = gameSetting
-        .scaleOnMapTile(Vector2(dto.exposionSizeX, dto.exposionSizeY));
+        .scaleOnMapTile(Vector2(dto.explosionSizeX, dto.explosionSizeY));
     tower = weaponTower;
     barrel[0] = Sprite(await images.load('weapon/${dto.barrelImg0}.png'));
     barrel[1] = Sprite(await images.load('weapon/${dto.barrelImg1}.png'));

@@ -1,6 +1,5 @@
 import 'package:flame/components.dart';
 import '../enemy/enemy_component.dart';
-import 'game_component.dart';
 
 mixin Radar<T> on PositionComponent {
   bool _radarOn = false;

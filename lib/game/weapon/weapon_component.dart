@@ -1,15 +1,10 @@
-import 'dart:async';
-import 'dart:js_interop';
 import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
-import 'package:flame/input.dart';
-import 'package:flame/layout.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../game_controller/game_event.dart';
 import '../../settings/weapon_settings.dart';
@@ -34,7 +29,7 @@ class SmartRotateEffect extends RotateEffect {
         super.by(0, controller);
 
   double _angle = 0;
-  double _destinationAngle;
+  final double _destinationAngle;
 
   @override
   void onStart() {
@@ -175,7 +170,7 @@ class WeaponComponent extends PositionComponent
     radarOn = true;
     radarRange = (size.x + size.y) / 4;
     radarScanAlert = onEnemyBlock;
-    radarScanNothing = onEnymyUnBlock;
+    radarScanNothing = onEnemyUnBlock;
     radarCollisionDepth = 0;
   }
 
@@ -192,7 +187,7 @@ class WeaponComponent extends PositionComponent
     blockEnemy = true;
   }
 
-  void onEnymyUnBlock() {
+  void onEnemyUnBlock() {
     blockEnemy = false;
   }
 
@@ -251,9 +246,9 @@ class WeaponComponent extends PositionComponent
         return Cannon(position: anchor);
       case WeaponType.mg:
         return MachineGun(position: anchor);
-      case WeaponType.missele:
+      case WeaponType.missile:
         return Missile(position: anchor);
-      case WeaponType.minner:
+      case WeaponType.miner:
       case WeaponType.none:
         continue first;
     }

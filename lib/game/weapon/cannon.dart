@@ -6,7 +6,7 @@ import '../../settings/weapon_settings.dart';
 import '../base/game_component.dart';
 import '../game_setting.dart';
 import 'bullet_component.dart';
-import 'expolotion_component.dart';
+import 'explosion_component.dart';
 import 'weapon_component.dart';
 
 class Cannon extends WeaponComponent {

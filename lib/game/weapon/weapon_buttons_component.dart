@@ -30,24 +30,26 @@ mixin MixinWeaponButtons on PositionComponent {
     EffectController duration(double x) => EffectController(duration: x);
     final half = size * 0.5;
     final initMargin = EdgeInsets.only(bottom: half.y, right: half.x);
-    cancelButton = HudMarginComponent(
+
+    /// T0D0 add in other overlay
+    cancelButton = HudMarginComponent(margin: initMargin, children: [
+      CancelButtonComponent(
+        size: Vector2(50, 50),
         priority: Priority.overlay,
-        margin: initMargin,
-        children: [
-          CancelButtonComponent(size: Vector2(50, 50)),
-        ]);
-    destroyButton = HudMarginComponent(
+      ),
+    ]);
+    destroyButton = HudMarginComponent(margin: initMargin, children: [
+      DestroyButtonComponent(
+        size: Vector2(50, 50),
         priority: Priority.overlay,
-        margin: initMargin,
-        children: [
-          DestroyButtonComponent(size: Vector2(50, 50)),
-        ]);
-    emptyButton = HudMarginComponent(
+      ),
+    ]);
+    emptyButton = HudMarginComponent(margin: initMargin, children: [
+      EmptyButtonComponent(
+        size: Vector2(50, 50),
         priority: Priority.overlay,
-        margin: initMargin,
-        children: [
-          EmptyButtonComponent(size: Vector2(50, 50)),
-        ]);
+      ),
+    ]);
     cancelButton
       ?..add(
         MoveEffect.to(Vector2(-half.x, -half.y - 5), duration(0.5)),
@@ -86,7 +88,8 @@ mixin MixinWeaponButtons on PositionComponent {
 
 class DestroyButtonComponent extends SpriteGroupComponent<ButtonState>
     with HasGameRef<GameMain>, TapCallbacks {
-  DestroyButtonComponent({super.size}) : super(anchor: Anchor.center);
+  DestroyButtonComponent({super.size, super.priority})
+      : super(anchor: Anchor.center);
 
   @override
   Future<void> onLoad() async {
@@ -121,25 +124,26 @@ class DestroyButtonComponent extends SpriteGroupComponent<ButtonState>
   }
 
   @override
-  void onTapDown(_) {
+  void onTapDown(event) {
     current = ButtonState.pressed;
     gameRef.gameController.send(const GameEvent.weaponDestroyed());
   }
 
   @override
-  void onTapUp(_) {
+  void onTapUp(event) {
     current = ButtonState.unpressed;
   }
 
   @override
-  void onTapCancel(_) {
+  void onTapCancel(event) {
     current = ButtonState.unpressed;
   }
 }
 
 class CancelButtonComponent extends SpriteGroupComponent<ButtonState>
     with HasGameRef<GameMain>, TapCallbacks {
-  CancelButtonComponent({super.size}) : super(anchor: Anchor.center);
+  CancelButtonComponent({super.size, super.priority})
+      : super(anchor: Anchor.center);
 
   @override
   Future<void> onLoad() async {
@@ -174,25 +178,26 @@ class CancelButtonComponent extends SpriteGroupComponent<ButtonState>
   }
 
   @override
-  void onTapDown(_) {
+  void onTapDown(event) {
     current = ButtonState.pressed;
     gameRef.gameController.send(const GameEvent.weaponUnSelected());
   }
 
   @override
-  void onTapUp(_) {
+  void onTapUp(event) {
     current = ButtonState.unpressed;
   }
 
   @override
-  void onTapCancel(_) {
+  void onTapCancel(event) {
     current = ButtonState.unpressed;
   }
 }
 
 class EmptyButtonComponent extends SpriteGroupComponent<ButtonState>
     with HasGameRef<GameMain>, TapCallbacks {
-  EmptyButtonComponent({super.size}) : super(anchor: Anchor.center);
+  EmptyButtonComponent({super.size, super.priority})
+      : super(anchor: Anchor.center);
 
   @override
   Future<void> onLoad() async {
@@ -227,17 +232,17 @@ class EmptyButtonComponent extends SpriteGroupComponent<ButtonState>
   }
 
   @override
-  void onTapDown(_) {
+  void onTapDown(event) {
     current = ButtonState.pressed;
   }
 
   @override
-  void onTapUp(_) {
+  void onTapUp(event) {
     current = ButtonState.unpressed;
   }
 
   @override
-  void onTapCancel(_) {
+  void onTapCancel(event) {
     current = ButtonState.unpressed;
   }
 }
